@@ -8,15 +8,34 @@ public class DataController
     private const string PlayerDataSavePath = "user://PlayerData.json";
     private const string LevelsDataSavePath = "user://LevelsData.json";
 
-    public static void SaveData()
+    private static void SaveStartupLevelsData()
     {
+        using var file = FileAccess.Open(LevelsDataSavePath, FileAccess.ModeFlags.Write);
 
+        Dictionary dict = new();
+
+        for (int i = 0; i < Data.LevelsList.Length; i++) 
+            dict.Add(Data.LevelsList[i].Name, false);
+        
+
+        file.StoreLine(Json.Stringify(dict));
+    }
+
+    private static void SaveStartupPlayerData()
+    {
+        using var file = FileAccess.Open(PlayerDataSavePath, FileAccess.ModeFlags.Write);
+
+        Dictionary dict = new();
+
+        //Add to dictionary player info
+
+        file.StoreLine(Json.Stringify(dict));
     }
 
     public static void LoadLevelsData()
     {
         if (!FileAccess.FileExists(LevelsDataSavePath)) 
-            SaveData();
+            SaveStartupLevelsData();
 
         using var file = FileAccess.Open(LevelsDataSavePath, FileAccess.ModeFlags.Read);
 
@@ -38,7 +57,7 @@ public class DataController
     public static void LoadPlayerData()
     {
         if (!FileAccess.FileExists(PlayerDataSavePath)) 
-            SaveData();
+            SaveStartupPlayerData();
 
         using var file = FileAccess.Open(PlayerDataSavePath, FileAccess.ModeFlags.Read);
 
