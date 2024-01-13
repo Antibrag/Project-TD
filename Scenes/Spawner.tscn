@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvqjmwduxls4e"]
+
+[ext_resource type="Script" path="res://Scripts/Spawner.cs" id="1_siyf5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tq562"]
+albedo_color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4bhd4"]
+material = SubResource("StandardMaterial3D_tq562")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wf8d4"]
+size = Vector3(1.5, 0.2, 1.5)
+
+[node name="Spawner" type="Area3D"]
+script = ExtResource("1_siyf5")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4bhd4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_wf8d4")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="OnSpawnTimerTimeout"]
