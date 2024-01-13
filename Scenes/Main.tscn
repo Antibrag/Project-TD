@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddeb4ppqxmv70"]
+[gd_scene load_steps=2 format=3 uid="uid://ddeb4ppqxmv70"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_afwfs"]
-[ext_resource type="PackedScene" uid="uid://ojppg4lx1jd2" path="res://Scenes/Debug_Level.tscn" id="1_sxhle"]
 
 [node name="Main" type="Node"]
 
@@ -14,6 +13,4 @@ light_color = Color(1, 1, 0.862745, 1)
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3, 2)
-
-[node name="Level" parent="." instance=ExtResource("1_sxhle")]
+transform = Transform3D(1, 0, 0, 0, 0.573577, 0.819152, 0, -0.819152, 0.573577, 0, 3, 2)
