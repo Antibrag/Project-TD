@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddeb4ppqxmv70"]
+[gd_scene load_steps=3 format=3 uid="uid://ddeb4ppqxmv70"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_afwfs"]
+[ext_resource type="PackedScene" uid="uid://dhwwk2741bvh5" path="res://Scenes/Start_Menu.tscn" id="1_j6s4j"]
 
 [node name="Main" type="Node"]
+
+[node name="StartMenu" parent="." instance=ExtResource("1_j6s4j")]
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_afwfs")
