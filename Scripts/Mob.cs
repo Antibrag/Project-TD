@@ -1,18 +1,14 @@
 using Godot;
-using System;
 
 public partial class Mob : Area3D
 {
-	public string MobName { get; set; }
+	public string GameName { get; set; }
 	public float Health { get; set; }
 
-	public Mob(string name, float health)
+    public void Initialize(string name, float health, Vector3 position)
 	{
-		MobName = name;
+		GameName = name;
 		Health = health;
-	}
-
-	public override void _Process(double delta)
-	{
+		Position = position;
 	}
 }
