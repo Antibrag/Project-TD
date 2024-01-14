@@ -5,9 +5,18 @@ public partial class GameManager : Node
     public override void _Ready()   
     {
         DataController.LoadLevelsData();
-        DataController.LoadPlayerData();
+        DataController.LoadPlayerData(); 
+    }
 
-        LoadFirstUnCompleteLevel(); 
+    public async void StartGame()
+    {
+        LoadFirstUnCompleteLevel();
+
+        await ToSignal(GetTree().CreateTimer(1), "timeout");
+
+        GetNode<StartMenu>("/root/Main/StartMenu").Disable();
+
+        GetNode<Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
     }
 
     private void LoadFirstUnCompleteLevel()
