@@ -22,11 +22,11 @@ metadata/MobsCounts = {
 [node name="Objects" type="Node3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Path" type="Path3D" parent="Objects" index="0"]
+[node name="Path3D" type="Path3D" parent="Objects" index="0"]
 curve = SubResource("Curve3D_hvmfl")
 
 [node name="Spawner" parent="Objects" index="1" instance=ExtResource("4_ih2l8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+transform = Transform3D(0.999999, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 0.999999, -4, 0, -2)
 
 [node name="Finish" parent="Objects" index="2" instance=ExtResource("5_isyrk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
