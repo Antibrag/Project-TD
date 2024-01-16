@@ -1,24 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://cglftj66y8b0c"]
+[gd_scene load_steps=5 format=3 uid="uid://bht6bp7i7fe8n"]
 
 [ext_resource type="Script" path="res://Scripts/Mob.cs" id="1_r0ip5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aus2k"]
-albedo_color = Color(0.494118, 0, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5218k"]
+albedo_color = Color(0.564706, 0.152941, 0, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_t6gsa"]
-material = SubResource("StandardMaterial3D_aus2k")
-radius = 0.2
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jqnij"]
+material = SubResource("StandardMaterial3D_5218k")
+radius = 0.3
 height = 1.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0j6t"]
-radius = 0.2
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4xu7c"]
+radius = 0.3
 height = 1.0
 
-[node name="DevMob" type="Area3D"]
+[node name="Mob" type="PathFollow3D"]
 script = ExtResource("1_r0ip5")
+Speed = 0.1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_t6gsa")
+[node name="Area3D" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_a0j6t")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("CapsuleMesh_jqnij")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_4xu7c")
