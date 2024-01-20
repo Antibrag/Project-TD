@@ -6,18 +6,6 @@ public class DataController
     private const string PlayerDataSavePath = "user://PlayerData.json";
     private const string LevelsDataSavePath = "user://LevelsData.json";
 
-    private static void SaveStartingLevelsData()
-    {
-        using var file = FileAccess.Open(LevelsDataSavePath, FileAccess.ModeFlags.Write);
-
-        Dictionary data = new();
-
-        for (int i = 0; i < Data.LevelsList.Length; i++) 
-            data.Add(Data.LevelsList[i].Name, false);
-        
-        file.StoreLine(Json.Stringify(data));
-    }
-
     private static void SaveStartingPlayerData()
     {
         using var file = FileAccess.Open(PlayerDataSavePath, FileAccess.ModeFlags.Write);
@@ -47,7 +35,7 @@ public class DataController
         if (!FileAccess.FileExists(LevelsDataSavePath)) 
         {
             GD.PushWarning("Levels data not found\nCreate starting levels information");
-            SaveStartingLevelsData();
+            SaveLevelsData();
         }
 
         using var file = FileAccess.Open(LevelsDataSavePath, FileAccess.ModeFlags.Read);
