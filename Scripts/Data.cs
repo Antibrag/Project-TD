@@ -1,5 +1,3 @@
-using Godot.Collections;
-
 public class Data
 {
     public struct Mob
