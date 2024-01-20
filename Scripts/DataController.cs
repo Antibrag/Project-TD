@@ -15,7 +15,6 @@ public class DataController
         for (int i = 0; i < Data.LevelsList.Length; i++) 
             dict.Add(Data.LevelsList[i].Name, false);
         
-
         file.StoreLine(Json.Stringify(dict));
     }
 
@@ -23,9 +22,10 @@ public class DataController
     {
         using var file = FileAccess.Open(PlayerDataSavePath, FileAccess.ModeFlags.Write);
 
-        Dictionary dict = new();
-
-        //Add to dictionary player info
+        Dictionary dict = new() 
+        {
+            {"Level", 1}
+        };
 
         file.StoreLine(Json.Stringify(dict));
     }
@@ -70,14 +70,8 @@ public class DataController
 
         Dictionary dict = (Dictionary)Json.ParseString(file.GetAsText());
 
-        //Code...
+        Player.GlobalInfo.Level = (int) dict["Level"];
 
         GD.Print("Load player data succsesfully");
-    }
-
-    public static void LoadAllData()
-    {
-        LoadLevelsData();
-        LoadPlayerData();
     }
 }
