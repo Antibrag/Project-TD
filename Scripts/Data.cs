@@ -5,12 +5,14 @@ public class Data
         public string Name { get; private set; }
         public string ScenePath { get; private set; }
         public float Health { get; private set; }
+        public float AttackPower { get; private set; }
 
-        public Mob(string name, float health, string scenePath)
+        public Mob(string name, float health, float attackPower, string scenePath)
         {
             Name = name;
             Health = health;
             ScenePath = scenePath;
+            AttackPower = attackPower;
         }
     }
 
@@ -32,7 +34,7 @@ public class Data
 
     public static Mob[] MobsList = new Mob[]
     {
-        new Mob("DevMob", 10, "res://Scenes/Dev_Mob.tscn")
+        new Mob("DevMob", 10, 10, "res://Scenes/Dev_Mob.tscn")
     };
 
     public static Level[] LevelsList = new Level[]
