@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://baep4m5b03yw0"]
+[gd_scene load_steps=4 format=3 uid="uid://baep4m5b03yw0"]
+
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_qa13u"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_aid56"]
 
@@ -6,6 +8,7 @@
 size = Vector3(1.5, 1.9, 1.5)
 
 [node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_qa13u")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_aid56")
