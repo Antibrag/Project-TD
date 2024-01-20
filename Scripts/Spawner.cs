@@ -40,7 +40,7 @@ public partial class Spawner : Area3D
 		Mob mob_instance = (Mob) GD.Load<PackedScene>(Data.MobsList[random_mob_index].ScenePath).Instantiate();
 		GetNode<Path3D>(GetParent().GetPath() + "/Path3D").CallDeferred("add_child", mob_instance);
 
-		mob_instance.Initialize(mob_name, Data.MobsList[random_mob_index].Health);
+		mob_instance.Initialize(mob_name, Data.MobsList[random_mob_index].Health, Data.MobsList[random_mob_index].AttackPower);
 
 		GD.Print($"Create Mob - {Data.MobsList[random_mob_index].Name}");
 	}
