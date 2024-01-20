@@ -16,7 +16,7 @@ height = 1.0
 
 [node name="Mob" type="PathFollow3D"]
 script = ExtResource("1_r0ip5")
-Speed = 0.1
+Speed = 0.05
 
 [node name="Area3D" type="Area3D" parent="."]
 
@@ -25,3 +25,5 @@ mesh = SubResource("CapsuleMesh_jqnij")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_4xu7c")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
