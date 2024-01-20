@@ -3,7 +3,7 @@ using Godot.Collections;
 
 public partial class Spawner : Area3D
 {
-	private Dictionary<string, int> _levelMobs { get; set; }
+	private Dictionary<string, int> _levelMobs;
 	private Timer _spawnTimer;
 
     public override void _Ready()
@@ -30,7 +30,10 @@ public partial class Spawner : Area3D
 		string mob_name = Data.MobsList[random_mob_index].Name;
 
 		if (_levelMobs[mob_name] == 0)
+		{
 			_levelMobs.Remove(mob_name);
+			return;
+		}
 		else
 			_levelMobs[mob_name]--;
 
