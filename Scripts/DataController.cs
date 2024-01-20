@@ -3,8 +3,6 @@ using Godot.Collections;
 
 public class DataController
 {
-    public static Data GameData { get; set; }
-
     private const string PlayerDataSavePath = "user://PlayerData.json";
     private const string LevelsDataSavePath = "user://LevelsData.json";
 
@@ -75,5 +73,11 @@ public class DataController
         //Code...
 
         GD.Print("Load player data succsesfully");
+    }
+
+    public static void LoadAllData()
+    {
+        LoadLevelsData();
+        LoadPlayerData();
     }
 }
