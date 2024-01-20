@@ -4,7 +4,7 @@ public partial class GameManager : Node
 {
     public override void _Ready()   
     {
-        DataController.LoadAllData();
+        DataController.LoadLevelsData();
     }
 
     public async void StartGame()
@@ -13,6 +13,8 @@ public partial class GameManager : Node
 
         //Wait while level is created on main scene
         await ToSignal(GetTree().CreateTimer(1), "timeout");
+
+        DataController.LoadPlayerData();
 
         GetNode<StartMenu>("/root/Main/StartMenu").Disable();
 
