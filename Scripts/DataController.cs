@@ -10,24 +10,36 @@ public class DataController
     {
         using var file = FileAccess.Open(LevelsDataSavePath, FileAccess.ModeFlags.Write);
 
-        Dictionary dict = new();
+        Dictionary data = new();
 
         for (int i = 0; i < Data.LevelsList.Length; i++) 
-            dict.Add(Data.LevelsList[i].Name, false);
+            data.Add(Data.LevelsList[i].Name, false);
         
-        file.StoreLine(Json.Stringify(dict));
+        file.StoreLine(Json.Stringify(data));
     }
 
     private static void SaveStartingPlayerData()
     {
         using var file = FileAccess.Open(PlayerDataSavePath, FileAccess.ModeFlags.Write);
 
-        Dictionary dict = new() 
+        Dictionary data = new() 
         {
             {"Level", 1}
         };
 
-        file.StoreLine(Json.Stringify(dict));
+        file.StoreLine(Json.Stringify(data));
+    }
+
+    public static void SaveLevelsData()
+    {
+        using var file = FileAccess.Open(LevelsDataSavePath, FileAccess.ModeFlags.Write);
+
+        Dictionary data = new();
+
+        for (int i = 0; i < Data.LevelsList.Length; i++) 
+            data.Add(Data.LevelsList[i].Name, Data.LevelsList[i].IsComplete);
+
+        file.StoreLine(Json.Stringify(data));
     }
 
     public static void LoadLevelsData()
@@ -40,13 +52,13 @@ public class DataController
 
         using var file = FileAccess.Open(LevelsDataSavePath, FileAccess.ModeFlags.Read);
 
-        Dictionary dict = (Dictionary)Json.ParseString(file.GetAsText());
+        Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
 
         for (int i = 0; i < Data.LevelsList.Length; i++) 
         {
             try
             {
-                Data.LevelsList[i].IsCompleted = (bool) dict[Data.LevelsList[i].Name];
+                Data.LevelsList[i].IsComplete = (bool) data[Data.LevelsList[i].Name];
             }
             catch (System.Exception)
             {
@@ -68,9 +80,9 @@ public class DataController
 
         using var file = FileAccess.Open(PlayerDataSavePath, FileAccess.ModeFlags.Read);
 
-        Dictionary dict = (Dictionary)Json.ParseString(file.GetAsText());
+        Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
 
-        Player.GlobalInfo.Level = (int) dict["Level"];
+        Player.GlobalInfo.Level = (int) data["Level"];
 
         GD.Print("Load player data succsesfully");
     }

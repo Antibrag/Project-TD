@@ -18,13 +18,13 @@ public class Data
     {
         public string Name { get; private set; }
         public string ScenePath { get; private set; }
-        public bool IsCompleted { get; set; }
+        public bool IsComplete { get; set; }
 
         public Level(string name, string scenePath, bool isCompleted = false)
         {
             Name = name;
             ScenePath = scenePath;
-            IsCompleted = isCompleted;
+            IsComplete = isCompleted;
         }
     }
 

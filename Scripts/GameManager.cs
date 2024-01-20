@@ -24,7 +24,7 @@ public partial class GameManager : Node
     private void LoadFirstUnCompleteLevel()
     {
         for (int i = 0; i < Data.LevelsList.Length; i++)
-            if (!Data.LevelsList[i].IsCompleted)  
+            if (!Data.LevelsList[i].IsComplete)  
             { 
                 LoadLevel(i);
                 return;
