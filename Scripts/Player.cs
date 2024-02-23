@@ -10,16 +10,27 @@ public partial class Player : CharacterBody3D
     public float Health { get; set; }
 
     public void TakeDamage(float damageValue) 
-    {
+    {        
         float healthBefore = Health;
-
         Health -= damageValue;
 
         GD.Print($"Player health - {healthBefore} -> {Health}");
+
+        if (Health <= 0)
+        {
+            Death();
+            return;
+        }
+    }
+
+    public void Death()
+    {
+        GD.Print("Player death!");
+        GetNode<Spawner>(GetParent().GetPath() + "/Objects/Spawner").QueueFreeAllMobs();
     }
 
     public override void _Ready()
     {
-        Health = 100;
+        Health = 20;
     }
 }
