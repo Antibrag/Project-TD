@@ -18,6 +18,16 @@ public partial class Spawner : Area3D
 		_spawnTimer.Start();
 	}
 
+	public void QueueFreeAllMobs()
+	{
+		_spawnTimer.Stop();
+
+		Node mobsParent = GetNode<Node>(GetParent().GetPath() + "/MobsPath");
+
+		for (int i = 0; i < mobsParent.GetChildCount(); i++)
+			mobsParent.GetChild<Mob>(i).Death();
+	}
+
 	public void OnSpawnTimerTimeout()
 	{
 		if (_levelMobs.Count == 0)
@@ -38,7 +48,7 @@ public partial class Spawner : Area3D
 			_levelMobs[mob_name]--;
 
 		Mob mob_instance = (Mob) GD.Load<PackedScene>(Data.MobsList[random_mob_index].ScenePath).Instantiate();
-		GetNode<Path3D>(GetParent().GetPath() + "/Path3D").CallDeferred("add_child", mob_instance);
+		GetNode<Path3D>(GetParent().GetPath() + "/MobsPath").CallDeferred("add_child", mob_instance);
 
 		mob_instance.Initialize(mob_name, Data.MobsList[random_mob_index].Health, Data.MobsList[random_mob_index].AttackPower);
 
