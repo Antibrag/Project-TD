@@ -16,10 +16,14 @@ public partial class Mob : PathFollow3D
 		AttackPower = attackPower;
 	}
 
+	public void Death() =>
+		QueueFree();
+
 	public void OnBodyEntered(Node3D node)
 	{
 		if (node.Name == "Player")
 		{	
+			Player player = GetNode<Player>(node.GetPath());
 			GD.Print($"* {GameName} deals damage to player - {AttackPower}");
 
 			GetNode<Player>(node.GetPath()).TakeDamage(AttackPower);
