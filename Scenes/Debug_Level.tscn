@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ojppg4lx1jd2"]
+[gd_scene load_steps=8 format=3 uid="uid://ojppg4lx1jd2"]
 
 [ext_resource type="PackedScene" uid="uid://djs63x2jnf1mu" path="res://Scenes/Base_Level_Tail.tscn" id="1_jmbs0"]
 [ext_resource type="PackedScene" uid="uid://nvlfegc5re3s" path="res://Scenes/Road.tscn" id="2_24hux"]
 [ext_resource type="PackedScene" uid="uid://cfn4xw4kn0210" path="res://Scenes/Corner_Road.tscn" id="3_206le"]
 [ext_resource type="PackedScene" uid="uid://dvqjmwduxls4e" path="res://Scenes/Spawner.tscn" id="4_ih2l8"]
 [ext_resource type="PackedScene" uid="uid://baep4m5b03yw0" path="res://Scenes/Player.tscn" id="5_isyrk"]
+[ext_resource type="PackedScene" uid="uid://clxr1pbu355wb" path="res://Assets/tree_cone.fbx" id="6_drplf"]
 
 [sub_resource type="Curve3D" id="Curve3D_hvmfl"]
 _data = {
@@ -71,3 +72,54 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0,
 
 [node name="Road10" parent="Objects" index="15" instance=ExtResource("2_24hux")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 1)
+
+[node name="Tree" parent="Objects" index="16" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8, 0, -4)
+
+[node name="Tree2" parent="Objects" index="17" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.7103, 0, -1)
+
+[node name="Tree3" parent="Objects" index="18" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6.30286, 0, -11.0132)
+
+[node name="Tree4" parent="Objects" index="19" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.68443, -4.76837e-07, -8.28702)
+
+[node name="Tree5" parent="Objects" index="20" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.60763, 0, -12.3508)
+
+[node name="Tree6" parent="Objects" index="21" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.87303, 0, -10.1756)
+
+[node name="Tree7" parent="Objects" index="22" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.44952, -4.76837e-07, -5.79686)
+
+[node name="Tree8" parent="Objects" index="23" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.50771, 0, -5.33643)
+
+[node name="Tree9" parent="Objects" index="24" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4.62699, 0, -9.57031)
+
+[node name="Tree10" parent="Objects" index="25" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 2.81262, 4.76837e-07, -0.786684)
+
+[node name="Tree11" parent="Objects" index="26" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4.39007, 4.76837e-07, -5.36308)
+
+[node name="Tree12" parent="Objects" index="27" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.41631, 4.76837e-07, -2.37987)
+
+[node name="Tree13" parent="Objects" index="28" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -7.07059, 4.76837e-07, 2.38182)
+
+[node name="Tree14" parent="Objects" index="29" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3.69752, 0, 4.57903)
+
+[node name="Tree15" parent="Objects" index="30" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.41016, 0, 3.78836)
+
+[node name="Tree16" parent="Objects" index="31" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.60294, 0, 4.18206)
+
+[node name="Tree17" parent="Objects" index="32" instance=ExtResource("6_drplf")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 6.83124, 0, -0.161361)
