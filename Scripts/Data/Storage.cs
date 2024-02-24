@@ -5,6 +5,11 @@ namespace Data
         public static readonly string PlayerDataSavePath = "user://PlayerData.json";
         public static readonly string LevelsDataSavePath = "user://LevelsData.json";
 
+        public static class GlobalInfo
+        {
+            public static int Level { get; set; }
+        }
+
         public struct Mob
         {
             public string Name { get; private set; }

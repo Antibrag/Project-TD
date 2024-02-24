@@ -45,7 +45,7 @@ namespace Data
 
             Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
 
-            Player.GlobalInfo.Level = (int) data["Level"];
+            Storage.GlobalInfo.Level = (int) data["Level"];
 
             GD.Print("Load player data succsesfully");
         }
