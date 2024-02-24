@@ -3,7 +3,7 @@ using Godot;
 public partial class StartMenu : Control
 {
     public void OnStartButtonPressed() =>
-        GetNode<GameManager>("/root/Main/GameManager").StartGame();
+        GetNode<Level.Loader>("/root/Main/Loader").StartGame();
     
     public void Disable()
     {

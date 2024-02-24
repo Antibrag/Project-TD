@@ -38,7 +38,7 @@ public partial class DeathMenu : Control
 
 	public void OnRestartButtonPressed()
 	{
-		GetNode<Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
+		GetNode<Level.Objects.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
 		Disable();
 	}
 
