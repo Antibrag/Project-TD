@@ -1,14 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddeb4ppqxmv70"]
+[gd_scene load_steps=4 format=3 uid="uid://ddeb4ppqxmv70"]
 
-[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_afwfs"]
-[ext_resource type="PackedScene" uid="uid://dhwwk2741bvh5" path="res://Scenes/Start_Menu.tscn" id="1_j6s4j"]
+[ext_resource type="PackedScene" uid="uid://dhwwk2741bvh5" path="res://Scenes/UI/Start_Menu.tscn" id="1_j6s4j"]
+[ext_resource type="PackedScene" uid="uid://1gyobi3pytqj" path="res://Scenes/UI/Death_Menu.tscn" id="2_s2qrx"]
+[ext_resource type="Script" path="res://Scripts/Level/Loader.cs" id="3_528sy"]
 
 [node name="Main" type="Node"]
 
 [node name="StartMenu" parent="." instance=ExtResource("1_j6s4j")]
 
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource("1_afwfs")
+[node name="Death_Menu" parent="." instance=ExtResource("2_s2qrx")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+
+[node name="Loader" type="Node" parent="."]
+script = ExtResource("3_528sy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-4.37114e-08, -0.866025, 0.5, 0, 0.5, 0.866025, -1, 3.78552e-08, -2.18557e-08, 4, 4, 0)
