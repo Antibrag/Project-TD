@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ojppg4lx1jd2"]
 
-[ext_resource type="PackedScene" uid="uid://djs63x2jnf1mu" path="res://Scenes/Base_Level_Tail.tscn" id="1_jmbs0"]
+[ext_resource type="PackedScene" uid="uid://djs63x2jnf1mu" path="res://Scenes/Levels/Base_Level_Tail.tscn" id="1_jmbs0"]
 [ext_resource type="PackedScene" uid="uid://nvlfegc5re3s" path="res://Scenes/Road.tscn" id="2_24hux"]
 [ext_resource type="PackedScene" uid="uid://cfn4xw4kn0210" path="res://Scenes/Corner_Road.tscn" id="3_206le"]
 [ext_resource type="PackedScene" uid="uid://dvqjmwduxls4e" path="res://Scenes/Spawner.tscn" id="4_ih2l8"]
