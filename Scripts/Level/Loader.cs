@@ -22,7 +22,7 @@ namespace Level
 
             GetNode<StartMenu>("/root/Main/StartMenu").Disable();
 
-            GetNode<Level.Objects.Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
+            GetNode<Objects.Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
         }
 
         public void LoadFirstUnCompleteLevel()
