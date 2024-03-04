@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ojppg4lx1jd2"]
+[gd_scene load_steps=9 format=3 uid="uid://ojppg4lx1jd2"]
 
 [ext_resource type="PackedScene" uid="uid://djs63x2jnf1mu" path="res://Scenes/Levels/Base_Level_Tail.tscn" id="1_jbqfe"]
 [ext_resource type="PackedScene" uid="uid://baep4m5b03yw0" path="res://Scenes/Player.tscn" id="2_2gy87"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://nvlfegc5re3s" path="res://Scenes/Road.tscn" id="4_wki0h"]
 [ext_resource type="PackedScene" uid="uid://cfn4xw4kn0210" path="res://Scenes/Corner_Road.tscn" id="5_71u2w"]
 [ext_resource type="PackedScene" uid="uid://clxr1pbu355wb" path="res://Assets/tree_cone.fbx" id="6_y4cio"]
+[ext_resource type="PackedScene" uid="uid://daorro7c3vor3" path="res://Scenes/Player_Builds/Cross_Bow.tscn" id="7_lunma"]
 
 [sub_resource type="Curve3D" id="Curve3D_hvmfl"]
 _data = {
@@ -123,3 +124,6 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.60294, 0, 4.18206)
 
 [node name="Tree17" parent="Objects" index="32" instance=ExtResource("6_y4cio")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 6.83124, 0, -0.161361)
+
+[node name="Cross_Bow" parent="." index="3" instance=ExtResource("7_lunma")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.34315, 0.794699, -0.506951)
