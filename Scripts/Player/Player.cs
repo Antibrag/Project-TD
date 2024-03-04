@@ -24,9 +24,4 @@ public partial class Player : CharacterBody3D
         GetNode<Level.Objects.Spawner>(GetParent().GetPath() + "/Objects/Spawner").QueueFreeAllMobs();
         GetNode<DeathMenu>("/root/Main/Death_Menu").Enable();
     }
-
-    public override void _Ready()
-    {
-        Health = 20;
-    }
 }
