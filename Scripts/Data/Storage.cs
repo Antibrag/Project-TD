@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Data
 {
     public static class Storage
@@ -38,13 +36,15 @@ namespace Data
 
         public struct Build 
         {
+            public string Name { get; private set; }
             public string ScenePath { get ; private set; }
-            public bool Aviable { get; private set; }
+            public bool Aviable { get; set; }
             public int Level { get; set; }
             public float Damage { get; set; }
 
-            public Build(string scenePath, int level, float damage, bool aviable = false)
+            public Build(string name, string scenePath, int level, float damage, bool aviable = false)
             {
+                Name = name;
                 ScenePath = scenePath;
                 Aviable = aviable;
                 Level = level;
@@ -70,9 +70,9 @@ namespace Data
             new Level("Dev Level", "res://Scenes/Levels/Debug_Level.tscn", 100)
         };
 
-        public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
+        public static readonly Build[] BuildsList = new Build[]
         {
-            {"CrossBow", new Build("res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, true)}
+            new Build("CrossBow", "res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, true)
         };
     }
 }
