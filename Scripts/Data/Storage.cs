@@ -7,7 +7,7 @@ namespace Data
 
         public static class GlobalInfo
         {
-            public static int Level { get; set; }
+            public static int CurrentLevelIdx { get; set; }
         }
 
         public struct Mob
@@ -31,12 +31,14 @@ namespace Data
             public string Name { get; private set; }
             public string ScenePath { get; private set; }
             public bool IsComplete { get; set; }
+            public float StartPlayerHealth { get; set; }
 
-            public Level(string name, string scenePath, bool isCompleted = false)
+            public Level(string name, string scenePath, float startPlayerHealth, bool isCompleted = false)
             {
                 Name = name;
                 ScenePath = scenePath;
                 IsComplete = isCompleted;
+                StartPlayerHealth = startPlayerHealth;
             }
         }
 
@@ -49,7 +51,7 @@ namespace Data
 
         public static Level[] LevelsList = new Level[]
         {
-            new Level("Dev Level", "res://Scenes/Levels/Debug_Level.tscn")
+            new Level("Dev Level", "res://Scenes/Levels/Debug_Level.tscn", 100)
         };
     }
 }
