@@ -1,26 +1,24 @@
+using Data;
 using Godot;
 
 namespace Level
 {
 	public partial class Mob : PathFollow3D
 	{
-		public string GameName { get; private set; }
-		public float Health { get; private set; }
-		public float AttackPower { get; private set; }
+		[Export] public float Speed { get; private set; }
 
-		[Export]
-		public float Speed { get; private set; }
+		public Storage.Mob Characteristics { get; set; }
 
-		public void Initialize(string name, float health, float attackPower)
+		public void Initialize(string name) 
 		{
-			GameName = name;
-			Health = health;
-			AttackPower = attackPower;
+			for (int i = 0; i < Storage.MobsList.Length; i++)
+				if (Storage.MobsList[i].Name == name)
+					Characteristics = Storage.MobsList[i];
 		}
 
 		public void Death()
 		{
-			GD.Print($"Delete mob - {GameName}");
+			GD.Print($"Delete mob - {Characteristics.Name}");
 			QueueFree();
 		}
 
@@ -30,9 +28,9 @@ namespace Level
 			{	
 				Player player = GetNode<Player>(node.GetPath());
 
-				GD.Print($"* {GameName} deals damage to player - {AttackPower}");
+				GD.Print($"* {Characteristics.Name} deals damage to player - {Characteristics.AttackPower}");
 
-				GetNode<Player>(node.GetPath()).TakeDamage(AttackPower);
+				GetNode<Player>(node.GetPath()).TakeDamage(Characteristics.AttackPower);
 
 				Death();
 			}
