@@ -1,8 +1,10 @@
+using Data;
 using Godot;
 
 public partial class Player : CharacterBody3D
 {
     public float Health { get; set; }
+    public int Level { get; set; }
 
     public void TakeDamage(float damageValue) 
     {        
