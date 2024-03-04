@@ -1,15 +1,9 @@
+using System.Collections.Generic;
+
 namespace Data
 {
-    public class Storage
+    public static class Storage
     {
-        public static readonly string PlayerDataSavePath = "user://PlayerData.json";
-        public static readonly string LevelsDataSavePath = "user://LevelsData.json";
-
-        public static class GlobalInfo
-        {
-            public static int CurrentLevelIdx { get; set; }
-        }
-
         public struct Mob
         {
             public string Name { get; private set; }
@@ -31,7 +25,7 @@ namespace Data
             public string Name { get; private set; }
             public string ScenePath { get; private set; }
             public bool IsComplete { get; set; }
-            public float StartPlayerHealth { get; set; }
+            public float StartPlayerHealth { get; private set; }
 
             public Level(string name, string scenePath, float startPlayerHealth, bool isCompleted = false)
             {
@@ -42,16 +36,43 @@ namespace Data
             }
         }
 
-        //public class Player...
+        public struct Build 
+        {
+            public string ScenePath { get ; private set; }
+            public bool Aviable { get; private set; }
+            public int Level { get; set; }
+            public float Damage { get; set; }
 
-        public static Mob[] MobsList = new Mob[]
+            public Build(string scenePath, int level, float damage, bool aviable = false)
+            {
+                ScenePath = scenePath;
+                Aviable = aviable;
+                Level = level;
+                Damage = damage;
+            }
+        }
+
+        public static readonly string PlayerDataSavePath = "user://PlayerData.json";
+        public static readonly string LevelsDataSavePath = "user://LevelsData.json";
+
+        public static class GlobalInfo
+        {
+            public static int CurrentLevelIdx { get; set; }
+        }
+
+        public static readonly Mob[] MobsList = new Mob[]
         {
             new Mob("DevMob", 10, 10, "res://Scenes/Dev_Mob.tscn")
         };
 
-        public static Level[] LevelsList = new Level[]
+        public static readonly Level[] LevelsList = new Level[]
         {
             new Level("Dev Level", "res://Scenes/Levels/Debug_Level.tscn", 100)
+        };
+
+        public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
+        {
+            {"CrossBow", new Build("res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, true)}
         };
     }
 }
