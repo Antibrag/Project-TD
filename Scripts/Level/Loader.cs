@@ -5,11 +5,9 @@ namespace Level
 {
     public partial class Loader : Node
     {
-        public override void _Ready()   
-        {
+        public override void _Ready() =>        
             Data.Loader.LoadLevelsData();
-        }
-
+        
         //Replace to own class
         public async void StartGame()
         {
@@ -46,6 +44,8 @@ namespace Level
                 
                 var level = GD.Load<PackedScene>(Storage.LevelsList[i].ScenePath).Instantiate();
                 GetNode<Node>("/root/Main").CallDeferred("add_child", level);
+
+                GetNode<Player>(level.GetPath() + "/Player").Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevelIdx].StartPlayerHealth;
 
                 GD.Print($"Load level - {Storage.LevelsList[i].Name}");
                 return;
