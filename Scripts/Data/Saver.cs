@@ -11,7 +11,7 @@ namespace Data
 
             Dictionary data = new() 
             {
-                {"Level", 1}
+                {"CurrentLevelIdx", 1}
             };
 
             file.StoreLine(Json.Stringify(data));
