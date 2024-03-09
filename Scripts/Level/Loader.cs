@@ -35,7 +35,7 @@ namespace Level
             GD.PushWarning("All levels complete or failed to load");
         }
 
-        public void LoadLevel(string levelName)
+        /*public void LoadLevel(string levelName)
         {
             for (int i = 0; i < Storage.LevelsList.Length; i++)
             {
@@ -50,12 +50,14 @@ namespace Level
                 GD.Print($"Load level - {Storage.LevelsList[i].Name}");
                 return;
             }
-        }
+        }*/
 
         public void LoadLevel(int levelIndex)
         {
             var level = GD.Load<PackedScene>(Storage.LevelsList[levelIndex].ScenePath).Instantiate();
             GetNode<Node>("/root/Main").CallDeferred("add_child", level);
+
+            Storage.GlobalInfo.CurrentLevelIdx = levelIndex;
 
             GD.Print($"Load level - {Storage.LevelsList[levelIndex].Name}");
             return;

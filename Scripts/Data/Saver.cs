@@ -11,10 +11,15 @@ namespace Data
 
             Dictionary data = new() 
             {
-                {"CurrentLevelIdx", 1}
+                //{"CurrentLevelIdx", 0}
             };
 
             file.StoreLine(Json.Stringify(data));
+        }
+
+        public static void SavePlayerData()
+        {
+            
         }
 
         public static void SaveLevelsData()
