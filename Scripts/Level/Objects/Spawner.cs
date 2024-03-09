@@ -16,7 +16,8 @@ namespace Level.Objects
 
 		public void StartSpawn(float spawnTime)
 		{
-			_levelMobs = (Dictionary<string, int>) GetNode<Node3D>("/root/Main/Level").GetMeta("MobsCounts");
+			//GD.Print("Spawner - Start spawn");
+			_levelMobs = new ((Dictionary<string, int>) GetNode<Node3D>("/root/Main/Level").GetMeta("MobsCounts"));
 			_spawnTimer.WaitTime = spawnTime;
 			_spawnTimer.Start();
 		}
@@ -33,13 +34,15 @@ namespace Level.Objects
 
 		public void OnSpawnTimerTimeout()
 		{
+			GD.Print($"Level mobs count = {_levelMobs.Count}");
+
 			if (_levelMobs.Count == 0)
 			{
 				_spawnTimer.Stop();
 				return;
 			}
 
-			int random_mob_index = new System.Random().Next(0, _levelMobs.Count);
+			int random_mob_index = new System.Random().Next(0, _levelMobs.Count-1);
 			string mob_name = Storage.MobsList[random_mob_index].Name;
 
 			if (_levelMobs[mob_name] == 0)
@@ -53,10 +56,9 @@ namespace Level.Objects
 			Mob mob_instance = (Mob) GD.Load<PackedScene>(Storage.MobsList[random_mob_index].ScenePath).Instantiate();
 			GetNode<Path3D>(GetParent().GetPath() + "/MobsPath").CallDeferred("add_child", mob_instance);
 
-			mob_instance.Initialize(mob_name, Storage.MobsList[random_mob_index].Health, Storage.MobsList[random_mob_index].AttackPower);
+			mob_instance.Initialize(mob_name);
 
 			GD.Print($"Create Mob - {Storage.MobsList[random_mob_index].Name}");
 		}
 	}
 }
-
