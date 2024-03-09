@@ -3,8 +3,13 @@ using Godot;
 
 public partial class Player : CharacterBody3D
 {
-    public float Health { get; set; }
+    public float Health { get; set; } 
     public int Level { get; set; }
+
+    public override void _Ready()
+    {
+        Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevelIdx].StartPlayerHealth;
+    }
 
     public void TakeDamage(float damageValue) 
     {        
