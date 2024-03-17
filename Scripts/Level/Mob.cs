@@ -13,12 +13,13 @@ namespace Level
 		{
 			for (int i = 0; i < Storage.MobsList.Length; i++)
 				if (Storage.MobsList[i].Name == name)
-					Characteristics = Storage.MobsList[i];
+					Characteristics = (Storage.Mob) Storage.MobsList[i].Clone();
 		}
 
 		public void Death()
 		{
 			GD.Print($"Delete mob - {Characteristics.Name}");
+			Characteristics.Health = 0;
 			QueueFree();
 		}
 
@@ -36,7 +37,7 @@ namespace Level
 			}
 		}
 
-		public override void _PhysicsProcess(double delta)
+        public override void _PhysicsProcess(double delta)
 		{
 			ProgressRatio += Speed / 100 * (float) delta;
 		}
