@@ -1,15 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://daorro7c3vor3"]
+[gd_scene load_steps=5 format=3 uid="uid://daorro7c3vor3"]
 
+[ext_resource type="Script" path="res://Scripts/Player/Bulds/CrossBow.cs" id="1_b1ew8"]
 [ext_resource type="PackedScene" uid="uid://drof56qd3s8u5" path="res://Assets/Crossbow_Tower/Cross_Bow.fbx" id="1_lkno8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtmqj"]
 size = Vector3(27, 11, 20)
 
-[node name="Cross_Bow" type="Area3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_e5vvi"]
+height = 0.001
+radius = 50.0
+
+[node name="Cross_Bow" type="Area3D" groups=["Build"]]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
+script = ExtResource("1_b1ew8")
 
 [node name="CrossBow" parent="." instance=ExtResource("1_lkno8")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03912, -3.82089, -0.0172408)
 shape = SubResource("BoxShape3D_jtmqj")
+
+[node name="AttackRadius" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_e5vvi")
+
+[node name="AttackCD" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
