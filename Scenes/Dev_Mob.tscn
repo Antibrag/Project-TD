@@ -18,7 +18,7 @@ height = 1.0
 script = ExtResource("1_h6xus")
 Speed = 10.0
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["Mob"]]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 mesh = SubResource("CapsuleMesh_jqnij")
