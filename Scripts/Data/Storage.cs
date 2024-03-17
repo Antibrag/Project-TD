@@ -38,17 +38,19 @@ namespace Data
         {
             public string Name { get; private set; }
             public string ScenePath { get ; private set; }
-            public bool Aviable { get; set; }
+            public bool Available { get; set; }
             public int Level { get; set; }
             public float Damage { get; set; }
+            public float AttackSpeed { get; set; }
 
-            public Build(string name, string scenePath, int level, float damage, bool aviable = false)
+            public Build(string name, string scenePath, int level, float damage, float attackSpeed, bool available = false)
             {
                 Name = name;
                 ScenePath = scenePath;
-                Aviable = aviable;
+                Available = available;
                 Level = level;
                 Damage = damage;
+                AttackSpeed = attackSpeed;
             }
         }
 
@@ -62,17 +64,20 @@ namespace Data
 
         public static readonly Mob[] MobsList = new Mob[]
         {
+            //Mob name, Mob health, Mob attack power, mob scene path
             new Mob("DevMob", 10, 10, "res://Scenes/Dev_Mob.tscn")
         };
 
         public static readonly Level[] LevelsList = new Level[]
         {
+            //Level name, Level path, Player start health
             new Level("Dev Level", "res://Scenes/Levels/Debug_Level.tscn", 100)
         };
 
         public static readonly Build[] BuildsList = new Build[]
         {
-            new Build("CrossBow", "res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, true)
+            //Build name, build scene path, build level, build damage, build attack speed, build is available? 
+            new Build("CrossBow", "res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, 0.1f, true)
         };
     }
 }
