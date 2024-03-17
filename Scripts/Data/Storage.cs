@@ -2,11 +2,16 @@ namespace Data
 {
     public static class Storage
     {
-        public struct Mob
+        private interface IClonable
+        {
+            object Clone();
+        }
+
+        public class Mob : IClonable 
         {
             public string Name { get; private set; }
             public string ScenePath { get; private set; }
-            public float Health { get; private set; }
+            public float Health { get; set; }
             public float AttackPower { get; private set; }
 
             public Mob(string name, float health, float attackPower, string scenePath)
@@ -16,6 +21,10 @@ namespace Data
                 ScenePath = scenePath;
                 AttackPower = attackPower;
             }
+
+            public object Clone() =>     
+                new Mob(Name, Health, AttackPower, ScenePath);
+            
         }
 
         public struct Level
@@ -34,7 +43,7 @@ namespace Data
             }
         }
 
-        public struct Build 
+        public class Build : IClonable
         {
             public string Name { get; private set; }
             public string ScenePath { get ; private set; }
@@ -52,6 +61,9 @@ namespace Data
                 Damage = damage;
                 AttackSpeed = attackSpeed;
             }
+
+            public object Clone() =>
+                new Build(Name, ScenePath, Level, Damage, AttackSpeed, Available);
         }
 
         public static readonly string PlayerDataSavePath = "user://PlayerData.json";
