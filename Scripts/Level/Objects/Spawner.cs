@@ -34,8 +34,6 @@ namespace Level.Objects
 
 		public void OnSpawnTimerTimeout()
 		{
-			GD.Print($"Level mobs count = {_levelMobs.Count}");
-
 			if (_levelMobs.Count == 0)
 			{
 				_spawnTimer.Stop();
