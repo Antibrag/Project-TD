@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Data
 {
     public static class Storage
@@ -86,10 +88,9 @@ namespace Data
             new Level("Dev Level", "res://Scenes/Levels/Debug_Level.tscn", 100)
         };
 
-        public static readonly Build[] BuildsList = new Build[]
+        public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
         {
-            //Build name, build scene path, build level, build damage, build attack speed, build is available? 
-            new Build("CrossBow", "res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, 0.1f, true)
+            {"CrossBow", new Build("CrossBow", "res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, 0.1f, true)}
         };
     }
 }

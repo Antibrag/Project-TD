@@ -19,9 +19,7 @@ namespace Builds
 
 		private void Initialize()
 		{
-			for (int i = 0; i < Storage.BuildsList.Length; i++)
-				if (Storage.BuildsList[i].Name == "CrossBow")
-					Characteristics = (Storage.Build) Storage.BuildsList[i].Clone();
+			Characteristics = (Storage.Build) Storage.BuildsList["CrossBow"].Clone();
 			
 			IsPlaced = false;
 			GetNode<CollisionShape3D>("AttackRadius").Disabled = true;
