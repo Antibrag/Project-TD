@@ -56,7 +56,7 @@ namespace Level.Objects
 
 			mob_instance.Initialize(mob_name);
 
-			GD.Print($"Create Mob - {Storage.MobsList[random_mob_index].Name}");
+			//GD.Print($"Create Mob - {Storage.MobsList[random_mob_index].Name}");
 		}
 	}
 }
