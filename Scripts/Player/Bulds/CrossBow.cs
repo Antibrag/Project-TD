@@ -109,7 +109,10 @@ namespace Builds
 			if (ev.IsActionPressed("PastBuild") && !IsPlaced && IsPossibilityPlace)
 			{
 				IsPlaced = true;
+
+				GetNode<CollisionShape3D>("AttackRadius").Hide();
 				GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
+
 				GD.Print(Characteristics.Name + " - has been placed");
 			}
 		}
@@ -123,8 +126,6 @@ namespace Builds
 				NextTarget();
 			else if (IsPlaced && Target != null)
 				TargetIndicator.GlobalPosition = new Vector3(Target.GlobalPosition.X, Target.GlobalPosition.Y+1, Target.GlobalPosition.Z);
-
-			GD.Print($"Target - {Target}\nTargetsListSize - {TargetsList.Count}");
 		}
 	}
 }
