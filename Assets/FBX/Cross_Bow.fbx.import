@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://drof56qd3s8u5"
-path="res://.godot/imported/Cross_Bow.fbx-41ea638267402c762855c200e00d8eb2.scn"
+path="res://.godot/imported/Cross_Bow.fbx-2329413abcdf8f7011087c51b70a3d65.scn"
 
 [deps]
 
-source_file="res://Assets/Crossbow_Tower/Cross_Bow.fbx"
-dest_files=["res://.godot/imported/Cross_Bow.fbx-41ea638267402c762855c200e00d8eb2.scn"]
+source_file="res://Assets/FBX/Cross_Bow.fbx"
+dest_files=["res://.godot/imported/Cross_Bow.fbx-2329413abcdf8f7011087c51b70a3d65.scn"]
 
 [params]
 
@@ -29,6 +29,19 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"meshes": {
+"Root Scene_Crossbow": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Meshes/Builds/CrossBow.res"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1
