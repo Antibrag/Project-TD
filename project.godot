@@ -46,6 +46,8 @@ PastBuild={
 [rendering]
 
 global_illumination/gi/use_half_resolution=true
+environment/ssao/quality=1
+environment/ssil/quality=1
 environment/subsurface_scattering/subsurface_scattering_quality=0
 anti_aliasing/quality/screen_space_aa=1
 occlusion_culling/use_occlusion_culling=true
