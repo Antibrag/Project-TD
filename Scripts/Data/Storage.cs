@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Godot;
 
 namespace Data
 {
@@ -6,26 +7,46 @@ namespace Data
     {
         private interface IClonable
         {
-            object Clone();
+            public object Clone();
+        }
+
+        public struct MeshObject
+        {
+            public string MeshPath;
+            public Vector3 Scale;
+
+            public MeshObject(string meshPath, Vector3 scale)
+            {
+                MeshPath = meshPath;
+                Scale = scale;
+            }
         }
 
         public class Mob : IClonable 
         {
             public string Name { get; private set; }
-            public string ScenePath { get; private set; }
+            public MeshObject Mesh { get; private set; }
             public float Health { get; set; }
             public float AttackPower { get; private set; }
 
-            public Mob(string name, float health, float attackPower, string scenePath)
+            public Mob(string name, string meshPath, Vector3 meshScale, float health, float attackPower)
             {
                 Name = name;
+                Mesh = new MeshObject(meshPath, meshScale);
                 Health = health;
-                ScenePath = scenePath;
+                AttackPower = attackPower;
+            }
+
+            public Mob(string name, MeshObject mesh, float health, float attackPower)
+            {
+                Name = name;
+                Mesh = mesh;
+                Health = health;
                 AttackPower = attackPower;
             }
 
             public object Clone() =>     
-                new Mob(Name, Health, AttackPower, ScenePath);
+                new Mob(Name, Mesh, Health, AttackPower);
             
         }
 
@@ -48,16 +69,26 @@ namespace Data
         public class Build : IClonable
         {
             public string Name { get; private set; }
-            public string ScenePath { get ; private set; }
+            public MeshObject Mesh { get; private set;}
             public bool Available { get; set; }
             public int Level { get; set; }
             public float Damage { get; set; }
             public float AttackSpeed { get; set; }
 
-            public Build(string name, string scenePath, int level, float damage, float attackSpeed, bool available = false)
+            public Build(string name, string meshPath, Vector3 meshScale, int level, float damage, float attackSpeed, bool available = false)
             {
                 Name = name;
-                ScenePath = scenePath;
+                Mesh = new MeshObject(meshPath, meshScale);
+                Available = available;
+                Level = level;
+                Damage = damage;
+                AttackSpeed = attackSpeed;
+            }
+
+            public Build(string name, MeshObject mesh, int level, float damage, float attackSpeed, bool available = false)
+            {
+                Name = name;
+                Mesh = mesh;
                 Available = available;
                 Level = level;
                 Damage = damage;
@@ -65,7 +96,7 @@ namespace Data
             }
 
             public object Clone() =>
-                new Build(Name, ScenePath, Level, Damage, AttackSpeed, Available);
+                new Build(Name, Mesh, Level, Damage, AttackSpeed, Available);
         }
 
         public static readonly string PlayerDataSavePath = "user://PlayerData.json";
@@ -76,10 +107,10 @@ namespace Data
             public static int CurrentLevelIdx { get; set; }
         }
 
-        public static readonly Mob[] MobsList = new Mob[]
+        public static readonly Dictionary<string, Mob> MobsList = new Dictionary<string, Mob>()
         {
             //Mob name, Mob health, Mob attack power, mob scene path
-            new Mob("DevMob", 10, 10, "res://Scenes/Dev_Mob.tscn")
+            {"DevMob", new Mob("DevMob", "res://Assets/Meshes/DevMob.res", new Vector3(40, 40, 40), 10, 10)}
         };
 
         public static readonly Level[] LevelsList = new Level[]
@@ -90,7 +121,7 @@ namespace Data
 
         public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
         {
-            {"CrossBow", new Build("CrossBow", "res://Scenes/Player_Builds/Cross_Bow.tscn", 1, 10, 0.1f, true)}
+            {"CrossBow", new Build("CrossBow", "res://Assets/Meshes/Builds/CrossBow.res", new Vector3(100, 100, 100), 1, 10, 0.1f, true)}
         };
     }
 }
