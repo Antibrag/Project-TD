@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvqjmwduxls4e" path="res://Scenes/Spawner.tscn" id="3_82rpb"]
 [ext_resource type="PackedScene" uid="uid://nvlfegc5re3s" path="res://Scenes/Road.tscn" id="4_wki0h"]
 [ext_resource type="PackedScene" uid="uid://cfn4xw4kn0210" path="res://Scenes/Corner_Road.tscn" id="5_71u2w"]
-[ext_resource type="PackedScene" uid="uid://daorro7c3vor3" path="res://Scenes/Player_Builds/Cross_Bow.tscn" id="7_lunma"]
+[ext_resource type="PackedScene" uid="uid://daorro7c3vor3" path="res://Scenes/Build.tscn" id="7_lunma"]
 
 [sub_resource type="Curve3D" id="Curve3D_hvmfl"]
 _data = {
@@ -25,8 +25,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 1)
 
 [node name="Objects" type="Node" parent="Player" index="2"]
 
-[node name="Cross_Bow" parent="Player/Objects" index="0" instance=ExtResource("7_lunma")]
-transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0.7, -0.5)
+[node name="Build" parent="Player/Objects" index="0" instance=ExtResource("7_lunma")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0.68981, 0)
 
 [node name="Objects" type="Node3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
@@ -39,41 +39,55 @@ transform = Transform3D(0.999999, 0, 3.55271e-15, 0, 1, 0, -3.55271e-15, 0, 0.99
 
 [node name="Road3" parent="Objects" index="2" instance=ExtResource("4_wki0h")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 0, -2)
+visible = false
 
 [node name="Road12" parent="Objects" index="3" instance=ExtResource("4_wki0h")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -2, 0, -3)
+visible = false
 
 [node name="Road13" parent="Objects" index="4" instance=ExtResource("4_wki0h")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -2, 0, -4)
+visible = false
 
 [node name="Road14" parent="Objects" index="5" instance=ExtResource("4_wki0h")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -2, 0, -5)
+visible = false
 
 [node name="Road15" parent="Objects" index="6" instance=ExtResource("4_wki0h")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -2, 0, -6)
+visible = false
 
 [node name="Road16" parent="Objects" index="7" instance=ExtResource("4_wki0h")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -2, 0, -7)
+visible = false
 
 [node name="Road4" parent="Objects" index="8" instance=ExtResource("5_71u2w")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -2)
+visible = false
 
 [node name="Road11" parent="Objects" index="9" instance=ExtResource("5_71u2w")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -2)
+visible = false
 
 [node name="Road5" parent="Objects" index="10" instance=ExtResource("4_wki0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+visible = false
 
 [node name="Road6" parent="Objects" index="11" instance=ExtResource("4_wki0h")]
+visible = false
 
 [node name="Road7" parent="Objects" index="12" instance=ExtResource("5_71u2w")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 1)
+visible = false
 
 [node name="Road8" parent="Objects" index="13" instance=ExtResource("4_wki0h")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, 1)
+visible = false
 
 [node name="Road9" parent="Objects" index="14" instance=ExtResource("4_wki0h")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 1)
+visible = false
 
 [node name="Road10" parent="Objects" index="15" instance=ExtResource("4_wki0h")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 1)
+visible = false
