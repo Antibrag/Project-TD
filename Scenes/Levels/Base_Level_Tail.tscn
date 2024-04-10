@@ -2,12 +2,14 @@
 
 [ext_resource type="ArrayMesh" uid="uid://ct2c56mdsxrph" path="res://Assets/Meshes/Grass.res" id="1_41k3o"]
 [ext_resource type="Texture2D" uid="uid://ctllv2xtenkng" path="res://Assets/Textures/Grass/grass-1.jpg" id="1_hodcd"]
-[ext_resource type="Texture2D" uid="uid://bsb3p8assagli" path="res://Assets/Textures/Grass/grass-1-6.jpg" id="2_c1gjr"]
 [ext_resource type="Texture2D" uid="uid://cfhj6jn5s42na" path="res://Assets/Textures/Grass/grass-1-3.jpg" id="3_8k4yt"]
 [ext_resource type="Texture2D" uid="uid://c51j3rhmeumib" path="res://Assets/Textures/Grass/grass-1-1.jpg" id="4_famxw"]
 [ext_resource type="Texture2D" uid="uid://crc11pw4dhbff" path="res://Assets/Textures/Grass/grass-1-2.jpg" id="6_3q5m5"]
-[ext_resource type="Texture2D" uid="uid://diy6t05i8ddvk" path="res://Assets/Textures/Grass/grass-1-5.jpg" id="7_pqrry"]
 [ext_resource type="ArrayMesh" uid="uid://b44hkv52hudi4" path="res://Assets/Meshes/Tree03.res" id="8_lrxfg"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m31j6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_42ti7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xi3bk"]
 albedo_color = Color(0.364706, 0.576471, 0, 1)
@@ -18,11 +20,11 @@ roughness_texture = ExtResource("6_3q5m5")
 emission_texture = ExtResource("3_8k4yt")
 normal_enabled = true
 normal_scale = 0.5
-normal_texture = ExtResource("7_pqrry")
+normal_texture = SubResource("CompressedTexture2D_42ti7")
 subsurf_scatter_enabled = true
-subsurf_scatter_texture = ExtResource("7_pqrry")
-subsurf_scatter_transmittance_texture = ExtResource("2_c1gjr")
-backlight_texture = ExtResource("2_c1gjr")
+subsurf_scatter_texture = SubResource("CompressedTexture2D_42ti7")
+subsurf_scatter_transmittance_texture = SubResource("CompressedTexture2D_m31j6")
+backlight_texture = SubResource("CompressedTexture2D_m31j6")
 uv1_scale = Vector3(10, 10, 10)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6pk64"]
