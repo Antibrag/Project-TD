@@ -11,9 +11,11 @@ namespace Level
 
 		public void Initialize(string name) 
 		{
-			for (int i = 0; i < Storage.MobsList.Length; i++)
-				if (Storage.MobsList[i].Name == name)
-					Characteristics = (Storage.Mob) Storage.MobsList[i].Clone();
+			Characteristics = (Storage.Mob) Storage.MobsList[name].Clone();
+
+			MeshInstance3D mob_mesh = GetNode<MeshInstance3D>("Area3D/Mesh");
+			mob_mesh.Mesh = GD.Load<Mesh>(Characteristics.Mesh.MeshPath);
+			mob_mesh.Scale = Characteristics.Mesh.Scale;
 		}
 
 		public void Death()
