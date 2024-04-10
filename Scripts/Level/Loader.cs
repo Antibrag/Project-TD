@@ -20,7 +20,7 @@ namespace Level
 
             GetNode<StartMenu>("/root/Main/StartMenu").Disable();
 
-            GetNode<Objects.Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
+            GetNode<Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
         }
 
         public void LoadFirstUnCompleteLevel()
@@ -34,23 +34,6 @@ namespace Level
 
             GD.PushWarning("All levels complete or failed to load");
         }
-
-        /*public void LoadLevel(string levelName)
-        {
-            for (int i = 0; i < Storage.LevelsList.Length; i++)
-            {
-                if (levelName != Storage.LevelsList[i].Name)
-                    continue;
-                
-                var level = GD.Load<PackedScene>(Storage.LevelsList[i].ScenePath).Instantiate();
-                GetNode<Node>("/root/Main").CallDeferred("add_child", level);
-
-                GetNode<Player>(level.GetPath() + "/Player").Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevelIdx].StartPlayerHealth;
-
-                GD.Print($"Load level - {Storage.LevelsList[i].Name}");
-                return;
-            }
-        }*/
 
         public void LoadLevel(int levelIndex)
         {

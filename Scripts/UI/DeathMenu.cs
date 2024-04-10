@@ -39,7 +39,7 @@ public partial class DeathMenu : Control
 
 	public void OnRestartButtonPressed()
 	{
-		GetNode<Level.Objects.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
+		GetNode<Level.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
 		GetNode<Player>(GetParent().GetPath() + "/Level/Player").Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevelIdx].StartPlayerHealth;
 		Disable();
 	}

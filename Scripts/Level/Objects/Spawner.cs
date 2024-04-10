@@ -1,8 +1,10 @@
-using Data;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
-namespace Level.Objects
+using Data;
+
+namespace Level
 {
 	public partial class Spawner : Area3D
 	{
@@ -41,7 +43,7 @@ namespace Level.Objects
 			}
 
 			int random_mob_index = new System.Random().Next(0, _levelMobs.Count-1);
-			string mob_name = Storage.MobsList[random_mob_index].Name;
+			string mob_name = Storage.MobsList.ElementAt(random_mob_index).Key;
 
 			if (_levelMobs[mob_name] == 0)
 			{
@@ -51,12 +53,10 @@ namespace Level.Objects
 			else
 				_levelMobs[mob_name]--;
 
-			Mob mob_instance = (Mob) GD.Load<PackedScene>(Storage.MobsList[random_mob_index].ScenePath).Instantiate();
+			Mob mob_instance = (Mob) GD.Load<PackedScene>("res://Scenes/Mob.tscn").Instantiate();
 			GetNode<Path3D>(GetParent().GetPath() + "/MobsPath").CallDeferred("add_child", mob_instance);
 
 			mob_instance.Initialize(mob_name);
-
-			//GD.Print($"Create Mob - {Storage.MobsList[random_mob_index].Name}");
 		}
 	}
 }
