@@ -29,6 +29,6 @@ public partial class Player : CharacterBody3D
     {
         GD.Print("Player death!");
         GetNode<Level.Spawner>(GetParent().GetPath() + "/Objects/Spawner").QueueFreeAllMobs();
-        GetNode<DeathMenu>("/root/Main/Death_Menu").Enable();
+        GetNode<UI.DeathMenu>("/root/Main/Death_Menu").Enable();
     }
 }

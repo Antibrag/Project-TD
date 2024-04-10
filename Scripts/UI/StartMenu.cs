@@ -1,13 +1,17 @@
 using Godot;
 
-public partial class StartMenu : Control
+namespace UI
 {
-    public void OnStartButtonPressed() 
-        => GetNode<Level.Loader>("/root/Main/Loader").StartGame();
-    
-    public void Disable()
+    public partial class StartMenu : Control
     {
-        GetNode<Button>("StartButton").Disabled = true;
-        Hide();
+        public void OnStartButtonPressed() 
+            => GetNode<Level.Loader>("/root/Main/Loader").StartGame();
+        
+        public void Disable()
+        {
+            GetNode<Button>("StartButton").Disabled = true;
+            Hide();
+    
+        }
     }
 }

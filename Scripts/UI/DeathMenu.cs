@@ -1,51 +1,55 @@
 using Data;
 using Godot;
 
-public partial class DeathMenu : Control
+namespace UI
 {
-    public override void _Ready()
-    {
-        GetNode<Button>("RestartButton").Disabled = true;
-		GetNode<Button>("MenuButton").Disabled = true;
-    }
-
-    public async void Enable(float side_speed = 0.01f)
+	public partial class DeathMenu : Control
 	{
-		Show();
-
-		for (float i = Modulate.A; i <= 1; i += 0.01f)
+		public override void _Ready()
 		{
-			Modulate = new Color(Modulate, i);
-			await ToSignal(GetTree().CreateTimer(side_speed), "timeout");
+			GetNode<Button>("RestartButton").Disabled = true;
+			GetNode<Button>("MenuButton").Disabled = true;
 		}
 
-		GetNode<Button>("RestartButton").Disabled = false;
-		GetNode<Button>("MenuButton").Disabled = false;
-	}
-
-	public async void Disable(float side_speed = 0.01f)
-	{
-		for (float i = Modulate.A; i >= 1; i -= 0.01f)
+		public async void Enable(float side_speed = 0.01f)
 		{
-			Modulate = new Color(Modulate, i);
-			await ToSignal(GetTree().CreateTimer(side_speed), "timeout");
+			Show();
+
+			for (float i = Modulate.A; i <= 1; i += 0.01f)
+			{
+				Modulate = new Color(Modulate, i);
+				await ToSignal(GetTree().CreateTimer(side_speed), "timeout");
+			}
+
+			GetNode<Button>("RestartButton").Disabled = false;
+			GetNode<Button>("MenuButton").Disabled = false;
 		}
 
-		GetNode<Button>("RestartButton").Disabled = true;
-		GetNode<Button>("MenuButton").Disabled = true;
+		public async void Disable(float side_speed = 0.01f)
+		{
+			for (float i = Modulate.A; i >= 1; i -= 0.01f)
+			{
+				Modulate = new Color(Modulate, i);
+				await ToSignal(GetTree().CreateTimer(side_speed), "timeout");
+			}
 
-		Hide();
+			GetNode<Button>("RestartButton").Disabled = true;
+			GetNode<Button>("MenuButton").Disabled = true;
+
+			Hide();
+		}
+
+		public void OnRestartButtonPressed()
+		{
+			GetNode<Level.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
+			GetNode<Player>(GetParent().GetPath() + "/Level/Player").Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevelIdx].StartPlayerHealth;
+			Disable();
+		}
+
+		/*public void OnMenuButtonPressed()
+		{
+
+		}*/
 	}
-
-	public void OnRestartButtonPressed()
-	{
-		GetNode<Level.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
-		GetNode<Player>(GetParent().GetPath() + "/Level/Player").Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevelIdx].StartPlayerHealth;
-		Disable();
-	}
-
-	/*public void OnMenuButtonPressed()
-	{
-
-	}*/
 }
+

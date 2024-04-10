@@ -18,7 +18,7 @@ namespace Level
 
             Data.Loader.LoadPlayerData();
 
-            GetNode<StartMenu>("/root/Main/StartMenu").Disable();
+            GetNode<UI.StartMenu>("/root/Main/StartMenu").Disable();
 
             GetNode<Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
         }
