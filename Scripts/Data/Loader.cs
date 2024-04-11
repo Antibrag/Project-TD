@@ -7,13 +7,13 @@ namespace Data
     {
         public static void LoadLevelsData()
         {
-            if (!FileAccess.FileExists(Storage.LevelsDataSavePath)) 
+            if (!FileAccess.FileExists(Storage.GlobalInfo.LevelsDataSavePath)) 
             {
                 GD.PushWarning("Levels data not found\nCreate starting levels information");
                 Saver.SaveLevelsData();
             }
 
-            using var file = FileAccess.Open(Storage.LevelsDataSavePath, FileAccess.ModeFlags.Read);
+            using var file = FileAccess.Open(Storage.GlobalInfo.LevelsDataSavePath, FileAccess.ModeFlags.Read);
 
             Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
 
@@ -35,13 +35,13 @@ namespace Data
 
         public static void LoadPlayerData()
         {
-            if (!FileAccess.FileExists(Storage.PlayerDataSavePath)) 
+            if (!FileAccess.FileExists(Storage.GlobalInfo.PlayerDataSavePath)) 
             {
                 GD.PushWarning("Player data not found\nCreate starting player information");
-                Saver.SaveStartingPlayerData();
+                Saver.SavePlayerData(true);
             }
 
-            using var file = FileAccess.Open(Storage.PlayerDataSavePath, FileAccess.ModeFlags.Read);
+            using var file = FileAccess.Open(Storage.GlobalInfo.PlayerDataSavePath, FileAccess.ModeFlags.Read);
 
             Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
 

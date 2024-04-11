@@ -50,7 +50,7 @@ namespace Data
             
         }
 
-        public struct Level
+        public class Level
         {
             public string Name { get; private set; }
             public string ScenePath { get; private set; }
@@ -99,12 +99,13 @@ namespace Data
                 new Build(Name, Mesh, Level, Damage, AttackSpeed, Available);
         }
 
-        public static readonly string PlayerDataSavePath = "user://PlayerData.json";
-        public static readonly string LevelsDataSavePath = "user://LevelsData.json";
+        
 
         public static class GlobalInfo
         {
-            public static int CurrentLevelIdx { get; set; }
+            public static readonly string PlayerDataSavePath = "user://PlayerData.json";
+            public static readonly string LevelsDataSavePath = "user://LevelsData.json";
+            public static int CurrentLevelIdx;
         }
 
         public static readonly Dictionary<string, Mob> MobsList = new Dictionary<string, Mob>()

@@ -5,26 +5,20 @@ namespace Data
 {
     public class Saver
     {
-        public static void SaveStartingPlayerData()
+        public static void SavePlayerData(bool isStartingData = false)
         {
-            using var file = FileAccess.Open(Storage.PlayerDataSavePath, FileAccess.ModeFlags.Write);
+            // using var file = FileAccess.Open(Storage.GlobalInfo.PlayerDataSavePath, FileAccess.ModeFlags.Write);
 
-            Dictionary data = new() 
-            {
-                //{"CurrentLevelIdx", 0}
-            };
-
-            file.StoreLine(Json.Stringify(data));
-        }
-
-        public static void SavePlayerData()
-        {
-            
+            // if (isStartingData)
+            // {
+            //     file.StoreLine(Json.Stringify(data));
+            //     return;
+            // }
         }
 
         public static void SaveLevelsData()
         {
-            using var file = FileAccess.Open(Storage.LevelsDataSavePath, FileAccess.ModeFlags.Write);
+            using var file = FileAccess.Open(Storage.GlobalInfo.LevelsDataSavePath, FileAccess.ModeFlags.Write);
 
             Dictionary data = new();
 
