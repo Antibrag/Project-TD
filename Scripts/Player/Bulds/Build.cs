@@ -4,36 +4,38 @@ using Godot.Collections;
 
 public partial class Build : Area3D
 {
+	public Storage.Build Characteristics { get; set; }
+	private bool _isPlaced { get; set; } = false;
+
 	[Export] public Timer AttackCDTimer;
 	[Export] public MeshInstance3D TargetIndicator;
 
-	public Storage.Build Characteristics { get; set; }
-
-	private System.Collections.Generic.List<Level.Mob> TargetsList { get; set; } = new();
-	private Level.Mob Target { get; set; } = null;
-
-	private bool IsPossibilityPlace { get; set; }
-	private bool IsPlaced { get; set; }
+	private System.Collections.Generic.List<Level.Mob> _targetsList = new();
+	private Level.Mob _target = null;
+	private bool _isPossibilityPlace;
 
 	private void Initialize()
 	{
 		Characteristics = (Storage.Build) Storage.BuildsList["CrossBow"].Clone();
 
-		IsPlaced = false;
 		GetNode<CollisionShape3D>("AttackRadius").Disabled = true;
+		
+		MeshInstance3D build_mesh = GetNode<MeshInstance3D>("Mesh");
+		build_mesh.Mesh = GD.Load<Mesh>(Characteristics.Mesh.MeshPath);
+		build_mesh.Scale = Characteristics.Mesh.Scale;
 	}
 
 	private void NextTarget()
 	{
-		if (TargetsList.Count == 1)
+		if (_targetsList.Count == 1)
 		{
-			Target = null;
+			_target = null;
 			TargetIndicator.GlobalPosition = Vector3.Zero;
 			return;
 		}
 
-		TargetsList.Remove(Target);
-		Target = TargetsList[0];
+		_targetsList.Remove(_target);
+		_target = _targetsList[0];
 	}
 
 	private Vector3 ScreenPointToRay()
@@ -53,7 +55,7 @@ public partial class Build : Area3D
 		if (!rayArray.ContainsKey("position"))
 			return Vector3.Zero;
 
-		return (Vector3)rayArray["position"];
+		return (Vector3) rayArray["position"];
 	}
 
 	private void MoveToMouse()
@@ -70,28 +72,30 @@ public partial class Build : Area3D
 
 	public void OnAreaEntered(Area3D enteredArea)
 	{
-		if (!IsPlaced)
-			IsPossibilityPlace = false;
-		else
+		if (!_isPlaced)
 		{
-			if (enteredArea.IsInGroup("Mob"))
-			{
-				Level.Mob mob = (Level.Mob)enteredArea.GetParent();
-
-				if (!TargetsList.Contains(mob))
-					TargetsList.Add(mob);
-
-				if (TargetsList.Count == 1)
-					Target = mob;
-			}
+			_isPossibilityPlace = false;
+			return;
 		}
+
+		if (enteredArea.IsInGroup("Mob"))
+		{
+			Level.Mob mob = (Level.Mob) enteredArea.GetParent();
+
+			if (!_targetsList.Contains(mob))
+				_targetsList.Add(mob);
+
+			if (_targetsList.Count == 1)
+				_target = mob;
+		}
+		
 	}
 
 	public void OnAreaExited(Area3D exitedArea)
 	{
-		if (!IsPlaced)
+		if (!_isPlaced)
 		{
-			IsPossibilityPlace = true;
+			_isPossibilityPlace = true;
 			return;
 		}
 
@@ -104,9 +108,9 @@ public partial class Build : Area3D
 
 	public override void _Input(InputEvent @ev)
 	{
-		if (ev.IsActionPressed("PastBuild") && !IsPlaced && IsPossibilityPlace)
+		if (ev.IsActionPressed("PastBuild") && !_isPlaced && _isPossibilityPlace)
 		{
-			IsPlaced = true;
+			_isPlaced = true;
 
 			GetNode<CollisionShape3D>("AttackRadius").Hide();
 			GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
@@ -117,13 +121,13 @@ public partial class Build : Area3D
 
 	public override void _Process(double delta)
 	{
-		if (!IsPlaced)
+		if (!_isPlaced)
 			MoveToMouse();
 
-		if (IsPlaced && Target != null && Target.Characteristics.Health <= 0)
+		if (_isPlaced && _target != null && _target.Characteristics.Health <= 0)
 			NextTarget();
-		else if (IsPlaced && Target != null)
-			TargetIndicator.GlobalPosition = new Vector3(Target.GlobalPosition.X, Target.GlobalPosition.Y + 1, Target.GlobalPosition.Z);
+		else if (_isPlaced && _target != null)
+			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z);
 	}
 }
 
