@@ -66,20 +66,20 @@ namespace Data
 
         public class Build : GameObject, IClonable
         {
-            public bool Available { get; set; }
             public float AttackSpeed { get; set; }
+            public Dictionary<string, Projectile> Projectiles { get; set; } 
 
-            public Build(string name, in MeshObject mesh, int level, float attackSpeed, bool available = false)
+            public Build(string name, in MeshObject mesh, int level, float attackSpeed, Dictionary <string, Projectile> buildProjectilesList)
             {
                 Name = name;
                 Mesh = mesh;
-                Available = available;
                 Level = level;
                 AttackSpeed = attackSpeed;
+                Projectiles = buildProjectilesList;
             }
 
             public object Clone() 
-                => new Build(Name, Mesh, Level, AttackSpeed, Available);
+                => new Build(Name, Mesh, Level, AttackSpeed, Projectiles);
         }
 
         public class Projectile : GameObject, IClonable
@@ -100,12 +100,10 @@ namespace Data
                 => new Projectile(Name, Mesh, Level, AttackPower, PenetrationPower);
         }
 
-        public static class GlobalInfo
+        public static readonly Dictionary<string, Projectile> ProjectilesList = new Dictionary<string, Projectile>()
         {
-            public static readonly string PlayerDataSavePath = "user://PlayerData.json";
-            public static readonly string LevelsDataSavePath = "user://LevelsData.json";
-            public static int CurrentLevelIdx;
-        }
+            {"Wood Arrow", new Projectile("Wood Arrow", new MeshObject("", new Vector3()), 1, 2, 1)}
+        };
 
         public static readonly Dictionary<string, Mob> MobsList = new Dictionary<string, Mob>()
         {
@@ -121,8 +119,21 @@ namespace Data
 
         public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
         {
-            {"CrossBow", new Build("CrossBow", new MeshObject("res://Assets/Meshes/Builds/CrossBow.res", new Vector3(100, 100, 100)), 1, 1, true)}
+            {"CrossBow", new Build(
+                "CrossBow", 
+                new MeshObject("res://Assets/Meshes/Builds/CrossBow.res", new Vector3(100, 100, 100)), 
+                1, 
+                1,
+                new Dictionary<string, Projectile>() { {"Wood Arrow", ProjectilesList["Wood Arrow"]} } 
+            )}
         };
+
+        public static class GlobalInfo
+        {
+            public static readonly string PlayerDataSavePath = "user://PlayerData.json";
+            public static readonly string LevelsDataSavePath = "user://LevelsData.json";
+            public static int CurrentLevelIdx;
+        }
     }
 }
 
