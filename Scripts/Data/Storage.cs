@@ -29,7 +29,7 @@ namespace Data
             public float Health { get; set; }
             public float AttackPower { get; private set; }
 
-            public Mob(string name, string meshPath, Vector3 meshScale, float health, float attackPower)
+            public Mob(string name, string meshPath, in Vector3 meshScale, float health, float attackPower)
             {
                 Name = name;
                 Mesh = new MeshObject(meshPath, meshScale);
@@ -37,7 +37,7 @@ namespace Data
                 AttackPower = attackPower;
             }
 
-            public Mob(string name, MeshObject mesh, float health, float attackPower)
+            public Mob(string name, in MeshObject mesh, float health, float attackPower)
             {
                 Name = name;
                 Mesh = mesh;
@@ -75,7 +75,7 @@ namespace Data
             public float Damage { get; set; }
             public float AttackSpeed { get; set; }
 
-            public Build(string name, string meshPath, Vector3 meshScale, int level, float damage, float attackSpeed, bool available = false)
+            public Build(string name, string meshPath, in Vector3 meshScale, int level, float damage, float attackSpeed, bool available = false)
             {
                 Name = name;
                 Mesh = new MeshObject(meshPath, meshScale);
@@ -85,7 +85,7 @@ namespace Data
                 AttackSpeed = attackSpeed;
             }
 
-            public Build(string name, MeshObject mesh, int level, float damage, float attackSpeed, bool available = false)
+            public Build(string name, in MeshObject mesh, int level, float damage, float attackSpeed, bool available = false)
             {
                 Name = name;
                 Mesh = mesh;
