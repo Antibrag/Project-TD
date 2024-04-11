@@ -10,6 +10,14 @@ namespace Data
             public object Clone();
         }
 
+        public class GameObject
+        {
+            public string Name { get; set; }
+            public MeshObject Mesh { get; set; }
+            public int Level { get; set; }
+            
+        }
+
         public struct MeshObject
         {
             public string MeshPath;
@@ -22,20 +30,10 @@ namespace Data
             }
         }
 
-        public class Mob : IClonable 
+        public class Mob : GameObject, IClonable
         {
-            public string Name { get; private set; }
-            public MeshObject Mesh { get; private set; }
             public float Health { get; set; }
             public float AttackPower { get; private set; }
-
-            public Mob(string name, string meshPath, in Vector3 meshScale, float health, float attackPower)
-            {
-                Name = name;
-                Mesh = new MeshObject(meshPath, meshScale);
-                Health = health;
-                AttackPower = attackPower;
-            }
 
             public Mob(string name, in MeshObject mesh, float health, float attackPower)
             {
@@ -45,8 +43,8 @@ namespace Data
                 AttackPower = attackPower;
             }
 
-            public object Clone() =>     
-                new Mob(Name, Mesh, Health, AttackPower);
+            public object Clone() 
+                => new Mob(Name, Mesh, Health, AttackPower);
             
         }
 
@@ -66,40 +64,41 @@ namespace Data
             }
         }
 
-        public class Build : IClonable
+        public class Build : GameObject, IClonable
         {
-            public string Name { get; private set; }
-            public MeshObject Mesh { get; private set;}
             public bool Available { get; set; }
-            public int Level { get; set; }
-            public float Damage { get; set; }
             public float AttackSpeed { get; set; }
 
-            public Build(string name, string meshPath, in Vector3 meshScale, int level, float damage, float attackSpeed, bool available = false)
-            {
-                Name = name;
-                Mesh = new MeshObject(meshPath, meshScale);
-                Available = available;
-                Level = level;
-                Damage = damage;
-                AttackSpeed = attackSpeed;
-            }
-
-            public Build(string name, in MeshObject mesh, int level, float damage, float attackSpeed, bool available = false)
+            public Build(string name, in MeshObject mesh, int level, float attackSpeed, bool available = false)
             {
                 Name = name;
                 Mesh = mesh;
                 Available = available;
                 Level = level;
-                Damage = damage;
                 AttackSpeed = attackSpeed;
             }
 
-            public object Clone() =>
-                new Build(Name, Mesh, Level, Damage, AttackSpeed, Available);
+            public object Clone() 
+                => new Build(Name, Mesh, Level, AttackSpeed, Available);
         }
 
-        
+        public class Projectile : GameObject, IClonable
+        {
+            public float AttackPower { get; set; }
+            public float PenetrationPower { get; set; } //Пробивная способность
+
+            public Projectile(string name, MeshObject mesh, int level, float attackPower, float penetrationPower)
+            {
+                Name = name;
+                Mesh = mesh;
+                Level = level;
+                AttackPower = attackPower;
+                PenetrationPower = penetrationPower;
+            }
+
+            public object Clone() 
+                => new Projectile(Name, Mesh, Level, AttackPower, PenetrationPower);
+        }
 
         public static class GlobalInfo
         {
@@ -111,7 +110,7 @@ namespace Data
         public static readonly Dictionary<string, Mob> MobsList = new Dictionary<string, Mob>()
         {
             //Mob name, Mob health, Mob attack power, mob scene path
-            {"DevMob", new Mob("DevMob", "res://Assets/Meshes/DevMob.res", new Vector3(40, 40, 40), 10, 10)}
+            {"DevMob", new Mob("DevMob", new MeshObject("res://Assets/Meshes/DevMob.res", new Vector3(40, 40, 40)), 10, 10)}
         };
 
         public static readonly Level[] LevelsList = new Level[]
@@ -122,7 +121,7 @@ namespace Data
 
         public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
         {
-            {"CrossBow", new Build("CrossBow", "res://Assets/Meshes/Builds/CrossBow.res", new Vector3(100, 100, 100), 1, 10, 0.1f, true)}
+            {"CrossBow", new Build("CrossBow", new MeshObject("res://Assets/Meshes/Builds/CrossBow.res", new Vector3(100, 100, 100)), 1, 1, true)}
         };
     }
 }
