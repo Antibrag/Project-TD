@@ -12,7 +12,7 @@ namespace Data
 
         public class GameObject
         {
-            public string Name { get; set; }
+            //public string Name { get; set; }
             public MeshObject Mesh { get; set; }
             public int Level { get; set; }
         }
@@ -34,29 +34,26 @@ namespace Data
             public float Health { get; set; }
             public float AttackPower { get; private set; }
 
-            public Mob(string name, in MeshObject mesh, float health, float attackPower)
+            public Mob(in MeshObject mesh, float health, float attackPower)
             {
-                Name = name;
                 Mesh = mesh;
                 Health = health;
                 AttackPower = attackPower;
             }
 
             public object Clone() 
-                => new Mob(Name, Mesh, Health, AttackPower);
+                => new Mob(Mesh, Health, AttackPower);
             
         }
 
         public class Level
         {
-            public string Name { get; private set; }
             public string ScenePath { get; private set; }
             public bool IsComplete { get; set; }
             public float StartPlayerHealth { get; private set; }
 
-            public Level(string name, string scenePath, float startPlayerHealth, bool isCompleted = false)
+            public Level(string scenePath, float startPlayerHealth, bool isCompleted = false)
             {
-                Name = name;
                 ScenePath = scenePath;
                 IsComplete = isCompleted;
                 StartPlayerHealth = startPlayerHealth;
@@ -68,9 +65,8 @@ namespace Data
             public float AttackSpeed { get; set; }
             public Dictionary<string, Projectile> Projectiles { get; set; } 
 
-            public Build(string name, in MeshObject mesh, int level, float attackSpeed, Dictionary <string, Projectile> buildProjectilesList)
+            public Build(in MeshObject mesh, int level, float attackSpeed, Dictionary <string, Projectile> buildProjectilesList)
             {
-                Name = name;
                 Mesh = mesh;
                 Level = level;
                 AttackSpeed = attackSpeed;
@@ -78,7 +74,7 @@ namespace Data
             }
 
             public object Clone() 
-                => new Build(Name, Mesh, Level, AttackSpeed, Projectiles);
+                => new Build(Mesh, Level, AttackSpeed, Projectiles);
         }
 
         public class Projectile : GameObject, IClonable
@@ -86,9 +82,8 @@ namespace Data
             public float AttackPower { get; set; }
             public float PenetrationPower { get; set; } //Пробивная способность
 
-            public Projectile(string name, in MeshObject mesh, int level, float attackPower, float penetrationPower)
+            public Projectile(in MeshObject mesh, int level, float attackPower, float penetrationPower)
             {
-                Name = name;
                 Mesh = mesh;
                 Level = level;
                 AttackPower = attackPower;
@@ -96,30 +91,29 @@ namespace Data
             }
 
             public object Clone() 
-                => new Projectile(Name, Mesh, Level, AttackPower, PenetrationPower);
+                => new Projectile(Mesh, Level, AttackPower, PenetrationPower);
         }
 
         public static readonly Dictionary<string, Projectile> ProjectilesList = new Dictionary<string, Projectile>()
         {
-            {"Wood Arrow", new Projectile("Wood Arrow", new MeshObject("", new Vector3()), 1, 2, 1)}
+            {"Wood Arrow", new Projectile(new MeshObject("", new Vector3()), 1, 2, 1)}
         };
 
         public static readonly Dictionary<string, Mob> MobsList = new Dictionary<string, Mob>()
         {
             //Mob name, Mob health, Mob attack power, mob scene path
-            {"DevMob", new Mob("DevMob", new MeshObject("res://Assets/Meshes/DevMob.res", new Vector3(40, 40, 40)), 10, 10)}
+            {"DevMob", new Mob(new MeshObject("res://Assets/Meshes/DevMob.res", new Vector3(40, 40, 40)), 10, 10)}
         };
 
         public static readonly Level[] LevelsList = new Level[]
         {
             //Level name, Level path, Player start health
-            new Level("Dev Level", "res://Scenes/Levels/Debug_Level.tscn", 100)
+            new Level("res://Scenes/Levels/Debug_Level.tscn", 100)
         };
 
         public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
         {
             {"CrossBow", new Build(
-                "CrossBow", 
                 new MeshObject("res://Assets/Meshes/Builds/CrossBow.res", new Vector3(100, 100, 100)), 
                 1, 
                 1,
