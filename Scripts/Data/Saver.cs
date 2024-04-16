@@ -18,11 +18,11 @@ namespace Data
 
         public static void SaveLevelsData()
         {
-            using var file = FileAccess.Open(Storage.GlobalInfo.LevelsDataSavePath, FileAccess.ModeFlags.Write);
+            using var file = FileAccess.Open(Storage.LevelsDataSavePath, FileAccess.ModeFlags.Write);
 
             Godot.Collections.Dictionary data = new();
 
-            foreach (KeyValuePair<string, Storage.Level> level in Storage.LevelsList) 
+            foreach (KeyValuePair<string, Level> level in Storage.LevelsList) 
                 data.Add(level.Key, level.Value.IsComplete);
 
             file.StoreLine(Json.Stringify(data));

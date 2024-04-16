@@ -36,13 +36,14 @@ namespace UI
 			GetNode<Button>("RestartButton").Disabled = true;
 			GetNode<Button>("MenuButton").Disabled = true;
 
+
 			Hide();
 		}
 
 		public void OnRestartButtonPressed()
 		{
-			GetNode<Level.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
-			GetNode<Player>(GetParent().GetPath() + "/Level/Player").Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevel].StartPlayerHealth;
+			GetNode<LevelObjects.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
+			GetNode<Player>(GetParent().GetPath() + "/Level/Player").Health = Storage.LevelsList[Storage.CurrentLevel].StartPlayerHealth;
 			Disable();
 		}
 

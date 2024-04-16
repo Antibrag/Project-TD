@@ -1,17 +1,17 @@
 using Data;
 using Godot;
 
-namespace Level
+namespace LevelObjects
 {
 	public partial class Mob : PathFollow3D
 	{
 		[Export] public float Speed { get; private set; }
 
-		public Storage.Mob Characteristics { get; set; }
+		public Data.Mob Characteristics { get; set; }
 
 		public void Initialize(string name) 
 		{
-			Characteristics = (Storage.Mob) Storage.MobsList[name].Clone();
+			Characteristics = (Data.Mob) Storage.MobsList[name].Clone();
 
 			MeshInstance3D mob_mesh = GetNode<MeshInstance3D>("Area3D/Mesh");
 			mob_mesh.Mesh = GD.Load<Mesh>(Characteristics.Mesh.MeshPath);

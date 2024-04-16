@@ -4,19 +4,19 @@ using Godot.Collections;
 
 public partial class Build : Area3D
 {
-	public Storage.Build Characteristics { get; set; }
+	public Data.Build Characteristics { get; set; }
 	private bool _isPlaced { get; set; } = false;
 
 	[Export] public Timer AttackCDTimer;
 	[Export] public MeshInstance3D TargetIndicator;
 
-	private System.Collections.Generic.List<Level.Mob> _targetsList = new();
-	private Level.Mob _target = null;
+	private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
+	private LevelObjects.Mob _target = null;
 	private bool _isPossibilityPlace;
 
 	private void Initialize()
 	{
-		Characteristics = (Storage.Build) Storage.BuildsList["CrossBow"].Clone();
+		Characteristics = (Data.Build) Storage.BuildsList["CrossBow"].Clone();
 
 		GetNode<CollisionShape3D>("AttackRadius").Disabled = true;
 		
@@ -80,7 +80,7 @@ public partial class Build : Area3D
 
 		if (enteredArea.IsInGroup("Mob"))
 		{
-			Level.Mob mob = (Level.Mob) enteredArea.GetParent();
+			LevelObjects.Mob mob = (LevelObjects.Mob) enteredArea.GetParent();
 
 			if (!_targetsList.Contains(mob))
 				_targetsList.Add(mob);
@@ -102,7 +102,6 @@ public partial class Build : Area3D
 		NextTarget();
 	}
 
-
 	public override void _Ready()
 		=> Initialize();
 
@@ -121,11 +120,11 @@ public partial class Build : Area3D
 	{
 		if (!_isPlaced)
 			MoveToMouse();
-
+		
 		if (_isPlaced && _target != null && _target.Characteristics.Health <= 0)
 			NextTarget();
 		else if (_isPlaced && _target != null)
-			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z);
+			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 	}
 }
 

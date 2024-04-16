@@ -8,7 +8,7 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
-        Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevel].StartPlayerHealth;
+        Health = Storage.LevelsList[Storage.CurrentLevel].StartPlayerHealth;
     }
 
     public void TakeDamage(float damageValue) 
@@ -28,7 +28,7 @@ public partial class Player : CharacterBody3D
     public void Death()
     {
         GD.Print("Player death!");
-        GetNode<Level.Spawner>(GetParent().GetPath() + "/Objects/Spawner").QueueFreeAllMobs();
+        GetNode<LevelObjects.Spawner>(GetParent().GetPath() + "/Objects/Spawner").QueueFreeAllMobs();
         GetNode<UI.DeathMenu>("/root/Main/Death_Menu").Enable();
     }
 }

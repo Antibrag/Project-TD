@@ -4,7 +4,7 @@ using Godot.Collections;
 
 using Data;
 
-namespace Level
+namespace LevelObjects
 {
 	public partial class Spawner : Area3D
 	{
