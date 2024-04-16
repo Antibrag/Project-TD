@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://daorro7c3vor3"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Bulds/Build.cs" id="1_e05sd"]
+[ext_resource type="Script" path="res://Scripts/Player/Build/Build.cs" id="1_mdwtu"]
 [ext_resource type="ArrayMesh" uid="uid://b3n2g1pa0ioik" path="res://Assets/Meshes/Builds/CrossBow.res" id="2_j15np"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtmqj"]
@@ -29,7 +29,7 @@ height = 2.0
 
 [node name="Build" type="Area3D" node_paths=PackedStringArray("AttackCDTimer", "TargetIndicator") groups=["Build"]]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
-script = ExtResource("1_e05sd")
+script = ExtResource("1_mdwtu")
 AttackCDTimer = NodePath("AttackCD")
 TargetIndicator = NodePath("TargetIndicator")
 
@@ -55,3 +55,4 @@ mesh = SubResource("SphereMesh_gm4w1")
 
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="." to="." method="OnAreaExited"]
+[connection signal="timeout" from="AttackCD" to="." method="OnAttackCDTimerTimeout"]
