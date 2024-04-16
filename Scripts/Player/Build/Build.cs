@@ -5,6 +5,7 @@ using Godot.Collections;
 public partial class Build : Area3D
 {
 	public Data.Build Characteristics { get; set; }
+	private Data.Projectile SelectedProjectile { get; set; }
 	private bool _isPlaced { get; set; } = false;
 
 	[Export] public Timer AttackCDTimer;
@@ -16,6 +17,7 @@ public partial class Build : Area3D
 
 	private void Initialize()
 	{
+		//Заменить хард-кодное объявление постройки и снаряда, на выбор во время игры 
 		Characteristics = (Data.Build) Storage.BuildsList["CrossBow"].Clone();
 
 		GetNode<CollisionShape3D>("AttackRadius").Disabled = true;
@@ -23,6 +25,10 @@ public partial class Build : Area3D
 		MeshInstance3D build_mesh = GetNode<MeshInstance3D>("Mesh");
 		build_mesh.Mesh = GD.Load<Mesh>(Characteristics.Mesh.MeshPath);
 		build_mesh.Scale = Characteristics.Mesh.Scale;
+
+		SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
+
+		AttackCDTimer.Start();
 	}
 
 	private void NextTarget()
@@ -36,6 +42,15 @@ public partial class Build : Area3D
 
 		_targetsList.Remove(_target);
 		_target = _targetsList[0];
+	}
+
+	private void Shoot(in Vector3 target_position)
+	{
+		Projectile projectile_instance = (Projectile) GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate();
+		AddChild(projectile_instance);
+		//CallDeferred("add_child", projectile_instance);
+
+		projectile_instance.Initialize(SelectedProjectile, target_position);
 	}
 
 	private Vector3 ScreenPointToRay()
@@ -100,6 +115,12 @@ public partial class Build : Area3D
 		}
 
 		NextTarget();
+	}
+
+	public void OnAttackCDTimerTimeout()
+	{
+		if (_target != null)
+			Shoot(_target.GlobalPosition);
 	}
 
 	public override void _Ready()
