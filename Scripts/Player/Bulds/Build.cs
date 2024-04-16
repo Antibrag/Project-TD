@@ -114,8 +114,6 @@ public partial class Build : Area3D
 
 			GetNode<CollisionShape3D>("AttackRadius").Hide();
 			GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
-
-			GD.Print(Characteristics.Name + " - has been placed");
 		}
 	}
 
