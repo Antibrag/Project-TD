@@ -15,17 +15,17 @@ namespace Data
 
             using var file = FileAccess.Open(Storage.GlobalInfo.LevelsDataSavePath, FileAccess.ModeFlags.Read);
 
-            Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
+            Dictionary data = (Dictionary) Json.ParseString(file.GetAsText());
 
-            for (int i = 0; i < Storage.LevelsList.Length; i++) 
+            foreach (System.Collections.Generic.KeyValuePair<string, Storage.Level> level in Storage.LevelsList) 
             {
                 try
                 {
-                    Storage.LevelsList[i].IsComplete = (bool) data[Storage.LevelsList[i].Name];
+                    level.Value.IsComplete = (bool) data[level.Key];
                 }
                 catch (System.Exception)
                 {
-                    GD.PrintErr($"Cannot load level data from file - {Storage.LevelsList[i].Name}");
+                    GD.PrintErr($"Cannot load level data from file - {level.Key}");
                     return;
                 }
             }

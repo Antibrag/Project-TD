@@ -1,5 +1,5 @@
 using Godot;
-using Godot.Collections;
+using System.Collections.Generic;
 
 namespace Data
 {
@@ -20,10 +20,10 @@ namespace Data
         {
             using var file = FileAccess.Open(Storage.GlobalInfo.LevelsDataSavePath, FileAccess.ModeFlags.Write);
 
-            Dictionary data = new();
+            Godot.Collections.Dictionary data = new();
 
-            for (int i = 0; i < Storage.LevelsList.Length; i++) 
-                data.Add(Storage.LevelsList[i].Name, Storage.LevelsList[i].IsComplete);
+            foreach (KeyValuePair<string, Storage.Level> level in Storage.LevelsList) 
+                data.Add(level.Key, level.Value.IsComplete);
 
             file.StoreLine(Json.Stringify(data));
         }

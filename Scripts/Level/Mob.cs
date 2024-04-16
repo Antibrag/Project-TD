@@ -20,7 +20,6 @@ namespace Level
 
 		public void Death()
 		{
-			GD.Print($"Delete mob - {Characteristics.Name}");
 			Characteristics.Health = 0;
 			QueueFree();
 		}
@@ -30,8 +29,6 @@ namespace Level
 			if (node.Name == "Player")
 			{	
 				Player player = GetNode<Player>(node.GetPath());
-
-				GD.Print($"* {Characteristics.Name} deals damage to player - {Characteristics.AttackPower}");
 
 				GetNode<Player>(node.GetPath()).TakeDamage(Characteristics.AttackPower);
 

@@ -105,10 +105,10 @@ namespace Data
             {"DevMob", new Mob(new MeshObject("res://Assets/Meshes/DevMob.res", new Vector3(40, 40, 40)), 10, 10)}
         };
 
-        public static readonly Level[] LevelsList = new Level[]
+        public static readonly Dictionary<string, Level> LevelsList = new Dictionary<string, Level>()
         {
             //Level name, Level path, Player start health
-            new Level("res://Scenes/Levels/Debug_Level.tscn", 100)
+            {"Dev Level", new Level("res://Scenes/Levels/Debug_Level.tscn", 100) }
         };
 
         public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
@@ -125,7 +125,7 @@ namespace Data
         {
             public static readonly string PlayerDataSavePath = "user://PlayerData.json";
             public static readonly string LevelsDataSavePath = "user://LevelsData.json";
-            public static int CurrentLevelIdx;
+            public static string CurrentLevel;
         }
     }
 }

@@ -1,5 +1,7 @@
 using Data;
 using Godot;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Level
 {
@@ -24,25 +26,27 @@ namespace Level
         }
 
         public void LoadFirstUnCompleteLevel()
-        {
-            for (int i = 0; i < Storage.LevelsList.Length; i++)
-                if (!Storage.LevelsList[i].IsComplete)  
+        {            
+            foreach (KeyValuePair<string, Storage.Level> level in Storage.LevelsList)
+            {
+                GD.Print(level.Key, level.Value.IsComplete);
+                if (!level.Value.IsComplete)  
                 { 
-                    LoadLevel(i);
+                    LoadLevel(level);
                     return;
                 }
-
+            }
             GD.PushWarning("All levels complete or failed to load");
         }
 
-        public void LoadLevel(int levelIndex)
+        public void LoadLevel(KeyValuePair<string, Storage.Level> level)
         {
-            var level = GD.Load<PackedScene>(Storage.LevelsList[levelIndex].ScenePath).Instantiate();
-            GetNode<Node>("/root/Main").CallDeferred("add_child", level);
+            var level_scene = GD.Load<PackedScene>(level.Value.ScenePath).Instantiate();
+            GetNode<Node>("/root/Main").CallDeferred("add_child", level_scene);
 
-            Storage.GlobalInfo.CurrentLevelIdx = levelIndex;
+            Storage.GlobalInfo.CurrentLevel = level.Key;
 
-            GD.Print($"Load level - {Storage.LevelsList[levelIndex].Name}");
+            GD.Print($"Load level - {level.Key}");
             return;
         }
     }

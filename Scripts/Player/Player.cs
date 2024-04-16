@@ -8,7 +8,7 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
-        Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevelIdx].StartPlayerHealth;
+        Health = Storage.LevelsList[Storage.GlobalInfo.CurrentLevel].StartPlayerHealth;
     }
 
     public void TakeDamage(float damageValue) 
