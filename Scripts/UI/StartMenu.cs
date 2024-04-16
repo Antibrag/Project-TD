@@ -5,7 +5,7 @@ namespace UI
     public partial class StartMenu : Control
     {
         public void OnStartButtonPressed() 
-            => GetNode<Level.Loader>("/root/Main/Loader").StartGame();
+            => GetNode<LevelObjects.Loader>("/root/Main/Loader").StartGame();
         
         public void Disable()
         {
