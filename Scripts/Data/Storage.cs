@@ -15,7 +15,6 @@ namespace Data
             public string Name { get; set; }
             public MeshObject Mesh { get; set; }
             public int Level { get; set; }
-            
         }
 
         public struct MeshObject
@@ -23,7 +22,7 @@ namespace Data
             public string MeshPath;
             public Vector3 Scale;
 
-            public MeshObject(string meshPath, Vector3 scale)
+            public MeshObject(string meshPath, in Vector3 scale)
             {
                 MeshPath = meshPath;
                 Scale = scale;
@@ -87,7 +86,7 @@ namespace Data
             public float AttackPower { get; set; }
             public float PenetrationPower { get; set; } //Пробивная способность
 
-            public Projectile(string name, MeshObject mesh, int level, float attackPower, float penetrationPower)
+            public Projectile(string name, in MeshObject mesh, int level, float attackPower, float penetrationPower)
             {
                 Name = name;
                 Mesh = mesh;
