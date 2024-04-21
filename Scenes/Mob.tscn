@@ -1,14 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bht6bp7i7fe8n"]
+[gd_scene load_steps=6 format=3 uid="uid://bht6bp7i7fe8n"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Mob.cs" id="1_i7y3m"]
 [ext_resource type="ArrayMesh" uid="uid://c3mc314sgx83a" path="res://Assets/Meshes/DevMob.res" id="2_hmlv0"]
+[ext_resource type="PackedScene" uid="uid://bnvii1vnrdcrd" path="res://Scenes/health_bar.tscn" id="3_rkhhl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_udsfa"]
 radius = 0.4
 
-[node name="Mob" type="PathFollow3D"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_5sdeh"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Mob" type="PathFollow3D" node_paths=PackedStringArray("HealthBar")]
 script = ExtResource("1_i7y3m")
-Speed = 10.0
+Speed = 1.0
+HealthBar = NodePath("SubViewport/HealthBar")
 
 [node name="Area3D" type="Area3D" parent="." groups=["Mob"]]
 
@@ -18,5 +23,17 @@ mesh = ExtResource("2_hmlv0")
 
 [node name="Collision" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_udsfa")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("3_rkhhl")]
+value = 0.0
+
+[node name="HealthBarSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.6, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_5sdeh")
+region_enabled = true
+region_rect = Rect2(160.353, 243.309, 191.433, 26.6897)
 
 [connection signal="body_entered" from="Area3D" to="." method="OnBodyEntered"]
