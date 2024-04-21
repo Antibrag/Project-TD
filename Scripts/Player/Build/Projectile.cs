@@ -1,18 +1,22 @@
 using Godot;
 
-public partial class Projectile : Area3D
+public partial class Projectile : RigidBody3D
 {
-	private Data.Projectile Characteristics { get; set; }
-	private Vector3 _target_position;
+	public Data.Projectile Characteristics { get; set; }
+	private LevelObjects.Mob _target;
 
-	public void Initialize(Data.Projectile characteristics, in Vector3 target_position)
+	public void Initialize(Data.Projectile characteristics, LevelObjects.Mob target)
 	{
 		Characteristics = characteristics;
-		_target_position = target_position;
+		_target = target;
 	}
 
     public override void _Process(double delta)
     {
-        GlobalPosition.MoveToward(_target_position, (float) delta);
+		if (_target.Characteristics.Health == 0 || _target == null)
+			QueueFree();
+
+        LookAt(_target.GlobalPosition);
+		GlobalPosition = GlobalPosition.MoveToward(_target.GlobalPosition, (float) delta * Characteristics.FlightSpeed);
     }
 }

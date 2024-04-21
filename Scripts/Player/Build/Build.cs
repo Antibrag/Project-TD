@@ -13,14 +13,14 @@ public partial class Build : Area3D
 
 	private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
 	private LevelObjects.Mob _target = null;
-	private bool _isPossibilityPlace;
+	private bool _isPossibilityPlace = true;
 
 	private void Initialize()
 	{
 		//Заменить хард-кодное объявление постройки и снаряда, на выбор во время игры 
 		Characteristics = (Data.Build) Storage.BuildsList["CrossBow"].Clone();
 
-		GetNode<CollisionShape3D>("AttackRadius").Disabled = true;
+		//GetNode<CollisionShape3D>("AttackRadius").Disabled = true;
 		
 		MeshInstance3D build_mesh = GetNode<MeshInstance3D>("Mesh");
 		build_mesh.Mesh = GD.Load<Mesh>(Characteristics.Mesh.MeshPath);
@@ -44,13 +44,13 @@ public partial class Build : Area3D
 		_target = _targetsList[0];
 	}
 
-	private void Shoot(in Vector3 target_position)
+	private void Shoot()
 	{
 		Projectile projectile_instance = (Projectile) GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate();
 		AddChild(projectile_instance);
 		//CallDeferred("add_child", projectile_instance);
 
-		projectile_instance.Initialize(SelectedProjectile, target_position);
+		projectile_instance.Initialize(SelectedProjectile, _target);
 	}
 
 	private Vector3 ScreenPointToRay()
@@ -59,11 +59,10 @@ public partial class Build : Area3D
 		Camera3D camera = GetTree().Root.GetCamera3D();
 
 		Vector3 rayOrigin = camera.ProjectRayOrigin(mousePosition);
-		Vector3 rayEnd = rayOrigin + camera.ProjectRayNormal(mousePosition) * 2000;
+		Vector3 rayEnd = rayOrigin + camera.ProjectRayNormal(mousePosition) * 1000;
 
 		var query = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
 		query.CollideWithAreas = true;
-		query.CollideWithBodies = false;
 
 		Dictionary rayArray = GetWorld3D().DirectSpaceState.IntersectRay(query);
 
@@ -120,7 +119,7 @@ public partial class Build : Area3D
 	public void OnAttackCDTimerTimeout()
 	{
 		if (_target != null)
-			Shoot(_target.GlobalPosition);
+			Shoot();
 	}
 
 	public override void _Ready()
@@ -131,7 +130,6 @@ public partial class Build : Area3D
 		if (ev.IsActionPressed("PastBuild") && !_isPlaced && _isPossibilityPlace)
 		{
 			_isPlaced = true;
-
 			GetNode<CollisionShape3D>("AttackRadius").Hide();
 			GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
 		}
@@ -139,13 +137,20 @@ public partial class Build : Area3D
 
 	public override void _Process(double delta)
 	{
+		//NEED OPTIMIZATION!!!!
 		if (!_isPlaced)
 			MoveToMouse();
+
+		if (_isPlaced && _target != null)
+		{
+			LookAt(_target.GlobalPosition);
+			RotationDegrees = new Vector3(0, RotationDegrees.Y, 0);
+
+			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
+		}
 		
 		if (_isPlaced && _target != null && _target.Characteristics.Health <= 0)
 			NextTarget();
-		else if (_isPlaced && _target != null)
-			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 	}
 }
 
