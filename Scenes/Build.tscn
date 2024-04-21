@@ -34,7 +34,7 @@ AttackCDTimer = NodePath("AttackCD")
 TargetIndicator = NodePath("TargetIndicator")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0)
+transform = Transform3D(-4.37114e-06, -100, -4.37114e-06, 0, -4.37114e-06, 100, -100, 4.37114e-06, 1.91069e-13, 0, 0, 0)
 mesh = ExtResource("2_j15np")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
