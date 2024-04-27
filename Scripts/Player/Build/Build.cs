@@ -143,7 +143,7 @@ public partial class Build : Area3D
 		if (!_isPlaced)
 			MoveToMouse();
 
-		if (_isPlaced && _target != null)
+		if (_isPlaced && IsInstanceValid(_target))
 		{
 			Head.LookAt(_target.GlobalPosition);
 			Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
@@ -151,7 +151,7 @@ public partial class Build : Area3D
 			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 		}
 		
-		if (_isPlaced && _target != null && _target.Characteristics.Health <= 0)
+		if (_isPlaced && IsInstanceValid(_target) && _target.Characteristics.Health <= 0)
 			NextTarget();
 	}
 }
