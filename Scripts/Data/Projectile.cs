@@ -1,14 +1,14 @@
 namespace Data
 {
-    public class Projectile : GameObject, IClonable
+    public class Projectile : IClonable
     {
         public float AttackPower { get; set; }
+        public int Level { get; set; }
         public float PenetrationPower { get; set; } //Пробивная способность
         public float FlightSpeed { get; set;}
 
-        public Projectile(in MeshObject mesh, int level, float attackPower, float penetrationPower, float flightSpeed)
+        public Projectile(int level, float attackPower, float penetrationPower, float flightSpeed)
         {
-            Mesh = mesh;
             Level = level;
             AttackPower = attackPower;
             PenetrationPower = penetrationPower;
@@ -16,6 +16,6 @@ namespace Data
         }
 
         public object Clone() 
-            => new Projectile(Mesh, Level, AttackPower, PenetrationPower, FlightSpeed);
+            => new Projectile(Level, AttackPower, PenetrationPower, FlightSpeed);
     }
 }

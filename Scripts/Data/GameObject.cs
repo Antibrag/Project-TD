@@ -7,37 +7,15 @@ namespace Data
         public object Clone();
     }
 
-    public class GameObject
+    public struct BuildMesh
     {
-        public MeshObject Mesh { get; set; }
-        public int Level { get; set; }
-    }
+        public Vector3 HeadPosition;
+        public Vector3 BodyPosition;
 
-    public struct MeshObject
-    {
-        public string Path;
-        public Vector3 Scale;
-
-        public MeshObject(string path, in Vector3 scale)
+        public BuildMesh(in Vector3 headPosition, in Vector3 bodyPosition)
         {
-            Path = path;
-            Scale = scale;
-        }
-    }
-
-    public struct BuildMeshObject
-    {
-        public string HeadPath;
-        public string BodyPath;
-        public Vector3 HeadScale;
-        public Vector3 BodyScale;
-
-        public BuildMeshObject (string headPath, in Vector3 headScale, string bodyPath, in Vector3 bodyScale)
-        {
-            HeadPath = headPath;
-            BodyPath = bodyPath;
-            HeadScale = headScale;
-            BodyScale = bodyScale;
+            HeadPosition = headPosition;
+            BodyPosition = bodyPosition;
         }
     }
 }

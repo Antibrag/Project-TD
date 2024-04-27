@@ -15,8 +15,7 @@ namespace LevelObjects
 
 			MeshInstance3D mob_mesh = GetNode<MeshInstance3D>("Area3D/Mesh");
 
-			mob_mesh.Mesh = GD.Load<Mesh>(Characteristics.Mesh.MeshPath);
-			mob_mesh.Scale = Characteristics.Mesh.Scale;
+			mob_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Mobs/{name}.res");
 
 			HealthBar.MaxValue = Characteristics.Health;
 			HealthBar.Value = Characteristics.Health;

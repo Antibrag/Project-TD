@@ -8,6 +8,7 @@ public partial class Build : Area3D
 	private Data.Projectile SelectedProjectile { get; set; }
 	private bool _isPlaced { get; set; } = false;
 
+	[Export] public MeshInstance3D Head;
 	[Export] public Timer AttackCDTimer;
 	[Export] public MeshInstance3D TargetIndicator;
 
@@ -15,16 +16,19 @@ public partial class Build : Area3D
 	private LevelObjects.Mob _target = null;
 	private bool _isPossibilityPlace = true;
 
-	private void Initialize()
+	private void Initialize(string name)
 	{
-		//Заменить хард-кодное объявление постройки и снаряда, на выбор во время игры 
-		Characteristics = (Data.Build) Storage.BuildsList["CrossBow"].Clone();
+		Characteristics = (Data.Build) Storage.BuildsList[name].Clone();
 
 		//GetNode<CollisionShape3D>("AttackRadius").Disabled = true;
 		
-		MeshInstance3D build_mesh = GetNode<MeshInstance3D>("Mesh");
-		build_mesh.Mesh = GD.Load<Mesh>(Characteristics.Mesh.MeshPath);
-		build_mesh.Scale = Characteristics.Mesh.Scale;
+		MeshInstance3D head_mesh = GetNode<MeshInstance3D>("HeadMesh");
+		head_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Head.res");
+		head_mesh.Position = Characteristics.Mesh.HeadPosition;
+
+		MeshInstance3D body_mesh = GetNode<MeshInstance3D>("BodyMesh");
+		body_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Body.res");
+		body_mesh.Position = Characteristics.Mesh.BodyPosition;
 
 		SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
 
@@ -48,7 +52,6 @@ public partial class Build : Area3D
 	{
 		Projectile projectile_instance = (Projectile) GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate();
 		AddChild(projectile_instance);
-		//CallDeferred("add_child", projectile_instance);
 
 		projectile_instance.Initialize(SelectedProjectile, _target);
 	}
@@ -101,8 +104,7 @@ public partial class Build : Area3D
 
 			if (_targetsList.Count == 1)
 				_target = mob;
-		}
-		
+		}		
 	}
 
 	public void OnAreaExited(Area3D exitedArea)
@@ -123,7 +125,7 @@ public partial class Build : Area3D
 	}
 
 	public override void _Ready()
-		=> Initialize();
+		=> Initialize("CrossBow"); //Заменить хард-кодное объявление постройки и снаряда, на выбор во время игры 
 
 	public override void _Input(InputEvent @ev)
 	{
@@ -143,8 +145,8 @@ public partial class Build : Area3D
 
 		if (_isPlaced && _target != null)
 		{
-			LookAt(_target.GlobalPosition);
-			RotationDegrees = new Vector3(0, RotationDegrees.Y, 0);
+			Head.LookAt(_target.GlobalPosition);
+			Head.RotationDegrees = new Vector3(-90, Head.RotationDegrees.Y + 90, 0);
 
 			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 		}
