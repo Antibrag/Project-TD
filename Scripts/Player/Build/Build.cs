@@ -146,7 +146,7 @@ public partial class Build : Area3D
 		if (_isPlaced && _target != null)
 		{
 			Head.LookAt(_target.GlobalPosition);
-			Head.RotationDegrees = new Vector3(-90, Head.RotationDegrees.Y + 90, 0);
+			Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
 
 			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 		}
