@@ -15,13 +15,29 @@ namespace Data
 
     public struct MeshObject
     {
-        public string MeshPath;
+        public string Path;
         public Vector3 Scale;
 
-        public MeshObject(string meshPath, in Vector3 scale)
+        public MeshObject(string path, in Vector3 scale)
         {
-            MeshPath = meshPath;
+            Path = path;
             Scale = scale;
+        }
+    }
+
+    public struct BuildMeshObject
+    {
+        public string HeadPath;
+        public string BodyPath;
+        public Vector3 HeadScale;
+        public Vector3 BodyScale;
+
+        public BuildMeshObject (string headPath, in Vector3 headScale, string bodyPath, in Vector3 bodyScale)
+        {
+            HeadPath = headPath;
+            BodyPath = bodyPath;
+            HeadScale = headScale;
+            BodyScale = bodyScale;
         }
     }
 }
