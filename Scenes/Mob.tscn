@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bht6bp7i7fe8n"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Mob.cs" id="1_i7y3m"]
-[ext_resource type="ArrayMesh" uid="uid://c3mc314sgx83a" path="res://Assets/Meshes/DevMob.res" id="2_hmlv0"]
+[ext_resource type="ArrayMesh" uid="uid://c3mc314sgx83a" path="res://Assets/Meshes/Mobs/DevMob.res" id="2_hmlv0"]
 [ext_resource type="PackedScene" uid="uid://bnvii1vnrdcrd" path="res://Scenes/health_bar.tscn" id="3_rkhhl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_udsfa"]
