@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0hwnbuav5snh"
-path="res://.godot/imported/ManaBar progress.svg-3100f328b8ad8efe6a3b73962dcb12f8.ctex"
+uid="uid://dlmij1tqrqxec"
+path="res://.godot/imported/ManaIco.svg-24904fdeb84712ee90ccd6111c6139cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ManaBar progress.svg"
-dest_files=["res://.godot/imported/ManaBar progress.svg-3100f328b8ad8efe6a3b73962dcb12f8.ctex"]
+source_file="res://Assets/ManaIco.svg"
+dest_files=["res://.godot/imported/ManaIco.svg-24904fdeb84712ee90ccd6111c6139cc.ctex"]
 
 [params]
 
