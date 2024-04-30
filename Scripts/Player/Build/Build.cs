@@ -50,7 +50,7 @@ public partial class Build : Area3D
 
 	private void Shoot()
 	{
-		Projectile projectile_instance = (Projectile) GD.Load<PackedScene>("res://Scenes/Projectile.tscn").Instantiate();
+		Projectile projectile_instance = (Projectile) GD.Load<PackedScene>("res://Scenes/Player/Projectile.tscn").Instantiate();
 		AddChild(projectile_instance);
 
 		projectile_instance.Initialize(SelectedProjectile, _target);
