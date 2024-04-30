@@ -16,6 +16,8 @@ public partial class Player : CharacterBody3D
         float healthBefore = Health;
         Health -= damageValue;
 
+        GetNode<HUD>("/root/Main/HUD").AddDecreasingHealth(damageValue);
+
         GD.Print($"Player health - {healthBefore} -> {Health}");
 
         if (Health <= 0)
