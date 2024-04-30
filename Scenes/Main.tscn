@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddeb4ppqxmv70"]
+[gd_scene load_steps=8 format=3 uid="uid://ddeb4ppqxmv70"]
 
 [ext_resource type="PackedScene" uid="uid://dhwwk2741bvh5" path="res://Scenes/UI/Start_Menu.tscn" id="1_j6s4j"]
 [ext_resource type="PackedScene" uid="uid://1gyobi3pytqj" path="res://Scenes/UI/Death_Menu.tscn" id="2_s2qrx"]
 [ext_resource type="Script" path="res://Scripts/Level/Loader.cs" id="3_528sy"]
+[ext_resource type="PackedScene" uid="uid://d2t0wdn4wk5wy" path="res://Scenes/Player/Hud.tscn" id="3_jltsl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1thn"]
 
@@ -19,6 +20,8 @@ volumetric_fog_emission_energy = 0.5
 volumetric_fog_length = 30.0
 
 [node name="Main" type="Node"]
+
+[node name="HUD" parent="." instance=ExtResource("3_jltsl")]
 
 [node name="StartMenu" parent="." instance=ExtResource("1_j6s4j")]
 
