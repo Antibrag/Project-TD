@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2t0wdn4wk5wy"]
+
+[ext_resource type="Texture2D" uid="uid://c3kf3nfihntdf" path="res://Assets/HealthBar under.svg" id="1_2jywo"]
+[ext_resource type="Texture2D" uid="uid://cu7agc0p323ny" path="res://Assets/HealthBar progress.svg" id="2_t0kqn"]
+[ext_resource type="Texture2D" uid="uid://bw8l0dxjmt0rk" path="res://Assets/ManaBar progress.svg" id="3_efk4e"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+offset_left = 252.0
+offset_top = 245.0
+offset_right = 706.0
+offset_bottom = 699.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+value = 57.0
+fill_mode = 8
+texture_under = ExtResource("1_2jywo")
+texture_progress = ExtResource("2_t0kqn")
+
+[node name="ManaBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+offset_left = 252.0
+offset_top = 245.0
+offset_right = 706.0
+offset_bottom = 699.0
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+value = 80.0
+fill_mode = 8
+texture_progress = ExtResource("3_efk4e")
