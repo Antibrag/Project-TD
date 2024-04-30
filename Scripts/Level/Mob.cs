@@ -53,7 +53,6 @@ namespace LevelObjects
 
         public override void _PhysicsProcess(double delta)
 		{
-			GD.Print($"delta = {delta}, speed = {Speed}, delta*Speed = {delta*Speed}");
 			Progress += (float) delta * Speed;
 		}
 	}	
