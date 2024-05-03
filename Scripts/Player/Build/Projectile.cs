@@ -13,10 +13,12 @@ public partial class Projectile : RigidBody3D
 
     public override void _Process(double delta)
     {
-		if (_target.Characteristics.Health == 0 || _target == null)
-			QueueFree();
-
-        LookAt(_target.GlobalPosition);
-		GlobalPosition = GlobalPosition.MoveToward(_target.GlobalPosition, (float) delta * Characteristics.FlightSpeed);
+		if (IsInstanceValid(_target))
+		{
+			LookAt(_target.GlobalPosition);
+			GlobalPosition = GlobalPosition.MoveToward(_target.GlobalPosition, (float) delta * Characteristics.FlightSpeed);
+		}
+		else
+			QueueFree(); 
     }
 }
