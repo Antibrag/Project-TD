@@ -1,7 +1,6 @@
 using Data;
 using Godot;
 using Godot.Collections;
-using System.Threading;
 
 public partial class Build : Area3D
 {
@@ -84,9 +83,6 @@ public partial class Build : Area3D
 			Position.Y,
 			MousePosition != Vector3.Zero ? MousePosition.Z : Position.Z
 		);
-
-		if (Input.IsActionPressed("PastBuild") && _isPossibilityPlace)
-			return;
 	}
 
 	public void OnAreaEntered(Area3D enteredArea)
@@ -106,6 +102,8 @@ public partial class Build : Area3D
 
 			if (_targetsList.Count == 1)
 				_target = mob;
+
+			AttackCDTimer.Start();
 		}		
 	}
 
@@ -129,32 +127,31 @@ public partial class Build : Area3D
 	public override void _Ready()
 		=> Initialize("CrossBow"); //Заменить хард-кодное объявление постройки и снаряда, на выбор во время игры 
 
+
 	public override void _Input(InputEvent @ev)
 	{
 		if (ev.IsActionPressed("PastBuild") && !_isPlaced && _isPossibilityPlace)
 		{
-			_isPlaced = true;
 			GetNode<CollisionShape3D>("AttackRadius").Hide();
 			GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
+
+			_isPlaced = true;
 		}
 	}
 
 	public override void _Process(double delta)
 	{
-		//NEED OPTIMIZATION!!!!
 		if (!_isPlaced)
+		{
 			ReplaceFromMouse();
+			return;
+		}
 
-		if (_isPlaced && _target != null)
+		if (_target != null)
 		{
 			Head.LookAt(_target.GlobalPosition);
 			Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
-
-			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 		}
-		
-		if (_isPlaced && _target != null && _target.Characteristics.Health <= 0)
-			NextTarget();
 	}
 }
 
