@@ -1,6 +1,7 @@
 using Data;
 using Godot;
 using Godot.Collections;
+using LevelObjects;
 
 public partial class Build : Area3D
 {
@@ -33,8 +34,10 @@ public partial class Build : Area3D
 		SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
 	}
 
-	private void NextTarget()
+	public void NextTarget()
 	{
+
+		GD.Print("Next target");
 		if (_targetsList.Count == 1)
 		{
 			_target = null;
@@ -101,9 +104,10 @@ public partial class Build : Area3D
 				_targetsList.Add(mob);
 
 			if (_targetsList.Count == 1)
+			{
 				_target = mob;
-
-			AttackCDTimer.Start();
+				mob.AttackingBuild = this;
+			}
 		}		
 	}
 
@@ -115,7 +119,8 @@ public partial class Build : Area3D
 			return;
 		}
 
-		NextTarget();
+		if (((LevelObjects.Mob) exitedArea.GetParent()).Characteristics.Health != 0)
+			NextTarget();
 	}
 
 	public void OnAttackCDTimerTimeout()
@@ -136,6 +141,7 @@ public partial class Build : Area3D
 			GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
 
 			_isPlaced = true;
+			AttackCDTimer.Start();
 		}
 	}
 
@@ -147,7 +153,7 @@ public partial class Build : Area3D
 			return;
 		}
 
-		if (_target != null)
+		if (IsInstanceValid(_target))
 		{
 			Head.LookAt(_target.GlobalPosition);
 			Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
