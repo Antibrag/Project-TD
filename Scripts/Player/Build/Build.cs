@@ -1,6 +1,7 @@
 using Data;
 using Godot;
 using Godot.Collections;
+using System.Threading;
 
 public partial class Build : Area3D
 {
@@ -9,7 +10,7 @@ public partial class Build : Area3D
 	private bool _isPlaced { get; set; } = false;
 
 	[Export] public MeshInstance3D Head;
-	[Export] public Timer AttackCDTimer;
+	[Export] public Godot.Timer AttackCDTimer;
 	[Export] public MeshInstance3D TargetIndicator;
 
 	private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
@@ -31,8 +32,6 @@ public partial class Build : Area3D
 		body_mesh.Position = Characteristics.Mesh.BodyPosition;
 
 		SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
-
-		AttackCDTimer.Start();
 	}
 
 	private void NextTarget()
@@ -75,7 +74,7 @@ public partial class Build : Area3D
 		return (Vector3) rayArray["position"];
 	}
 
-	private void MoveToMouse()
+	private void ReplaceFromMouse()
 	{
 		Vector3 MousePosition = ScreenPointToRay();
 
@@ -85,6 +84,9 @@ public partial class Build : Area3D
 			Position.Y,
 			MousePosition != Vector3.Zero ? MousePosition.Z : Position.Z
 		);
+
+		if (Input.IsActionPressed("PastBuild") && _isPossibilityPlace)
+			return;
 	}
 
 	public void OnAreaEntered(Area3D enteredArea)
@@ -141,9 +143,9 @@ public partial class Build : Area3D
 	{
 		//NEED OPTIMIZATION!!!!
 		if (!_isPlaced)
-			MoveToMouse();
+			ReplaceFromMouse();
 
-		if (_isPlaced && IsInstanceValid(_target))
+		if (_isPlaced && _target != null)
 		{
 			Head.LookAt(_target.GlobalPosition);
 			Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
@@ -151,7 +153,7 @@ public partial class Build : Area3D
 			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 		}
 		
-		if (_isPlaced && IsInstanceValid(_target) && _target.Characteristics.Health <= 0)
+		if (_isPlaced && _target != null && _target.Characteristics.Health <= 0)
 			NextTarget();
 	}
 }
