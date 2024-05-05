@@ -1,6 +1,7 @@
 using Data;
 using Godot;
 using Godot.Collections;
+using LevelObjects;
 
 public partial class Build : Area3D
 {
@@ -9,7 +10,7 @@ public partial class Build : Area3D
 	private bool _isPlaced { get; set; } = false;
 
 	[Export] public MeshInstance3D Head;
-	[Export] public Timer AttackCDTimer;
+	[Export] public Godot.Timer AttackCDTimer;
 	[Export] public MeshInstance3D TargetIndicator;
 
 	private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
@@ -31,11 +32,9 @@ public partial class Build : Area3D
 		body_mesh.Position = Characteristics.Mesh.BodyPosition;
 
 		SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
-
-		AttackCDTimer.Start();
 	}
 
-	private void NextTarget()
+	public void NextTarget()
 	{
 		if (_targetsList.Count == 1)
 		{
@@ -75,7 +74,7 @@ public partial class Build : Area3D
 		return (Vector3) rayArray["position"];
 	}
 
-	private void MoveToMouse()
+	private void ReplaceFromMouse()
 	{
 		Vector3 MousePosition = ScreenPointToRay();
 
@@ -104,6 +103,8 @@ public partial class Build : Area3D
 
 			if (_targetsList.Count == 1)
 				_target = mob;
+
+			mob.AttackingBuild = this;
 		}		
 	}
 
@@ -115,7 +116,8 @@ public partial class Build : Area3D
 			return;
 		}
 
-		NextTarget();
+		if (((LevelObjects.Mob) exitedArea.GetParent()).Characteristics.Health != 0)
+			NextTarget();
 	}
 
 	public void OnAttackCDTimerTimeout()
@@ -127,32 +129,32 @@ public partial class Build : Area3D
 	public override void _Ready()
 		=> Initialize("CrossBow"); //Заменить хард-кодное объявление постройки и снаряда, на выбор во время игры 
 
+
 	public override void _Input(InputEvent @ev)
 	{
 		if (ev.IsActionPressed("PastBuild") && !_isPlaced && _isPossibilityPlace)
 		{
-			_isPlaced = true;
 			GetNode<CollisionShape3D>("AttackRadius").Hide();
 			GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
+
+			_isPlaced = true;
+			AttackCDTimer.Start();
 		}
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		//NEED OPTIMIZATION!!!!
 		if (!_isPlaced)
-			MoveToMouse();
+		{
+			ReplaceFromMouse();
+			return;
+		}
 
-		if (_isPlaced && IsInstanceValid(_target))
+		if (IsInstanceValid(_target))
 		{
 			Head.LookAt(_target.GlobalPosition);
 			Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
-
-			TargetIndicator.GlobalPosition = new Vector3(_target.GlobalPosition.X, _target.GlobalPosition.Y + 1, _target.GlobalPosition.Z); 
 		}
-		
-		if (_isPlaced && IsInstanceValid(_target) && _target.Characteristics.Health <= 0)
-			NextTarget();
 	}
 }
 

@@ -1,3 +1,4 @@
+using System.Reflection.PortableExecutable;
 using Godot;
 
 namespace LevelObjects
@@ -8,6 +9,7 @@ namespace LevelObjects
 		[Export] public ProgressBar HealthBar { get; private set; }
 
 		public Data.Mob Characteristics { get; set; }
+		public Build AttackingBuild { get; set; } = null;
 
 		public void Initialize(string name) 
 		{
@@ -48,6 +50,10 @@ namespace LevelObjects
 		public void Death()
 		{
 			Characteristics.Health = 0;
+
+			if (AttackingBuild != null)
+				AttackingBuild.NextTarget();
+
 			QueueFree();
 		}
 
