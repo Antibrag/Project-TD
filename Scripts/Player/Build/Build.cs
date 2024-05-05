@@ -36,8 +36,6 @@ public partial class Build : Area3D
 
 	public void NextTarget()
 	{
-
-		GD.Print("Next target");
 		if (_targetsList.Count == 1)
 		{
 			_target = null;
@@ -104,10 +102,9 @@ public partial class Build : Area3D
 				_targetsList.Add(mob);
 
 			if (_targetsList.Count == 1)
-			{
 				_target = mob;
-				mob.AttackingBuild = this;
-			}
+
+			mob.AttackingBuild = this;
 		}		
 	}
 
@@ -145,7 +142,7 @@ public partial class Build : Area3D
 		}
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (!_isPlaced)
 		{
