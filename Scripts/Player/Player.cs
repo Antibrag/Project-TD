@@ -33,4 +33,9 @@ public partial class Player : CharacterBody3D
         GetNode<LevelObjects.Spawner>(GetParent().GetPath() + "/Objects/Spawner").QueueFreeAllMobs();
         GetNode<UI.DeathMenu>("/root/Main/Death_Menu").Enable();
     }
+
+    public void PastBuild()
+    {
+        
+    }
 }
