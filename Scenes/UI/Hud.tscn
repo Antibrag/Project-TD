@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2t0wdn4wk5wy"]
+
+[ext_resource type="Texture2D" uid="uid://c3kf3nfihntdf" path="res://Assets/Textures/HealthBar under.svg" id="1_2jywo"]
+[ext_resource type="Script" path="res://Scripts/UI/HUD.cs" id="1_3eivs"]
+[ext_resource type="Texture2D" uid="uid://cu7agc0p323ny" path="res://Assets/Textures/HealthBar progress.svg" id="2_t0kqn"]
+[ext_resource type="Texture2D" uid="uid://0hwnbuav5snh" path="res://Assets/Textures/ManaBar progress.svg" id="3_efk4e"]
+[ext_resource type="Texture2D" uid="uid://dsdg8sypwt8fj" path="res://Assets/Textures/HealthIco.svg" id="5_oyiw1"]
+[ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/ManaIco.svg" id="6_ae5hc"]
+[ext_resource type="Script" path="res://Scripts/UI/Buildbar.cs" id="7_5opla"]
+[ext_resource type="PackedScene" uid="uid://bptp24jj3f8y0" path="res://Scenes/UI/Build-Skill Panel.tscn" id="7_nr0vi"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3eivs")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 470.0
+offset_bottom = 470.0
+scale = Vector2(0.5, 0.5)
+step = 0.1
+value = 57.0
+fill_mode = 8
+texture_under = ExtResource("1_2jywo")
+texture_progress = ExtResource("2_t0kqn")
+radial_initial_angle = 180.0
+
+[node name="HealthIco" type="Sprite2D" parent="HealthBar"]
+position = Vector2(224, 240)
+scale = Vector2(0.28125, 0.28875)
+texture = ExtResource("5_oyiw1")
+
+[node name="ManaBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 470.0
+offset_bottom = 470.0
+scale = Vector2(0.5, 0.5)
+step = 0.1
+value = 80.0
+fill_mode = 8
+texture_progress = ExtResource("3_efk4e")
+radial_initial_angle = 180.0
+
+[node name="ManaIco" type="Sprite2D" parent="ManaBar"]
+position = Vector2(224, 240)
+scale = Vector2(0.095, 0.09)
+texture = ExtResource("6_ae5hc")
+
+[node name="Buildbar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -520.0
+offset_top = -160.0
+offset_right = 554.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("7_5opla")
+
+[node name="Skill-Build Button1" parent="Buildbar" instance=ExtResource("7_nr0vi")]
+layout_mode = 2
+
+[node name="Skill-Build Button2" parent="Buildbar" instance=ExtResource("7_nr0vi")]
+layout_mode = 2
+
+[node name="Skill-Build Button3" parent="Buildbar" instance=ExtResource("7_nr0vi")]
+layout_mode = 2
+
+[node name="Skill-Build Button4" parent="Buildbar" instance=ExtResource("7_nr0vi")]
+layout_mode = 2
+
+[node name="Skill-Build Button5" parent="Buildbar" instance=ExtResource("7_nr0vi")]
+layout_mode = 2
+
+[node name="Skill-Build Button6" parent="Buildbar" instance=ExtResource("7_nr0vi")]
+layout_mode = 2
+
+[node name="Skill-Build Button7" parent="Buildbar" instance=ExtResource("7_nr0vi")]
+layout_mode = 2
+
+[node name="DecreasedTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="timeout" from="DecreasedTimer" to="." method="OnDecreasedTimerTimeout"]
