@@ -126,10 +126,6 @@ public partial class Build : Area3D
 			Shoot();
 	}
 
-	public override void _Ready()
-		=> Initialize("CrossBow"); //Заменить хард-кодное объявление постройки и снаряда, на выбор во время игры 
-
-
 	public override void _Input(InputEvent @ev)
 	{
 		if (ev.IsActionPressed("PastBuild") && !_isPlaced && _isPossibilityPlace)
