@@ -45,6 +45,8 @@ namespace LevelObjects
 
             Storage.CurrentLevel = level.Key;
 
+            GetNode<UI.HUD>("/root/Main/HUD").InitializeButtons();
+
             GD.Print($"Load level - {level.Key}");
             return;
         }
