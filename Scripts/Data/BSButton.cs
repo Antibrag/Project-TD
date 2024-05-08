@@ -13,20 +13,20 @@ namespace Data
     public class BSButton
     {
         public Key ShortcutKey { get; set; }
-        public string ActionTargetName { get; set; }
+        public string BSIName { get; set; } //Build-Skill-Item name
         public Texture ButtonTexture { get; set; }
 
         public BSButton()
         {
             ShortcutKey = Key.None;
-            ActionTargetName = "";
+            BSIName = "";
             ButtonTexture = null;
         }
 
-        public BSButton(Key shortcut, string actionTargetName, Texture buttonTexture)
+        public BSButton(Key shortcut, string BSIName, Texture buttonTexture)
         {
             ShortcutKey = shortcut;
-            ActionTargetName = actionTargetName;
+            this.BSIName = BSIName;
             ButtonTexture = buttonTexture;
         }
     }
