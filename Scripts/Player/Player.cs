@@ -34,8 +34,11 @@ public partial class Player : CharacterBody3D
         GetNode<UI.DeathMenu>("/root/Main/Death_Menu").Enable();
     }
 
-    public void PastBuild()
+    public void PastBuild(string buildname)
     {
-        
+        Build build = (Build) GD.Load<PackedScene>("res://Scenes/Player/Build.tscn").Instantiate();
+        AddChild(build);
+
+        build.Initialize(buildname);
     }
 }
