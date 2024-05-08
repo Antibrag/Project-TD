@@ -36,6 +36,17 @@ namespace Data
                 new Dictionary<string, Projectile>() { {"Wood Arrow", ProjectilesList["Wood Arrow"]} } 
             )}
         };
+
+        public static readonly Dictionary<string, BSButton> BSButtonsList = new Dictionary<string, BSButton>()
+        {
+            {"1BButton", new BSButton(Key.Key1, "CrossBow", "res://Assets/Textures/Skill-Build background button.png")},
+            {"2BButton", new BSButton()},
+            {"3BButton", new BSButton()},
+            {"4BButton", new BSButton()},
+            {"5BButton", new BSButton()},
+            {"6BButton", new BSButton()},
+            {"6BButton", new BSButton()},
+        };
     }
 }
 
