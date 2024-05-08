@@ -15,7 +15,7 @@ namespace UI
 			switch (buttonType)
 			{
 				case nameof(Build):
-					ButtonName = $"{actionIndex}BButton";
+					ButtonName = $"{actionIndex+1}BButton";
 				break;
 
 				//case nameof(Spell):
@@ -33,9 +33,16 @@ namespace UI
 			Shortcut.Events.Add(inputEventKey);
 
 			BSIName = buttonConfiguration.BSIName;
+			GetNode<Label>("KeyBind").Text = buttonConfiguration.ShortcutKey.ToString();
 
 			TextureNormal = GD.Load<CompressedTexture2D>(buttonConfiguration.ButtonTexturePath);
 
+		}
+
+		public void OnPressed()
+		{
+			GD.Print($"Button({Name}) Pressed, BSIName = {BSIName}");
+			GetNode<Player>("/root/Main/Level/Player").PastBuild(BSIName);
 		}
 	}	
 }
