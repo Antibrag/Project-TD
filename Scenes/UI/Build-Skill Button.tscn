@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bptp24jj3f8y0"]
 
 [ext_resource type="Texture2D" uid="uid://323lrfot0iul" path="res://Assets/Textures/Skill-Build background button.png" id="1_xfipj"]
+[ext_resource type="Script" path="res://Scripts/Data/BSIButton.cs" id="2_68fbd"]
 [ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/ManaIco.svg" id="2_n8748"]
-[ext_resource type="Script" path="res://Scripts/UI/BuildSkill_Button.cs" id="2_rknwv"]
 
 [sub_resource type="Shortcut" id="Shortcut_yijba"]
 events = [null]
@@ -24,7 +24,7 @@ shortcut = SubResource("Shortcut_yijba")
 texture_normal = ExtResource("1_xfipj")
 ignore_texture_size = true
 stretch_mode = 4
-script = ExtResource("2_rknwv")
+script = ExtResource("2_68fbd")
 
 [node name="KeyBind" type="Label" parent="."]
 layout_mode = 1
@@ -59,3 +59,5 @@ grow_vertical = 0
 text = "5"
 label_settings = SubResource("LabelSettings_jj68v")
 vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="OnPressed"]
