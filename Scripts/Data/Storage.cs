@@ -45,7 +45,7 @@ namespace Data
             {"4BButton", new BSIButton()},
             {"5BButton", new BSIButton()},
             {"6BButton", new BSIButton()},
-            {"6BButton", new BSIButton()},
+            {"7BButton", new BSIButton()},
         };
     }
 }
