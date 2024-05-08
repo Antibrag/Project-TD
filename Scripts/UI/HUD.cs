@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class HUD : Control
 {
@@ -9,6 +8,17 @@ public partial class HUD : Control
 
 	private float _decreasedMana = 0;
 	private float _decreasedHealth = 0;
+
+	private void InitializeButtons()
+	{
+		HBoxContainer buildbar = GetNode<HBoxContainer>("Buildbar");
+
+		for (int i = 0; i < buildbar.GetChildCount(); i++)
+		{
+			BuildSkill_Button button = (BuildSkill_Button) buildbar.GetChild(i);
+			button.Initialize(i, nameof(Build));
+		}
+	}
 
     public override void _Ready()
     {
