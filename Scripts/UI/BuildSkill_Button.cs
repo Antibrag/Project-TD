@@ -25,7 +25,7 @@ public partial class BuildSkill_Button : TextureButton
 			//break;
 		}
 
-		BSButton buttonConfiguration = Storage.BuildButtonsList[ButtonName];
+		BSIButton buttonConfiguration = Storage.BuildButtonsList[ButtonName];
 
         InputEventKey inputEventKey = new() { Keycode = buttonConfiguration.ShortcutKey };
         Shortcut.Events.Add(inputEventKey);

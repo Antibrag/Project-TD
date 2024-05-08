@@ -2,7 +2,7 @@ using Godot;
 
 namespace Data
 {
-    public class BSButton
+    public class BSIButton
     {
         public Key ShortcutKey { get; set; }
         public string BSIName { get; set; } //Build-Spell-Item name
@@ -10,14 +10,14 @@ namespace Data
 
         public static readonly string DefaultButtonTexturePath = "res://Assets/Textures/Skill-Build background button.png";
 
-        public BSButton()
+        public BSIButton()
         {
             ShortcutKey = Key.None;
             BSIName = "";
             ButtonTexturePath = DefaultButtonTexturePath;
         }
 
-        public BSButton(Key shortcut, string BSIName, string buttonTexturePath)
+        public BSIButton(Key shortcut, string BSIName, string buttonTexturePath)
         {
             ShortcutKey = shortcut;
             this.BSIName = BSIName;

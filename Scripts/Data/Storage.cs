@@ -37,15 +37,15 @@ namespace Data
             )}
         };
 
-        public static readonly Dictionary<string, BSButton> BuildButtonsList = new Dictionary<string, BSButton>()
+        public static readonly Dictionary<string, BSIButton> BuildButtonsList = new Dictionary<string, BSIButton>()
         {
-            {"1BButton", new BSButton(Key.Key1, "CrossBow", BSButton.DefaultButtonTexturePath)},
-            {"2BButton", new BSButton()},
-            {"3BButton", new BSButton()},
-            {"4BButton", new BSButton()},
-            {"5BButton", new BSButton()},
-            {"6BButton", new BSButton()},
-            {"6BButton", new BSButton()},
+            {"1BButton", new BSIButton(Key.Key1, "CrossBow", BSIButton.DefaultButtonTexturePath)},
+            {"2BButton", new BSIButton()},
+            {"3BButton", new BSIButton()},
+            {"4BButton", new BSIButton()},
+            {"5BButton", new BSIButton()},
+            {"6BButton", new BSIButton()},
+            {"6BButton", new BSIButton()},
         };
     }
 }
