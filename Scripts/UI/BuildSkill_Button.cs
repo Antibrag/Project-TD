@@ -4,7 +4,7 @@ using Godot;
 public partial class BuildSkill_Button : TextureButton
 {
 	public string ButtonName { get; set; }
-	public string BSIName { get; set; } //Build-Skill_Item name 
+	public string BSIName { get; set; } //Build-Spell_Item name 
 
 	public void Initialize(int actionIndex, string buttonType)
 	{
@@ -16,7 +16,7 @@ public partial class BuildSkill_Button : TextureButton
 				ButtonName = $"{actionIndex}BButton";
 			break;
 
-			//case nameof(Skill):
+			//case nameof(Spell):
 			//	ButtonName = $"{actionIndex}SButton";
 			//break;
 
