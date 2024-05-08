@@ -1,38 +1,42 @@
 using Data;
 using Godot;
 
-public partial class BuildSkill_Button : TextureButton
+namespace UI
 {
-	public string ButtonName { get; set; }
-	public string BSIName { get; set; } //Build-Spell_Item name 
-
-	public void Initialize(int actionIndex, string buttonType)
+	public partial class BuildSkill_Button : TextureButton
 	{
-		Disabled = false;
+		public string ButtonName { get; set; }
+		public string BSIName { get; set; } //Build-Spell_Item name 
 
-		switch (buttonType)
+		public void Initialize(int actionIndex, string buttonType)
 		{
-			case nameof(Build):
-				ButtonName = $"{actionIndex}BButton";
-			break;
+			Disabled = false;
 
-			//case nameof(Spell):
-			//	ButtonName = $"{actionIndex}SButton";
-			//break;
+			switch (buttonType)
+			{
+				case nameof(Build):
+					ButtonName = $"{actionIndex}BButton";
+				break;
 
-			//case nameof(Item):
-			//	ButtonName = $"{actionIndex}IButton";
-			//break;
+				//case nameof(Spell):
+				//	ButtonName = $"{actionIndex}SButton";
+				//break;
+
+				//case nameof(Item):
+				//	ButtonName = $"{actionIndex}IButton";
+				//break;
+			}
+
+			BSIButton buttonConfiguration = Storage.BuildButtonsList[ButtonName];
+
+			InputEventKey inputEventKey = new() { Keycode = buttonConfiguration.ShortcutKey };
+			Shortcut.Events.Add(inputEventKey);
+
+			BSIName = buttonConfiguration.BSIName;
+
+			TextureNormal = GD.Load<CompressedTexture2D>(buttonConfiguration.ButtonTexturePath);
+
 		}
-
-		BSIButton buttonConfiguration = Storage.BuildButtonsList[ButtonName];
-
-        InputEventKey inputEventKey = new() { Keycode = buttonConfiguration.ShortcutKey };
-        Shortcut.Events.Add(inputEventKey);
-
-		BSIName = buttonConfiguration.BSIName;
-
-		TextureNormal = GD.Load<CompressedTexture2D>(buttonConfiguration.ButtonTexturePath);
-
-	}
+	}	
 }
+
