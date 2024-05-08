@@ -17,7 +17,7 @@ namespace UI
 
 			for (int i = 0; i < buildbar.GetChildCount(); i++)
 			{
-				BuildSkill_Button button = (BuildSkill_Button) buildbar.GetChild(i);
+				BSIButton button = (BSIButton) buildbar.GetChild(i);
 				button.Initialize(i, nameof(Build));
 			}
 		}

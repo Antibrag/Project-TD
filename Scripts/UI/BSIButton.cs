@@ -3,7 +3,7 @@ using Godot;
 
 namespace UI
 {
-	public partial class BuildSkill_Button : TextureButton
+	public partial class BSIButton : TextureButton
 	{
 		public string ButtonName { get; set; }
 		public string BSIName { get; set; } //Build-Spell_Item name 
@@ -27,7 +27,7 @@ namespace UI
 				//break;
 			}
 
-			BSIButton buttonConfiguration = Storage.BuildButtonsList[ButtonName];
+			Data.BSIButton buttonConfiguration = Storage.BuildButtonsList[ButtonName];
 
 			InputEventKey inputEventKey = new() { Keycode = buttonConfiguration.ShortcutKey };
 			Shortcut.Events.Add(inputEventKey);

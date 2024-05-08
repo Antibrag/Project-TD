@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bptp24jj3f8y0"]
+[gd_scene load_steps=7 format=3 uid="uid://bptp24jj3f8y0"]
 
 [ext_resource type="Texture2D" uid="uid://323lrfot0iul" path="res://Assets/Textures/Skill-Build background button.png" id="1_xfipj"]
 [ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/ManaIco.svg" id="2_n8748"]
 [ext_resource type="Script" path="res://Scripts/UI/BuildSkill_Button.cs" id="2_rknwv"]
+
+[sub_resource type="Shortcut" id="Shortcut_yijba"]
+events = [null]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2qhp4"]
 font_size = 32
@@ -17,6 +20,7 @@ anchor_right = 0.079
 anchor_bottom = 0.089
 offset_right = 0.319992
 offset_bottom = -0.120003
+shortcut = SubResource("Shortcut_yijba")
 texture_normal = ExtResource("1_xfipj")
 ignore_texture_size = true
 stretch_mode = 4
