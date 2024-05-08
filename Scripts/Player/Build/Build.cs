@@ -1,7 +1,6 @@
 using Data;
 using Godot;
 using Godot.Collections;
-using LevelObjects;
 
 public partial class Build : Area3D
 {
@@ -10,14 +9,14 @@ public partial class Build : Area3D
 	private bool _isPlaced { get; set; } = false;
 
 	[Export] public MeshInstance3D Head;
-	[Export] public Godot.Timer AttackCDTimer;
+	[Export] public Timer AttackCDTimer;
 	[Export] public MeshInstance3D TargetIndicator;
 
 	private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
 	private LevelObjects.Mob _target = null;
 	private bool _isPossibilityPlace = true;
 
-	private void Initialize(string name)
+	public void Initialize(string name)
 	{
 		Characteristics = (Data.Build) Storage.BuildsList[name].Clone();
 
