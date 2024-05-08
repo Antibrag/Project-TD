@@ -11,15 +11,14 @@ namespace UI
 		private float _decreasedMana = 0;
 		private float _decreasedHealth = 0;
 
-		private void InitializeButtons()
+		public void InitializeButtons()
 		{
 			HBoxContainer buildbar = GetNode<HBoxContainer>("Buildbar");
 
 			for (int i = 0; i < buildbar.GetChildCount(); i++)
-			{
-				BSIButton button = (BSIButton) buildbar.GetChild(i);
-				button.Initialize(i, nameof(Build));
-			}
+				((BSIButton) buildbar.GetChild(i)).Initialize(i, nameof(Build));
+			
+			GD.Print("HUD.InitializeButtons() - succesfully");
 		}
 
 		public override void _Ready()
