@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bptp24jj3f8y0"]
 
-[ext_resource type="Texture2D" uid="uid://323lrfot0iul" path="res://Assets/Textures/Skill-Build background button.png" id="1_xfipj"]
-[ext_resource type="Script" path="res://Scripts/Data/BSIButton.cs" id="2_68fbd"]
-[ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/ManaIco.svg" id="2_n8748"]
+[ext_resource type="Texture2D" uid="uid://323lrfot0iul" path="res://Assets/Textures/Skill-Build background button.png" id="1_2yoky"]
+[ext_resource type="Script" path="res://Scripts/Data/BSIButton.cs" id="2_d0bmb"]
+[ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/ManaIco.svg" id="3_whd2u"]
 
 [sub_resource type="Shortcut" id="Shortcut_yijba"]
 events = [null]
@@ -13,7 +13,7 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_jj68v"]
 font_size = 512
 
-[node name="Skill-Build Button" type="TextureButton"]
+[node name="BSIButton" type="TextureButton"]
 custom_minimum_size = Vector2(150, 0)
 anchors_preset = -1
 anchor_right = 0.079
@@ -21,10 +21,10 @@ anchor_bottom = 0.089
 offset_right = 0.319992
 offset_bottom = -0.120003
 shortcut = SubResource("Shortcut_yijba")
-texture_normal = ExtResource("1_xfipj")
+texture_normal = ExtResource("1_2yoky")
 ignore_texture_size = true
 stretch_mode = 4
-script = ExtResource("2_68fbd")
+script = ExtResource("2_d0bmb")
 
 [node name="KeyBind" type="Label" parent="."]
 layout_mode = 1
@@ -42,7 +42,7 @@ horizontal_alignment = 1
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(16, 80.5)
 scale = Vector2(0.0375, 0.03625)
-texture = ExtResource("2_n8748")
+texture = ExtResource("3_whd2u")
 
 [node name="ManaCost" type="Label" parent="Sprite2D"]
 anchors_preset = 8
