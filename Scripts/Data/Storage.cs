@@ -37,9 +37,9 @@ namespace Data
             )}
         };
 
-        public static readonly Dictionary<string, BSButton> BSButtonsList = new Dictionary<string, BSButton>()
+        public static readonly Dictionary<string, BSButton> BuildButtonsList = new Dictionary<string, BSButton>()
         {
-            {"1BButton", new BSButton(Key.Key1, "CrossBow", "res://Assets/Textures/Skill-Build background button.png")},
+            {"1BButton", new BSButton(Key.Key1, "CrossBow", BSButton.DefaultButtonTexturePath)},
             {"2BButton", new BSButton()},
             {"3BButton", new BSButton()},
             {"4BButton", new BSButton()},
