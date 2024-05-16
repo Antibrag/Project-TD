@@ -3,7 +3,7 @@ using Godot;
 
 public partial class Player : CharacterBody3D
 {
-    public float Health { get; set; } 
+    public float Health { get; set; }
     public int Level { get; set; }
 
     public override void _Ready()
@@ -11,8 +11,8 @@ public partial class Player : CharacterBody3D
         Health = Storage.LevelsList[Storage.CurrentLevel].StartPlayerHealth;
     }
 
-    public void TakeDamage(float damageValue) 
-    {        
+    public void TakeDamage(float damageValue)
+    {
         float healthBefore = Health;
         Health -= damageValue;
 
@@ -36,8 +36,8 @@ public partial class Player : CharacterBody3D
 
     public void PastBuild(string buildname)
     {
-        Build build = (Build) GD.Load<PackedScene>("res://Scenes/Player/Build.tscn").Instantiate();
-        AddChild(build);
+        Build build = (Build)GD.Load<PackedScene>("res://Scenes/Player/Build.tscn").Instantiate();
+        GetNode<Node>("Objects").AddChild(build);
 
         build.Initialize(buildname);
     }
