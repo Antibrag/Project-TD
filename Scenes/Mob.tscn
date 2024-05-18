@@ -15,7 +15,8 @@ script = ExtResource("1_i7y3m")
 Speed = 1.0
 HealthBar = NodePath("SubViewport/HealthBar")
 
-[node name="Area3D" type="Area3D" parent="." groups=["Mob"]]
+[node name="Area3D" type="RigidBody3D" parent="." groups=["Mob"]]
+gravity_scale = 0.0
 
 [node name="Mesh" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
