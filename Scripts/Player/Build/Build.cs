@@ -10,7 +10,6 @@ public partial class Build : Area3D
 
     [Export] public MeshInstance3D Head;
     [Export] public Timer AttackCDTimer;
-    [Export] public MeshInstance3D TargetIndicator;
 
     private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
     private LevelObjects.Mob _target = null;
@@ -36,7 +35,6 @@ public partial class Build : Area3D
         if (_targetsList.Count == 1)
         {
             _target = null;
-            TargetIndicator.GlobalPosition = Vector3.Zero;
             return;
         }
 
@@ -61,7 +59,7 @@ public partial class Build : Area3D
         Vector3 rayEnd = rayOrigin + camera.ProjectRayNormal(mousePosition) * 1000;
 
         var query = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
-        query.CollideWithAreas = false;
+        query.CollideWithAreas = true;
         query.CollideWithBodies = false;
 
         Dictionary rayArray = GetWorld3D().DirectSpaceState.IntersectRay(query);

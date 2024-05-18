@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://daorro7c3vor3"]
+[gd_scene load_steps=6 format=3 uid="uid://daorro7c3vor3"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Build/Build.cs" id="1_0ya2u"]
 [ext_resource type="ArrayMesh" uid="uid://b8g5q1q66da8w" path="res://Assets/Meshes/Builds/CrossBow_Head.res" id="2_q8hgu"]
@@ -8,20 +8,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtmqj"]
 size = Vector3(8, 1, 8)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0dl0"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_gm4w1"]
-material = SubResource("StandardMaterial3D_a0dl0")
-radius = 1.0
-height = 2.0
-
 [node name="Build" type="Area3D" node_paths=PackedStringArray("Head", "AttackCDTimer", "TargetIndicator") groups=["Build"]]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
 script = ExtResource("1_0ya2u")
 Head = NodePath("HeadMesh")
 AttackCDTimer = NodePath("AttackCD")
-TargetIndicator = NodePath("TargetIndicator")
+TargetIndicator = NodePath("")
 
 [node name="HeadMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_q8hgu")
@@ -37,13 +29,6 @@ disabled = true
 
 [node name="AttackArea" parent="." instance=ExtResource("4_567m5")]
 
-[node name="TargetIndicator" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.43248, 0)
-visible = false
-mesh = SubResource("SphereMesh_gm4w1")
-
 [node name="AttackCD" type="Timer" parent="."]
 
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
-[connection signal="area_exited" from="." to="." method="OnAreaExited"]
 [connection signal="timeout" from="AttackCD" to="." method="OnAttackCDTimerTimeout"]
