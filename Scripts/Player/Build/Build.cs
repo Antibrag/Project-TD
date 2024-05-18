@@ -82,6 +82,19 @@ public partial class Build : Area3D
         );
     }
 
+    public void AddMobInTargetList(RigidBody3D mobBody)
+    {
+        LevelObjects.Mob mob = (LevelObjects.Mob)mobBody.GetParent();
+
+        if (!_targetsList.Contains(mob))
+            _targetsList.Add(mob);
+
+        if (_targetsList.Count == 1)
+            _target = mob;
+
+        mob.AttackingBuild = this;
+    }
+
     public void OnAreaEntered(Area3D enteredArea)
     {
         if (!_isPlaced /*&& !enteredArea.IsInGroup("Build")*/)
@@ -93,19 +106,6 @@ public partial class Build : Area3D
             attackRadiusMaterial.AlbedoColor = new Color(255, 0, 0);
 
             return;
-        }
-
-        if (enteredArea.IsInGroup("Mob"))
-        {
-            LevelObjects.Mob mob = (LevelObjects.Mob)enteredArea.GetParent();
-
-            if (!_targetsList.Contains(mob))
-                _targetsList.Add(mob);
-
-            if (_targetsList.Count == 1)
-                _target = mob;
-
-            mob.AttackingBuild = this;
         }
     }
 
