@@ -10,7 +10,7 @@ size = Vector3(0.5, 0.1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wlta"]
 size = Vector3(1, 0.2, 1)
 
-[node name="Road" type="Area3D"]
+[node name="Road" type="StaticBody3D"]
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_6ekth")
