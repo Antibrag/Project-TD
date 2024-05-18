@@ -30,7 +30,7 @@ public partial class Build : Area3D
         SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
     }
 
-    public void NextTarget()
+    public void NextTarget(LevelObjects.Mob mob)
     {
         if (_targetsList.Count == 1)
         {
@@ -38,7 +38,7 @@ public partial class Build : Area3D
             return;
         }
 
-        _targetsList.Remove(_target);
+        _targetsList.Remove(mob);
         _target = _targetsList[0];
     }
 
@@ -82,7 +82,7 @@ public partial class Build : Area3D
         );
     }
 
-    public void AddMobInTargetList(RigidBody3D mobBody)
+    public void AddMobInTargetList(Node3D mobBody)
     {
         LevelObjects.Mob mob = (LevelObjects.Mob)mobBody.GetParent();
 
@@ -120,9 +120,6 @@ public partial class Build : Area3D
 
             return;
         }
-
-        if (exitedArea.IsInGroup("Mob") && ((LevelObjects.Mob)exitedArea.GetParent()).Characteristics.Health != 0)
-            NextTarget();
     }
 
     public void OnAttackCDTimerTimeout()
