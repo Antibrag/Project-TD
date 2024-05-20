@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd0m8djmymmjt"]
+[gd_scene load_steps=5 format=3 uid="uid://cd0m8djmymmjt"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Build/AttackArea.cs" id="1_w7sdg"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_odxn8"]
-height = 0.001
-radius = 50.0
+height = 0.08
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uq7ex"]
 emission = Color(0, 1, 0, 1)
@@ -10,10 +12,12 @@ emission_energy_multiplier = 100.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_8bs6l"]
 material = SubResource("StandardMaterial3D_uq7ex")
-inner_radius = 50.2
-outer_radius = 50.0
+inner_radius = 1.05
 
 [node name="AttackArea" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_w7sdg")
 
 [node name="AreaCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_odxn8")
@@ -21,3 +25,6 @@ disabled = true
 
 [node name="AreaMesh" type="MeshInstance3D" parent="AreaCollision"]
 mesh = SubResource("TorusMesh_8bs6l")
+
+[connection signal="body_entered" from="." to="." method="OnAttackAreaBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnAttackAreaBodyExited"]
