@@ -59,10 +59,13 @@ public partial class Build : Area3D
         Vector3 rayEnd = rayOrigin + camera.ProjectRayNormal(mousePosition) * 1000;
 
         var query = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
+        query.CollisionMask = 1;
         query.CollideWithAreas = true;
         query.CollideWithBodies = false;
 
         Dictionary rayArray = GetWorld3D().DirectSpaceState.IntersectRay(query);
+
+        GD.Print("ScreenPointToRay() - rayArray = ");
 
         if (!rayArray.ContainsKey("position"))
             return Vector3.Zero;
@@ -76,9 +79,9 @@ public partial class Build : Area3D
 
         Position = new Vector3
         (
-            MousePosition != Vector3.Zero ? MousePosition.X : Position.X,
+            MousePosition.X,
             Position.Y,
-            MousePosition != Vector3.Zero ? MousePosition.Z : Position.Z
+            MousePosition.Z
         );
     }
 
@@ -97,15 +100,11 @@ public partial class Build : Area3D
 
     public void OnAreaEntered(Area3D enteredArea)
     {
-        if (!_isPlaced /*&& !enteredArea.IsInGroup("Build")*/)
+        GD.Print("Body Entered");
+        if (!_isPlaced)
         {
             _enteredAreasCount++;
-
-            //Change AttackRadius mesh color to red
-            StandardMaterial3D attackRadiusMaterial = GetNode<MeshInstance3D>("AttackRadius/Mesh").Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
-            attackRadiusMaterial.AlbedoColor = new Color(255, 0, 0);
-
-            return;
+            GetNode<AttackArea>("AttackArea").ChangeAreaColor(new Color(255, 0, 0));
         }
     }
 
@@ -115,10 +114,8 @@ public partial class Build : Area3D
         {
             _enteredAreasCount--;
 
-            StandardMaterial3D attackRadiusMaterial = GetNode<MeshInstance3D>("AttackRadius/Mesh").Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
-            attackRadiusMaterial.AlbedoColor = new Color(255, 255, 255);
-
-            return;
+            if (_enteredAreasCount == 0)
+                GetNode<AttackArea>("AttackArea").ChangeAreaColor(new Color(255, 255, 255));
         }
     }
 
@@ -132,8 +129,8 @@ public partial class Build : Area3D
     {
         if (ev.IsActionPressed("PastBuild") && !_isPlaced && _enteredAreasCount == 0)
         {
-            GetNode<CollisionShape3D>("AttackRadius").Hide();
-            GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
+            GetNode<Area3D>("AttackArea").Hide();
+            GetNode<CollisionShape3D>("AttackArea/AreaCollision").Disabled = false;
 
             _isPlaced = true;
             AttackCDTimer.Start();
