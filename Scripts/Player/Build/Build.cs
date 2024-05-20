@@ -39,9 +39,8 @@ public partial class Build : Area3D
 
         Dictionary rayArray = GetWorld3D().DirectSpaceState.IntersectRay(query);
 
-        GD.Print("ScreenPointToRay() - rayArray = ");
-
         if (!rayArray.ContainsKey("position"))
+
             return Vector3.Zero;
 
         return (Vector3)rayArray["position"];
@@ -82,13 +81,14 @@ public partial class Build : Area3D
 
     public void NextTarget(LevelObjects.Mob mob)
     {
-        if (_targetsList.Count == 1)
+        _targetsList.Remove(mob);
+
+        if (_targetsList.Count == 0)
         {
             _target = null;
             return;
         }
 
-        _targetsList.Remove(mob);
         _target = _targetsList[0];
     }
 
@@ -102,7 +102,7 @@ public partial class Build : Area3D
         if (_targetsList.Count == 1)
             _target = mob;
 
-        mob.AttackingBuild = this;
+        mob.AttackingBuild.Add(this);
     }
 
     public void OnAreaEntered(Area3D enteredArea)
@@ -176,8 +176,6 @@ public partial class Build : Area3D
             Head.LookAt(_target.GlobalPosition);
             Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
         }
-
-        GD.Print(Name + " " + _targetsList.Count);
     }
 }
 

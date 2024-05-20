@@ -8,7 +8,7 @@ namespace LevelObjects
         [Export] public ProgressBar HealthBar { get; private set; }
 
         public Data.Mob Characteristics { get; set; }
-        public Build AttackingBuild { get; set; } = null;
+        public System.Collections.Generic.List<Build> AttackingBuild { get; set; } = new();
 
         public void Initialize(string name)
         {
@@ -46,12 +46,18 @@ namespace LevelObjects
                 Death();
         }
 
+        public void DelBuildFromList(Build build)
+        {
+            if (AttackingBuild.Contains(build))
+                AttackingBuild.Remove(build);
+        }
+
         public void Death()
         {
             Characteristics.Health = 0;
 
-            if (AttackingBuild != null)
-                AttackingBuild.NextTarget(this);
+            for (int i = 0; i < AttackingBuild.Count; i++)
+                AttackingBuild[i].NextTarget(this);
 
             QueueFree();
         }
