@@ -71,6 +71,12 @@ public partial class Build : Area3D
         body_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Body.res");
         body_mesh.Position = Characteristics.Mesh.BodyPosition;
 
+        TorusMesh attackAreaMesh = (TorusMesh)GetNode<MeshInstance3D>("AttackArea/AreaMesh").Mesh;
+        attackAreaMesh.InnerRadius = Characteristics.AttackAreaRadius + 0.05f;
+        attackAreaMesh.OuterRadius = Characteristics.AttackAreaRadius;
+
+        ((CylinderShape3D)GetNode<CollisionShape3D>("AttackArea/AreaCollision").Shape).Radius = Characteristics.AttackAreaRadius;
+
         SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
     }
 
