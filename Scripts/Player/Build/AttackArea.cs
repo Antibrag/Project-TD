@@ -2,6 +2,13 @@ using Godot;
 
 public partial class AttackArea : Area3D
 {
+    private Build _build;
+
+    public override void _Ready()
+    {
+        _build = (Build)GetParent();
+    }
+
     public void OnAreaEntered(Area3D enteredArea)
     {
         if (enteredArea.IsInGroup("Mob"))
@@ -11,7 +18,15 @@ public partial class AttackArea : Area3D
     public void OnAreaExited(Area3D exitedArea)
     {
         if (exitedArea.IsInGroup("Mob"))
-            ((Build)GetParent()).NextTarget((LevelObjects.Mob)exitedArea.GetParent());
+        {
+            LevelObjects.Mob mob = (LevelObjects.Mob)exitedArea.GetParent();
+
+            if (mob.Characteristics.Health == 0)
+                return;
+
+            _build.NextTarget(mob);
+            mob.DelBuildFromList(_build);
+        }
     }
 
     public void ChangeColor(Color newColor)
