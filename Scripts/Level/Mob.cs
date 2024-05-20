@@ -51,7 +51,7 @@ namespace LevelObjects
             Characteristics.Health = 0;
 
             if (AttackingBuild != null)
-                AttackingBuild.NextTarget();
+                AttackingBuild.NextTarget(this);
 
             QueueFree();
         }
