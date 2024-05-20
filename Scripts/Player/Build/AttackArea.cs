@@ -2,16 +2,16 @@ using Godot;
 
 public partial class AttackArea : Area3D
 {
-    public void OnBodyEntered(Node3D enteredBody)
+    public void OnAreaEntered(Area3D enteredArea)
     {
-        if (enteredBody.IsInGroup("Mob"))
-            ((Build)GetParent()).AddMobInTargetList(enteredBody);
+        if (enteredArea.IsInGroup("Mob"))
+            ((Build)GetParent()).AddMobInTargetList(enteredArea);
     }
 
-    public void OnBodyExited(Node3D exitedBody)
+    public void OnAreaExited(Area3D exitedArea)
     {
-        if (exitedBody.IsInGroup("Mob"))
-            ((Build)GetParent()).NextTarget((LevelObjects.Mob)exitedBody.GetParent());
+        if (exitedArea.IsInGroup("Mob"))
+            ((Build)GetParent()).NextTarget((LevelObjects.Mob)exitedArea.GetParent());
     }
 
     public void ChangeColor(Color newColor)
