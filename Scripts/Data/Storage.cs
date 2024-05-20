@@ -30,7 +30,7 @@ namespace Data
         public static readonly Dictionary<string, Build> BuildsList = new Dictionary<string, Build>()
         {
             {"CrossBow", new Build(
-                new BuildMesh(new Vector3(0,0,0), new Vector3(1.9f,4.1f,0)),
+                new BuildMesh(new Vector3(0,0,0), new Vector3(0.2f,0.4f,0)),
                 1, //Level
                 1, //AttackSpeed
                 new Dictionary<string, Projectile>() { {"Wood Arrow", ProjectilesList["Wood Arrow"]} }
