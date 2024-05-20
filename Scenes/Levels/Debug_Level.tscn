@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://djs63x2jnf1mu" path="res://Scenes/Levels/Base_Level_Tail.tscn" id="1_jbqfe"]
 [ext_resource type="PackedScene" uid="uid://baep4m5b03yw0" path="res://Scenes/Player/Player.tscn" id="2_2gy87"]
 [ext_resource type="PackedScene" uid="uid://dvqjmwduxls4e" path="res://Scenes/Spawner.tscn" id="3_82rpb"]
-[ext_resource type="PackedScene" uid="uid://nvlfegc5re3s" path="res://Scenes/Road.tscn" id="4_wki0h"]
-[ext_resource type="PackedScene" uid="uid://cfn4xw4kn0210" path="res://Scenes/Corner_Road.tscn" id="5_71u2w"]
+[ext_resource type="PackedScene" uid="uid://nvlfegc5re3s" path="res://Scenes/Levels/Elements/Road.tscn" id="4_wki0h"]
+[ext_resource type="PackedScene" uid="uid://cfn4xw4kn0210" path="res://Scenes/Levels/Elements/Corner_Road.tscn" id="5_71u2w"]
 
 [sub_resource type="Curve3D" id="Curve3D_hvmfl"]
 _data = {

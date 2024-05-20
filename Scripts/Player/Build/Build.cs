@@ -10,39 +10,11 @@ public partial class Build : Area3D
 
     [Export] public MeshInstance3D Head;
     [Export] public Timer AttackCDTimer;
-    [Export] public MeshInstance3D TargetIndicator;
+    [Export] public AttackArea AttackArea;
 
     private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
     private LevelObjects.Mob _target = null;
     private int _enteredAreasCount = 0;
-
-    public void Initialize(string name)
-    {
-        Characteristics = (Data.Build)Storage.BuildsList[name].Clone();
-
-        MeshInstance3D head_mesh = GetNode<MeshInstance3D>("HeadMesh");
-        head_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Head.res");
-        head_mesh.Position = Characteristics.Mesh.HeadPosition;
-
-        MeshInstance3D body_mesh = GetNode<MeshInstance3D>("BodyMesh");
-        body_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Body.res");
-        body_mesh.Position = Characteristics.Mesh.BodyPosition;
-
-        SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
-    }
-
-    public void NextTarget()
-    {
-        if (_targetsList.Count == 1)
-        {
-            _target = null;
-            TargetIndicator.GlobalPosition = Vector3.Zero;
-            return;
-        }
-
-        _targetsList.Remove(_target);
-        _target = _targetsList[0];
-    }
 
     private void Shoot()
     {
@@ -61,12 +33,14 @@ public partial class Build : Area3D
         Vector3 rayEnd = rayOrigin + camera.ProjectRayNormal(mousePosition) * 1000;
 
         var query = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
-        query.CollideWithAreas = false;
+        query.CollisionMask = 1;
+        query.CollideWithAreas = true;
         query.CollideWithBodies = false;
 
         Dictionary rayArray = GetWorld3D().DirectSpaceState.IntersectRay(query);
 
         if (!rayArray.ContainsKey("position"))
+
             return Vector3.Zero;
 
         return (Vector3)rayArray["position"];
@@ -78,36 +52,65 @@ public partial class Build : Area3D
 
         Position = new Vector3
         (
-            MousePosition != Vector3.Zero ? MousePosition.X : Position.X,
+            MousePosition.X,
             Position.Y,
-            MousePosition != Vector3.Zero ? MousePosition.Z : Position.Z
+            MousePosition.Z
         );
+    }
+
+    public void Initialize(string name)
+    {
+        Characteristics = (Data.Build)Storage.BuildsList[name].Clone();
+
+        MeshInstance3D head_mesh = GetNode<MeshInstance3D>("HeadMesh");
+        head_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Head.res");
+        head_mesh.Position = Characteristics.Mesh.HeadPosition;
+
+        MeshInstance3D body_mesh = GetNode<MeshInstance3D>("BodyMesh");
+        body_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Body.res");
+        body_mesh.Position = Characteristics.Mesh.BodyPosition;
+
+        TorusMesh attackAreaMesh = (TorusMesh)GetNode<MeshInstance3D>("AttackArea/AreaMesh").Mesh;
+        attackAreaMesh.InnerRadius = Characteristics.AttackAreaRadius + 0.05f;
+        attackAreaMesh.OuterRadius = Characteristics.AttackAreaRadius;
+
+        ((CylinderShape3D)GetNode<CollisionShape3D>("AttackArea/AreaCollision").Shape).Radius = Characteristics.AttackAreaRadius;
+
+        SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
+    }
+
+    public void NextTarget(LevelObjects.Mob mob)
+    {
+        _targetsList.Remove(mob);
+
+        if (_targetsList.Count == 0)
+        {
+            _target = null;
+            return;
+        }
+
+        _target = _targetsList[0];
+    }
+
+    public void AddMobInTargetList(Node3D mobBody)
+    {
+        LevelObjects.Mob mob = (LevelObjects.Mob)mobBody.GetParent();
+
+        if (!_targetsList.Contains(mob))
+            _targetsList.Add(mob);
+
+        if (_targetsList.Count == 1)
+            _target = mob;
+
+        mob.AttackingBuild.Add(this);
     }
 
     public void OnAreaEntered(Area3D enteredArea)
     {
-        if (!_isPlaced /*&& !enteredArea.IsInGroup("Build")*/)
+        if (!_isPlaced)
         {
             _enteredAreasCount++;
-
-            //Change AttackRadius mesh color to red
-            StandardMaterial3D attackRadiusMaterial = GetNode<MeshInstance3D>("AttackRadius/Mesh").Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
-            attackRadiusMaterial.AlbedoColor = new Color(255, 0, 0);
-
-            return;
-        }
-
-        if (enteredArea.IsInGroup("Mob"))
-        {
-            LevelObjects.Mob mob = (LevelObjects.Mob)enteredArea.GetParent();
-
-            if (!_targetsList.Contains(mob))
-                _targetsList.Add(mob);
-
-            if (_targetsList.Count == 1)
-                _target = mob;
-
-            mob.AttackingBuild = this;
+            AttackArea.ChangeColor(new Color(255, 0, 0));
         }
     }
 
@@ -117,14 +120,29 @@ public partial class Build : Area3D
         {
             _enteredAreasCount--;
 
-            StandardMaterial3D attackRadiusMaterial = GetNode<MeshInstance3D>("AttackRadius/Mesh").Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
-            attackRadiusMaterial.AlbedoColor = new Color(255, 255, 255);
-
-            return;
+            if (_enteredAreasCount == 0)
+                AttackArea.ChangeColor(new Color(255, 255, 255));
         }
+    }
 
-        if (exitedArea.IsInGroup("Mob") && ((LevelObjects.Mob)exitedArea.GetParent()).Characteristics.Health != 0)
-            NextTarget();
+    public void OnBodyEntered(Node3D enteredBody)
+    {
+        if (!_isPlaced)
+        {
+            _enteredAreasCount++;
+            AttackArea.ChangeColor(new Color(255, 0, 0));
+        }
+    }
+
+    public void OnBodyExited(Node3D exitedBody)
+    {
+        if (!_isPlaced)
+        {
+            _enteredAreasCount--;
+
+            if (_enteredAreasCount == 0)
+                AttackArea.ChangeColor(new Color(255, 255, 255));
+        }
     }
 
     public void OnAttackCDTimerTimeout()
@@ -137,8 +155,8 @@ public partial class Build : Area3D
     {
         if (ev.IsActionPressed("PastBuild") && !_isPlaced && _enteredAreasCount == 0)
         {
-            GetNode<CollisionShape3D>("AttackRadius").Hide();
-            GetNode<CollisionShape3D>("AttackRadius").Disabled = false;
+            GetNode<Area3D>("AttackArea").Hide();
+            GetNode<CollisionShape3D>("AttackArea/AreaCollision").Disabled = false;
 
             _isPlaced = true;
             AttackCDTimer.Start();
@@ -158,8 +176,6 @@ public partial class Build : Area3D
             Head.LookAt(_target.GlobalPosition);
             Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
         }
-
-        GD.Print(Name + " " + _targetsList.Count);
     }
 }
 
