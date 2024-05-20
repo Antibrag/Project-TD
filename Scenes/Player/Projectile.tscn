@@ -7,6 +7,8 @@
 size = Vector3(4.93237, 0.378404, 0.390411)
 
 [node name="Projectile" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_tfjbb")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
