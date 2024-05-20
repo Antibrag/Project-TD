@@ -16,7 +16,7 @@ public partial class AttackArea : Area3D
 
     public void ChangeColor(Color newColor)
     {
-        StandardMaterial3D attackRadiusMaterial = GetNode<MeshInstance3D>("AreaCollision/AreaMesh").Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
+        StandardMaterial3D attackRadiusMaterial = GetNode<MeshInstance3D>("AreaMesh").Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
         attackRadiusMaterial.AlbedoColor = newColor;
     }
 }
