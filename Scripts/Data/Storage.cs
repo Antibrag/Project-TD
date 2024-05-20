@@ -33,6 +33,7 @@ namespace Data
                 new BuildMesh(new Vector3(0,0,0), new Vector3(0.2f,0.4f,0)),
                 1, //Level
                 1, //AttackSpeed
+                3,
                 new Dictionary<string, Projectile>() { {"Wood Arrow", ProjectilesList["Wood Arrow"]} }
             )}
         };
