@@ -10,37 +10,11 @@ public partial class Build : Area3D
 
     [Export] public MeshInstance3D Head;
     [Export] public Timer AttackCDTimer;
+    [Export] public AttackArea AttackArea;
 
     private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
     private LevelObjects.Mob _target = null;
     private int _enteredAreasCount = 0;
-
-    public void Initialize(string name)
-    {
-        Characteristics = (Data.Build)Storage.BuildsList[name].Clone();
-
-        MeshInstance3D head_mesh = GetNode<MeshInstance3D>("HeadMesh");
-        head_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Head.res");
-        head_mesh.Position = Characteristics.Mesh.HeadPosition;
-
-        MeshInstance3D body_mesh = GetNode<MeshInstance3D>("BodyMesh");
-        body_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Body.res");
-        body_mesh.Position = Characteristics.Mesh.BodyPosition;
-
-        SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
-    }
-
-    public void NextTarget(LevelObjects.Mob mob)
-    {
-        if (_targetsList.Count == 1)
-        {
-            _target = null;
-            return;
-        }
-
-        _targetsList.Remove(mob);
-        _target = _targetsList[0];
-    }
 
     private void Shoot()
     {
@@ -85,6 +59,33 @@ public partial class Build : Area3D
         );
     }
 
+    public void Initialize(string name)
+    {
+        Characteristics = (Data.Build)Storage.BuildsList[name].Clone();
+
+        MeshInstance3D head_mesh = GetNode<MeshInstance3D>("HeadMesh");
+        head_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Head.res");
+        head_mesh.Position = Characteristics.Mesh.HeadPosition;
+
+        MeshInstance3D body_mesh = GetNode<MeshInstance3D>("BodyMesh");
+        body_mesh.Mesh = GD.Load<Mesh>($"res://Assets/Meshes/Builds/{name}_Body.res");
+        body_mesh.Position = Characteristics.Mesh.BodyPosition;
+
+        SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
+    }
+
+    public void NextTarget(LevelObjects.Mob mob)
+    {
+        if (_targetsList.Count == 1)
+        {
+            _target = null;
+            return;
+        }
+
+        _targetsList.Remove(mob);
+        _target = _targetsList[0];
+    }
+
     public void AddMobInTargetList(Node3D mobBody)
     {
         LevelObjects.Mob mob = (LevelObjects.Mob)mobBody.GetParent();
@@ -100,11 +101,10 @@ public partial class Build : Area3D
 
     public void OnAreaEntered(Area3D enteredArea)
     {
-        GD.Print("Body Entered");
         if (!_isPlaced)
         {
             _enteredAreasCount++;
-            GetNode<AttackArea>("AttackArea").ChangeAreaColor(new Color(255, 0, 0));
+            AttackArea.ChangeAreaColor(new Color(255, 0, 0));
         }
     }
 
@@ -115,7 +115,27 @@ public partial class Build : Area3D
             _enteredAreasCount--;
 
             if (_enteredAreasCount == 0)
-                GetNode<AttackArea>("AttackArea").ChangeAreaColor(new Color(255, 255, 255));
+                AttackArea.ChangeAreaColor(new Color(255, 255, 255));
+        }
+    }
+
+    public void OnBodyEntered(Node3D enteredBody)
+    {
+        if (!_isPlaced)
+        {
+            _enteredAreasCount++;
+            AttackArea.ChangeAreaColor(new Color(255, 0, 0));
+        }
+    }
+
+    public void OnBodyExited(Node3D exitedBody)
+    {
+        if (!_isPlaced)
+        {
+            _enteredAreasCount--;
+
+            if (_enteredAreasCount == 0)
+                AttackArea.ChangeAreaColor(new Color(255, 255, 255));
         }
     }
 

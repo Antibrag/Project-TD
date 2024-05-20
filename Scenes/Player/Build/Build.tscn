@@ -6,29 +6,33 @@
 [ext_resource type="PackedScene" uid="uid://cd0m8djmymmjt" path="res://Scenes/Player/Build/Attack_Area.tscn" id="4_567m5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtmqj"]
-size = Vector3(8, 1, 8)
+size = Vector3(0.6, 0.2, 0.6)
 
-[node name="Build" type="Area3D" node_paths=PackedStringArray("Head", "AttackCDTimer", "TargetIndicator") groups=["Build"]]
-transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
+[node name="Build" type="Area3D" node_paths=PackedStringArray("Head", "AttackCDTimer", "AttackArea") groups=["Build"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("1_0ya2u")
 Head = NodePath("HeadMesh")
 AttackCDTimer = NodePath("AttackCD")
-TargetIndicator = NodePath("")
+AttackArea = NodePath("AttackArea")
 
 [node name="HeadMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.08, 0, -3.72529e-09, 0, 0.08, 0, 3.72529e-09, 0, 0.08, 0, 0, 0)
 mesh = ExtResource("2_q8hgu")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5.2, 0)
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.2, 0.4, 0)
 mesh = ExtResource("3_01kum")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
 shape = SubResource("BoxShape3D_jtmqj")
-disabled = true
 
 [node name="AttackArea" parent="." instance=ExtResource("4_567m5")]
 
 [node name="AttackCD" type="Timer" parent="."]
 
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="." to="." method="OnAreaExited"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]
 [connection signal="timeout" from="AttackCD" to="." method="OnAttackCDTimerTimeout"]
