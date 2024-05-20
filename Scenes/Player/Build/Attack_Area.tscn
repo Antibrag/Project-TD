@@ -26,5 +26,5 @@ disabled = true
 [node name="AreaMesh" type="MeshInstance3D" parent="AreaCollision"]
 mesh = SubResource("TorusMesh_8bs6l")
 
-[connection signal="body_entered" from="." to="." method="OnAttackAreaBodyEntered"]
-[connection signal="body_exited" from="." to="." method="OnAttackAreaBodyExited"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="body_exited" from="." to="." method="OnBodyExited"]

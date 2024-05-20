@@ -104,7 +104,7 @@ public partial class Build : Area3D
         if (!_isPlaced)
         {
             _enteredAreasCount++;
-            AttackArea.ChangeAreaColor(new Color(255, 0, 0));
+            AttackArea.ChangeColor(new Color(255, 0, 0));
         }
     }
 
@@ -115,7 +115,7 @@ public partial class Build : Area3D
             _enteredAreasCount--;
 
             if (_enteredAreasCount == 0)
-                AttackArea.ChangeAreaColor(new Color(255, 255, 255));
+                AttackArea.ChangeColor(new Color(255, 255, 255));
         }
     }
 
@@ -124,7 +124,7 @@ public partial class Build : Area3D
         if (!_isPlaced)
         {
             _enteredAreasCount++;
-            AttackArea.ChangeAreaColor(new Color(255, 0, 0));
+            AttackArea.ChangeColor(new Color(255, 0, 0));
         }
     }
 
@@ -135,7 +135,7 @@ public partial class Build : Area3D
             _enteredAreasCount--;
 
             if (_enteredAreasCount == 0)
-                AttackArea.ChangeAreaColor(new Color(255, 255, 255));
+                AttackArea.ChangeColor(new Color(255, 255, 255));
         }
     }
 
