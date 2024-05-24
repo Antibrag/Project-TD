@@ -5,7 +5,14 @@ namespace Data
 {
     public static class Loader
     {
-        public static void LoadLevelsData()
+        public static void LoadAllData()
+        {
+            LoadPlayerData();
+            LoadLevelsData();
+            LoadBSIButtonsConfiguration();
+        }
+
+        private static void LoadLevelsData()
         {
             if (!FileAccess.FileExists(Storage.LevelsDataSavePath))
             {
@@ -33,7 +40,7 @@ namespace Data
             GD.Print("Load data levels succsesfully");
         }
 
-        public static void LoadPlayerData()
+        private static void LoadPlayerData()
         {
             if (!FileAccess.FileExists(Storage.PlayerDataSavePath))
             {
@@ -45,12 +52,10 @@ namespace Data
 
             Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
 
-            //Storage.GlobalInfo.CurrentLevelIdx = (int) data["CurrentLevelIdx"];
-
             GD.Print("Load player data succsesfully");
         }
 
-        public static void LoadBSIButtonsConfiguration()
+        private static void LoadBSIButtonsConfiguration()
         {
             if (!FileAccess.FileExists(Storage.BSIButtonsConfigurationPath))
             {
@@ -64,18 +69,23 @@ namespace Data
 
             foreach (System.Collections.Generic.KeyValuePair<string, BSIButton> button in Storage.BuildButtonsList)
             {
+                string[] buttonParameters = null;
+
                 try
                 {
-                    string[] buttonParameters = ((string[])data[button.Key]);
-
-                    button.Value.ShortcutKey = (Key)buttonParameters[0].ToInt();
-                    button.Value.BSIName = buttonParameters[1];
-                    button.Value.ButtonTexturePath = buttonParameters[2];
+                    buttonParameters = ((string[])data[button.Key]);
                 }
                 catch (System.Exception)
                 {
                     GD.PrintErr($"Cannot load {button.Key} configuration. Continue...");
                 }
+
+                Key buttonKey;
+                System.Enum.TryParse(buttonParameters[0], out buttonKey);
+
+                button.Value.ShortcutKey = buttonKey;
+                button.Value.BSIName = buttonParameters[1];
+                button.Value.ButtonTexturePath = buttonParameters[2];
             }
         }
     }

@@ -39,6 +39,8 @@ namespace Data
                 string[] buttonParameters = { button.Value.ShortcutKey.ToString(), button.Value.BSIName, button.Value.ButtonTexturePath };
                 data.Add(button.Key, buttonParameters);
             }
+
+            file.StoreLine(Json.Stringify(data));
         }
     }
 }
