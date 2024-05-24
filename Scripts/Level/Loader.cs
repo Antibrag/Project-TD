@@ -6,9 +6,9 @@ namespace LevelObjects
 {
     public partial class Loader : Node
     {
-        public override void _Ready() =>        
-            Data.Loader.LoadLevelsData();
-        
+        public override void _Ready() =>
+            Data.Loader.LoadAllData();
+
         //Replace to own class
         public async void StartGame()
         {
@@ -17,20 +17,18 @@ namespace LevelObjects
             //Wait while level is created on main scene
             await ToSignal(GetTree().CreateTimer(1), "timeout");
 
-            Data.Loader.LoadPlayerData();
-
             GetNode<UI.StartMenu>("/root/Main/StartMenu").Disable();
 
             GetNode<Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
         }
 
         public void LoadFirstUnCompleteLevel()
-        {            
+        {
             foreach (KeyValuePair<string, Data.Level> level in Storage.LevelsList)
             {
                 GD.Print(level.Key, level.Value.IsComplete);
-                if (!level.Value.IsComplete)  
-                { 
+                if (!level.Value.IsComplete)
+                {
                     LoadLevel(level);
                     return;
                 }
