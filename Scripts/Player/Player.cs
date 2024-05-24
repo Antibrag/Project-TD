@@ -38,13 +38,8 @@ public partial class Player : CharacterBody3D
         GetNode<UI.DeathMenu>("/root/Main/Death_Menu").Enable();
     }
 
-    public void PastBuild(string buildname)
+    public void SelectBuild(string buildname)
     {
-        float manaCost = Storage.BuildsList[buildname].ManaCost;
-
-        if (Mana < manaCost)
-            return;
-
         Build build = (Build)GD.Load<PackedScene>("res://Scenes/Player/Build/Build.tscn").Instantiate();
         GetNode<Node>("Objects").AddChild(build);
 

@@ -155,6 +155,14 @@ public partial class Build : Area3D
     {
         if (ev.IsActionPressed("PastBuild") && !_isPlaced && _enteredAreasCount == 0)
         {
+            Player player = GetNode<Player>("/root/Main/Level/Player");
+
+            if (player.Mana < Characteristics.ManaCost)
+            {
+                return;
+            }
+
+            player.SpendMana(Characteristics.ManaCost);
             GetNode<Area3D>("AttackArea").Hide();
             GetNode<CollisionShape3D>("AttackArea/AreaCollision").Disabled = false;
 
