@@ -13,6 +13,12 @@ public partial class Player : CharacterBody3D
         Mana = 100;
     }
 
+    public void SpendMana(float manaCost)
+    {
+        GetNode<UI.HUD>("/root/Main/HUD").AddDecreasingMana(manaCost);
+        Mana -= manaCost;
+    }
+
     public void TakeDamage(float damageValue)
     {
         GetNode<UI.HUD>("/root/Main/HUD").AddDecreasingHealth(damageValue);
@@ -35,6 +41,7 @@ public partial class Player : CharacterBody3D
     public void PastBuild(string buildname)
     {
         float manaCost = Storage.BuildsList[buildname].ManaCost;
+
         if (Mana < manaCost)
             return;
 
@@ -42,8 +49,5 @@ public partial class Player : CharacterBody3D
         GetNode<Node>("Objects").AddChild(build);
 
         build.Initialize(buildname);
-
-        GetNode<UI.HUD>("/root/Main/HUD").AddDecreasingMana(manaCost);
-        Mana -= manaCost;
     }
 }
