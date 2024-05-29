@@ -6,7 +6,16 @@ namespace UI
     public partial class BSIButton : TextureButton
     {
         public string ButtonName { get; set; }
-        public string BSIName { get; set; } //Build-Spell_Item name 
+
+        private Data.BSIButton _buttonConfiguration;
+
+        private void ChangeManaCostLabel()
+        {
+            if (_buttonConfiguration.BSIName == "none" || _buttonConfiguration.BSIName == "")
+                return;
+
+            GetNode<Label>("ManaCastIcon/ManaCost").Text = Storage.BuildsList[_buttonConfiguration.BSIName].ManaCost.ToString();
+        }
 
         public void Initialize(int actionIndex, string buttonType)
         {
@@ -16,6 +25,8 @@ namespace UI
             {
                 case nameof(Build):
                     ButtonName = $"{actionIndex + 1}BButton";
+                    _buttonConfiguration = Storage.BuildButtonsList[ButtonName];
+                    ChangeManaCostLabel();
                     break;
 
                     //case nameof(Spell):
@@ -27,29 +38,28 @@ namespace UI
                     //break;
             }
 
-            Data.BSIButton buttonConfiguration = Storage.BuildButtonsList[ButtonName];
-
+            //Add shortcut to key
             Shortcut = new();
             Shortcut.Events = (Godot.Collections.Array)new Godot.Collections.Array();
-            Shortcut.Events.Add(new InputEventKey() { Keycode = buttonConfiguration.ShortcutKey });
+            Shortcut.Events.Add(new InputEventKey() { Keycode = _buttonConfiguration.ShortcutKey });
 
-            BSIName = buttonConfiguration.BSIName;
+            //Add keyBind label shortcut key number
+            string shortcutKeyName = _buttonConfiguration.ShortcutKey.ToString();
 
-            string shortcutKeyName = buttonConfiguration.ShortcutKey.ToString();
             if (shortcutKeyName.Contains("Key"))
                 shortcutKeyName = shortcutKeyName.Substring(shortcutKeyName.IndexOf('y') + 1);
 
             GetNode<Label>("KeyBind").Text = shortcutKeyName;
 
-            TextureNormal = GD.Load<CompressedTexture2D>(buttonConfiguration.ButtonTexturePath);
+            //Add build-skill-item texture
+            TextureNormal = GD.Load<CompressedTexture2D>(_buttonConfiguration.ButtonTexturePath);
 
-            GD.Print($"Initialize button({ButtonName}, shortcut - {buttonConfiguration.ShortcutKey})");
+            GD.Print($"Initialize button({ButtonName}, shortcut - {_buttonConfiguration.ShortcutKey})");
         }
 
         public void OnPressed()
         {
-            GD.Print($"Button({Name}) Pressed, ShortCut key = {Shortcut.Events[0].ToString()}, eviri");
-            GetNode<Player>("/root/Main/Level/Player").SelectBuild(BSIName);
+            GetNode<Player>("/root/Main/Level/Player").SelectBuild(_buttonConfiguration.BSIName);
         }
     }
 }
