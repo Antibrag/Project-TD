@@ -8,16 +8,16 @@ namespace Data
         public string BSIName { get; set; } //Build-Spell-Item name
         public string ButtonTexturePath { get; set; }
 
-        public static readonly string DefaultButtonTexturePath = "res://Assets/Textures/Skill-Build background button.png";
+        private const string _defaultButtonTexturePath = "res://Assets/Textures/Skill-Build background button.png";
 
         public BSIButton()
         {
             ShortcutKey = Key.None;
-            BSIName = "";
-            ButtonTexturePath = DefaultButtonTexturePath;
+            BSIName = "none";
+            ButtonTexturePath = _defaultButtonTexturePath;
         }
 
-        public BSIButton(Key shortcut, string BSIName, string buttonTexturePath)
+        public BSIButton(Key shortcut, string BSIName, string buttonTexturePath = _defaultButtonTexturePath)
         {
             ShortcutKey = shortcut;
             this.BSIName = BSIName;

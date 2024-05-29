@@ -42,8 +42,8 @@ namespace Data
 
         public static readonly Dictionary<string, BSIButton> BuildButtonsList = new Dictionary<string, BSIButton>()
         {
-            {"1BButton", new BSIButton(Key.Key1, "CrossBow", BSIButton.DefaultButtonTexturePath)},
-            {"2BButton", new BSIButton(Key.Key2, "CrossBow", BSIButton.DefaultButtonTexturePath)},
+            {"1BButton", new BSIButton(Key.Key1, "CrossBow")},
+            {"2BButton", new BSIButton(Key.Key2, "CrossBow")},
             {"3BButton", new BSIButton()},
             {"4BButton", new BSIButton()},
             {"5BButton", new BSIButton()},
