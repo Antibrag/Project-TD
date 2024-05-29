@@ -76,6 +76,9 @@ public partial class Build : Area3D
 
         ((CylinderShape3D)GetNode<CollisionShape3D>("AttackArea/AreaCollision").Shape).Radius = Characteristics.AttackAreaRadius;
 
+        GD.Print($"AttackSpeed = {Characteristics.AttackSpeed}");
+        AttackCDTimer.WaitTime = 1 - Characteristics.AttackSpeed / 100;
+
         SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
     }
 
