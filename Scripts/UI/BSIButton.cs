@@ -34,7 +34,12 @@ namespace UI
             Shortcut.Events.Add(new InputEventKey() { Keycode = buttonConfiguration.ShortcutKey });
 
             BSIName = buttonConfiguration.BSIName;
-            GetNode<Label>("KeyBind").Text = buttonConfiguration.ShortcutKey.ToString();
+
+            string shortcutKeyName = buttonConfiguration.ShortcutKey.ToString();
+            if (shortcutKeyName.Contains("Key"))
+                shortcutKeyName = shortcutKeyName.Substring(shortcutKeyName.IndexOf('y') + 1);
+
+            GetNode<Label>("KeyBind").Text = shortcutKeyName;
 
             TextureNormal = GD.Load<CompressedTexture2D>(buttonConfiguration.ButtonTexturePath);
 
@@ -44,7 +49,7 @@ namespace UI
         public void OnPressed()
         {
             GD.Print($"Button({Name}) Pressed, ShortCut key = {Shortcut.Events[0].ToString()}, eviri");
-            GetNode<Player>("/root/Main/Level/Player").PastBuild(BSIName);
+            GetNode<Player>("/root/Main/Level/Player").SelectBuild(BSIName);
         }
     }
 }
