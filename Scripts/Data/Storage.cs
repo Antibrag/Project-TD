@@ -8,6 +8,9 @@ namespace Data
         public static readonly string PlayerDataSavePath = "user://PlayerData.json";
         public static readonly string LevelsDataSavePath = "user://LevelsData.json";
         public static readonly string BSIButtonsConfigurationPath = "user://BSIButtonsConfiguration.json";
+        public static readonly string BuildsDataSavePath = "user://BuildsData.json";
+        public static readonly string ProjectilesDataSavePath = "user://ProjectilesData.json";
+
         public static string CurrentLevel;
 
         private static readonly Dictionary<string, Projectile> ProjectilesList = new Dictionary<string, Projectile>()
@@ -34,7 +37,7 @@ namespace Data
                 new BuildMesh(new Vector3(0,0,0), new Vector3(0.2f,0.4f,0)),
                 1, //Level
                 25, //ManaCost
-                1, //AttackSpeed
+                10, //AttackSpeed
                 3,
                 new Dictionary<string, Projectile>() { {"Wood Arrow", ProjectilesList["Wood Arrow"]} }
             )}
