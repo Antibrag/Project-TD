@@ -5,7 +5,13 @@ namespace Data
         public float AttackPower { get; set; }
         public int Level { get; set; }
         public float PenetrationPower { get; set; } //Пробивная способность
-        public float FlightSpeed { get; set;}
+        public float FlightSpeed { get; set; }
+
+        private void SyncPropertiesWithLevel()
+        {
+            AttackPower += 2 * Level;
+            PenetrationPower += 0.1f * Level;
+        }
 
         public Projectile(int level, float attackPower, float penetrationPower, float flightSpeed)
         {
@@ -15,7 +21,7 @@ namespace Data
             FlightSpeed = flightSpeed;
         }
 
-        public object Clone() 
+        public object Clone()
             => new Projectile(Level, AttackPower, PenetrationPower, FlightSpeed);
     }
 }

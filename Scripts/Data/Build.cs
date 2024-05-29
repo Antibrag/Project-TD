@@ -11,6 +11,11 @@ namespace Data
         public int AttackAreaRadius { get; set; }
         public Dictionary<string, Projectile> Projectiles { get; set; }
 
+        public void SyncPropertiesForCurrentLevel()
+        {
+            AttackSpeed += 5 * Level;
+        }
+
         public Build(in BuildMesh mesh, int level, float manaCost, float attackSpeed, int attackAreaRadius, Dictionary<string, Projectile> buildProjectilesList)
         {
             Mesh = mesh;
