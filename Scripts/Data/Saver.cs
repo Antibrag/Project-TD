@@ -42,5 +42,17 @@ namespace Data
 
             file.StoreLine(Json.Stringify(data));
         }
+
+        public static void SaveBuildsData()
+        {
+            using var file = FileAccess.Open(Storage.BuildsDataSavePath, FileAccess.ModeFlags.Write);
+
+            Godot.Collections.Dictionary data = new();
+
+            foreach (KeyValuePair<string, Build> build in Storage.BuildsList)
+                data.Add(build.Key, build.Value.Level);
+
+            file.StoreLine(Json.Stringify(data));
+        }
     }
 }
