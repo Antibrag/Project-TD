@@ -7,6 +7,7 @@ namespace Data
     {
         public static void LoadAllData()
         {
+            LoadBuildsData();
             LoadPlayerData();
             LoadLevelsData();
             LoadBSIButtonsConfiguration();
@@ -53,6 +54,27 @@ namespace Data
             Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
 
             GD.Print("Load player data succsesfully");
+        }
+
+        private static void LoadBuildsData()
+        {
+            if (!FileAccess.FileExists(Storage.BuildsDataSavePath))
+            {
+                GD.PushWarning("Builds data not found!\nCreate default data file");
+                Saver.SaveBuildsData();
+            }
+
+            using var file = FileAccess.Open(Storage.BuildsDataSavePath, FileAccess.ModeFlags.Read);
+
+            Dictionary data = (Dictionary)Json.ParseString(file.GetAsText());
+
+            foreach (System.Collections.Generic.KeyValuePair<string, Build> build in Storage.BuildsList)
+            {
+                build.Value.Level = (int)data[build.Key];
+                build.Value.SyncPropertiesForCurrentLevel();
+            }
+
+            GD.Print("Load builds data complete");
         }
 
         private static void LoadBSIButtonsConfiguration()
