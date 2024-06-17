@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cu7agc0p323ny"
-path="res://.godot/imported/HealthBar progress.svg-877befa7e3ab204eb0abccf43f3b7144.ctex"
+uid="uid://dsdg8sypwt8fj"
+path="res://.godot/imported/HealthIco.svg-c3e132872fd29d904a9dae8ffa0ee442.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/HealthBar progress.svg"
-dest_files=["res://.godot/imported/HealthBar progress.svg-877befa7e3ab204eb0abccf43f3b7144.ctex"]
+source_file="res://Assets/Textures/UI/HealthIco.svg"
+dest_files=["res://.godot/imported/HealthIco.svg-c3e132872fd29d904a9dae8ffa0ee442.ctex"]
 
 [params]
 
