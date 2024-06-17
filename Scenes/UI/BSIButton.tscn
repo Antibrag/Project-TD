@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bptp24jj3f8y0"]
+[gd_scene load_steps=7 format=3 uid="uid://bptp24jj3f8y0"]
 
-[ext_resource type="Texture2D" uid="uid://323lrfot0iul" path="res://Assets/Textures/Skill-Build background button.png" id="1_2yoky"]
+[ext_resource type="Texture2D" uid="uid://323lrfot0iul" path="res://Assets/Textures/UI/BSIButtons/background.png" id="1_laedp"]
 [ext_resource type="Script" path="res://Scripts/UI/BSIButton.cs" id="2_34keo"]
-[ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/ManaIco.svg" id="3_whd2u"]
+[ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/UI/ManaIco.svg" id="3_3pj5d"]
+[ext_resource type="Texture2D" uid="uid://dn6t41heohgnt" path="res://Assets/Textures/UI/BSIButtons/CrossBow.png" id="3_lcqvd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2qhp4"]
-font_size = 32
+line_spacing = 0.0
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_jj68v"]
 font_size = 512
@@ -17,23 +19,34 @@ anchor_right = 0.079
 anchor_bottom = 0.089
 offset_right = 0.319992
 offset_bottom = 0.879997
-texture_normal = ExtResource("1_2yoky")
+texture_normal = ExtResource("1_laedp")
 ignore_texture_size = true
 stretch_mode = 4
 script = ExtResource("2_34keo")
 
-[node name="KeyBind" type="Label" parent="."]
+[node name="BSIIco" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.296
-anchor_right = 0.296
-offset_left = -24.992
-offset_right = 25.008
-offset_bottom = 45.0
+anchor_right = 0.628
+anchor_bottom = 1.0
+offset_top = 6.0
+offset_right = 0.543999
+offset_bottom = -6.0
 grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_lcqvd")
+expand_mode = 1
+
+[node name="KeyBind" type="Label" parent="."]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 30.0
 text = "P"
 label_settings = SubResource("LabelSettings_2qhp4")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ManaCastIcon" type="TextureRect" parent="."]
 layout_mode = 1
@@ -41,12 +54,12 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
-offset_top = -25.0
-offset_right = 614.0
-offset_bottom = 609.0
+offset_top = -29.0
+offset_right = 748.0
+offset_bottom = 715.0
 grow_vertical = 0
 scale = Vector2(0.0375, 0.03625)
-texture = ExtResource("3_whd2u")
+texture = ExtResource("3_3pj5d")
 expand_mode = 1
 stretch_mode = 5
 
