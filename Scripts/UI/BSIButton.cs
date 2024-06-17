@@ -8,6 +8,7 @@ namespace UI
         public string ButtonName { get; set; }
 
         private Data.BSIButton _buttonConfiguration;
+        private const string _defaultButtonTexturePath = "res://Assets/Textures/UI/BSIButtons";
 
         private void ChangeManaCostLabel()
         {
@@ -19,8 +20,6 @@ namespace UI
 
         public void Initialize(int actionIndex, string buttonType)
         {
-            Disabled = false;
-
             switch (buttonType)
             {
                 case nameof(Build):
@@ -38,6 +37,14 @@ namespace UI
                     //break;
             }
 
+            if (_buttonConfiguration.BSIName == "none" || _buttonConfiguration.BSIName == "")
+            {
+                Visible = false;
+                return;
+            }
+
+            Disabled = false;
+
             //Add shortcut to key
             Shortcut = new();
             Shortcut.Events = (Godot.Collections.Array)new Godot.Collections.Array();
@@ -52,7 +59,7 @@ namespace UI
             GetNode<Label>("KeyBind").Text = shortcutKeyName;
 
             //Add build-skill-item texture
-            TextureNormal = GD.Load<CompressedTexture2D>(_buttonConfiguration.ButtonTexturePath);
+            GetNode<TextureRect>("BSIIco").Texture = GD.Load<CompressedTexture2D>($"{_defaultButtonTexturePath}/{_buttonConfiguration.BSIName}.png");
 
             GD.Print($"Initialize button({ButtonName}, shortcut - {_buttonConfiguration.ShortcutKey})");
         }

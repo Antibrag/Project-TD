@@ -107,7 +107,6 @@ namespace Data
 
                 button.Value.ShortcutKey = buttonKey;
                 button.Value.BSIName = buttonParameters[1];
-                button.Value.ButtonTexturePath = buttonParameters[2];
             }
         }
     }

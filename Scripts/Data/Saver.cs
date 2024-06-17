@@ -36,7 +36,7 @@ namespace Data
 
             foreach (KeyValuePair<string, BSIButton> button in Storage.BuildButtonsList)
             {
-                string[] buttonParameters = { button.Value.ShortcutKey.ToString(), button.Value.BSIName, button.Value.ButtonTexturePath };
+                string[] buttonParameters = { button.Value.ShortcutKey.ToString(), button.Value.BSIName };
                 data.Add(button.Key, buttonParameters);
             }
 
