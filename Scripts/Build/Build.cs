@@ -1,3 +1,4 @@
+using System.Linq;
 using Data;
 using Godot;
 using Godot.Collections;
@@ -18,6 +19,41 @@ public partial class Build : Area3D
     private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
     private LevelObjects.Mob _target = null;
     private int _enteredAreasCount = 0;
+
+    private void StatesControll()
+    {
+        switch (_state)
+        {
+            case States.SELECTED:
+                Vector3 MousePosition = ScreenPointToRay();
+                Position = new Vector3
+                (
+                    MousePosition.X,
+                    Position.Y,
+                    MousePosition.Z
+                );
+
+                if (Input.IsActionJustPressed("PastBuild"))
+                {
+                    if (_enteredAreasCount > 0)
+                        return;
+                    
+                    _state = States.PASTED;
+                    GD.Print("Change staate to PASTED");
+                    AttackCDTimer.Start();
+                }
+                break;
+            
+            case States.PASTED:
+                if (_targetsList.Count <= 0)
+                    return;
+                
+                if (!GetNode<Timer>("ChangeTargetCD").IsStopped())
+                    return;
+
+                break;
+        }
+    }
 
     private void Shoot()
     {
