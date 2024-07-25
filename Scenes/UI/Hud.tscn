@@ -1,24 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2t0wdn4wk5wy"]
+[gd_scene load_steps=10 format=3 uid="uid://d2t0wdn4wk5wy"]
 
-[ext_resource type="Texture2D" uid="uid://c3kf3nfihntdf" path="res://Assets/Textures/HealthBar under.svg" id="1_2jywo"]
+[ext_resource type="Texture2D" uid="uid://c3kf3nfihntdf" path="res://Assets/Textures/UI/HealthBar under.svg" id="1_2jywo"]
 [ext_resource type="Script" path="res://Scripts/UI/HUD.cs" id="1_3eivs"]
-[ext_resource type="Texture2D" uid="uid://cu7agc0p323ny" path="res://Assets/Textures/HealthBar progress.svg" id="2_t0kqn"]
-[ext_resource type="Texture2D" uid="uid://0hwnbuav5snh" path="res://Assets/Textures/ManaBar progress.svg" id="3_efk4e"]
-[ext_resource type="Texture2D" uid="uid://dsdg8sypwt8fj" path="res://Assets/Textures/HealthIco.svg" id="5_oyiw1"]
-[ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/ManaIco.svg" id="6_ae5hc"]
+[ext_resource type="Texture2D" uid="uid://cu7agc0p323ny" path="res://Assets/Textures/UI/HealthBar progress.svg" id="2_t0kqn"]
+[ext_resource type="Texture2D" uid="uid://0hwnbuav5snh" path="res://Assets/Textures/UI/ManaBar progress.svg" id="3_efk4e"]
+[ext_resource type="Texture2D" uid="uid://dsdg8sypwt8fj" path="res://Assets/Textures/UI/HealthIco.svg" id="5_oyiw1"]
+[ext_resource type="Texture2D" uid="uid://dlmij1tqrqxec" path="res://Assets/Textures/UI/ManaIco.svg" id="6_ae5hc"]
 [ext_resource type="PackedScene" uid="uid://bptp24jj3f8y0" path="res://Scenes/UI/BSIButton.tscn" id="7_p81ph"]
+[ext_resource type="PackedScene" uid="uid://dhwwk2741bvh5" path="res://Scenes/UI/Start_Menu.tscn" id="8_owak6"]
+[ext_resource type="PackedScene" uid="uid://1gyobi3pytqj" path="res://Scenes/UI/Death_Menu.tscn" id="9_uvfns"]
 
-[node name="HUD" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_3eivs")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 470.0
@@ -37,7 +32,6 @@ scale = Vector2(0.28125, 0.28875)
 texture = ExtResource("5_oyiw1")
 
 [node name="ManaBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 470.0
@@ -55,7 +49,6 @@ scale = Vector2(0.095, 0.09)
 texture = ExtResource("6_ae5hc")
 
 [node name="Buildbar" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -89,6 +82,12 @@ layout_mode = 2
 
 [node name="BSIButton7" parent="Buildbar" instance=ExtResource("7_p81ph")]
 layout_mode = 2
+
+[node name="StartMenu" parent="." instance=ExtResource("8_owak6")]
+
+[node name="Death_Menu" parent="." instance=ExtResource("9_uvfns")]
+visible = false
+modulate = Color(1, 1, 1, 0)
 
 [node name="DecreasedTimer" type="Timer" parent="."]
 wait_time = 0.05

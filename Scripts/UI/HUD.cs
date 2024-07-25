@@ -2,7 +2,7 @@ using Godot;
 
 namespace UI
 {
-	public partial class HUD : Control
+	public partial class HUD : CanvasLayer
 	{
 		private TextureProgressBar _manaBar;
 		private TextureProgressBar _healthBar;

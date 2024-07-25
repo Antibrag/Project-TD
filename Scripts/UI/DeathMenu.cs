@@ -42,8 +42,8 @@ namespace UI
 
 		public void OnRestartButtonPressed()
 		{
-			GetNode<LevelObjects.Spawner>(GetParent().GetPath() + "/Level/Objects/Spawner").StartSpawn(2);
-			GetNode<Player>(GetParent().GetPath() + "/Level/Player").Health = Storage.LevelsList[Storage.CurrentLevel].StartPlayerHealth;
+			GetNode<LevelObjects.Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
+			GetNode<Player>("/root/Main/Level/Player").Health = Storage.LevelsList[Storage.CurrentLevel].StartPlayerHealth;
 			Disable();
 		}
 
