@@ -5,12 +5,15 @@ using Godot.Collections;
 public partial class Build : Area3D
 {
     public Data.Build Characteristics { get; set; }
-    private Data.Projectile SelectedProjectile { get; set; }
+    private Data.Projectile _selectedProjectile { get; set; }
     private bool _isPlaced { get; set; } = false;
 
     [Export] public MeshInstance3D Head;
     [Export] public Timer AttackCDTimer;
     [Export] public AttackArea AttackArea;
+
+    private enum States { SELECTED, PASTED }
+    private States _state = States.SELECTED;
 
     private System.Collections.Generic.List<LevelObjects.Mob> _targetsList = new();
     private LevelObjects.Mob _target = null;
@@ -21,7 +24,7 @@ public partial class Build : Area3D
         Projectile projectile_instance = (Projectile)GD.Load<PackedScene>("res://Scenes/Player/Projectile.tscn").Instantiate();
         AddChild(projectile_instance);
 
-        projectile_instance.Initialize(SelectedProjectile, _target);
+        projectile_instance.Initialize(_selectedProjectile, _target);
     }
 
     private Vector3 ScreenPointToRay()
@@ -79,7 +82,7 @@ public partial class Build : Area3D
         GD.Print($"AttackSpeed = {Characteristics.AttackSpeed}");
         AttackCDTimer.WaitTime = 1 - Characteristics.AttackSpeed / 100;
 
-        SelectedProjectile = Characteristics.Projectiles["Wood Arrow"];
+        _selectedProjectile = Characteristics.Projectiles["Wood Arrow"];
     }
 
     public void NextTarget(LevelObjects.Mob mob)
