@@ -1,4 +1,3 @@
-using System.Linq;
 using Data;
 using Godot;
 using Godot.Collections;
@@ -7,7 +6,6 @@ public partial class Build : Area3D
 {
     public Data.Build Characteristics { get; set; }
     private Data.Projectile _selectedProjectile { get; set; }
-    private bool _isPlaced { get; set; } = false;
 
     [Export] public MeshInstance3D Head;
     [Export] public Timer AttackCDTimer;
@@ -64,7 +62,7 @@ public partial class Build : Area3D
 
     private void Shoot()
     {
-        Projectile projectile_instance = (Projectile)GD.Load<PackedScene>("res://Scenes/Player/Projectile.tscn").Instantiate();
+        Projectile projectile_instance = (Projectile)GD.Load<PackedScene>("res://Scenes/Build/Projectile.tscn").Instantiate();
         AddChild(projectile_instance);
 
         projectile_instance.Initialize(_selectedProjectile, _targetsList[0]);
@@ -79,7 +77,7 @@ public partial class Build : Area3D
         Vector3 rayEnd = rayOrigin + camera.ProjectRayNormal(mousePosition) * 1000;
 
         var query = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
-        query.CollisionMask = 5;
+        query.CollisionMask = 16;
         query.CollideWithAreas = true;
         query.CollideWithBodies = false;
 
@@ -132,7 +130,7 @@ public partial class Build : Area3D
 
     public void OnAreaEntered(Area3D enteredArea)
     {
-        if (!_isPlaced)
+        if (_state == States.SELECTED)
         {
             _enteredAreasCount++;
             AttackArea.ChangeColor(new Color(255, 0, 0));
@@ -141,7 +139,7 @@ public partial class Build : Area3D
 
     public void OnAreaExited(Area3D exitedArea)
     {
-        if (!_isPlaced)
+        if (_state == States.SELECTED)
         {
             _enteredAreasCount--;
 
@@ -152,7 +150,7 @@ public partial class Build : Area3D
 
     public void OnBodyEntered(Node3D enteredBody)
     {
-        if (!_isPlaced)
+        if (_state == States.SELECTED)
         {
             _enteredAreasCount++;
             AttackArea.ChangeColor(new Color(255, 0, 0));
@@ -161,7 +159,7 @@ public partial class Build : Area3D
 
     public void OnBodyExited(Node3D exitedBody)
     {
-        if (!_isPlaced)
+        if (_state == States.SELECTED)
         {
             _enteredAreasCount--;
 
@@ -178,7 +176,6 @@ public partial class Build : Area3D
 
     public override void _Process(double delta)
     {
-
+        StatesControll();
     }
 }
-
