@@ -11,6 +11,8 @@ size = Vector3(0.5, 0.1, 1)
 size = Vector3(1, 0.2, 1)
 
 [node name="Road" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_6ekth")

@@ -45,6 +45,14 @@ PastBuild={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Builds"
+3d_physics/layer_3="Mobs"
+3d_physics/layer_4="Projectiles"
+3d_physics/layer_5="Terrain"
+
 [rendering]
 
 global_illumination/gi/use_half_resolution=true

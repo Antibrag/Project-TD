@@ -61,6 +61,8 @@ multimesh = SubResource("MultiMesh_ed47b")
 multimesh = SubResource("MultiMesh_3gqgf")
 
 [node name="PlaneArea" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 16
 
 [node name="PlaneCollusion" type="CollisionShape3D" parent="PlaneArea"]
 shape = SubResource("WorldBoundaryShape3D_mkfep")

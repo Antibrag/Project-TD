@@ -40,7 +40,7 @@ public partial class Player : CharacterBody3D
 
     public void SelectBuild(string buildname)
     {
-        Build build = (Build)GD.Load<PackedScene>("res://Scenes/Player/Build/Build.tscn").Instantiate();
+        Build build = (Build)GD.Load<PackedScene>("res://Scenes/Build/Build.tscn").Instantiate();
         GetNode<Node>("Objects").AddChild(build);
 
         build.Initialize(buildname);
