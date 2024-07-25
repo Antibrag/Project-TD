@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://daorro7c3vor3"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Build/Build.cs" id="1_0ya2u"]
+[ext_resource type="Script" path="res://Scripts/Build/Build.cs" id="1_h43xd"]
 [ext_resource type="ArrayMesh" uid="uid://b8g5q1q66da8w" path="res://Assets/Meshes/Builds/CrossBow_Head.res" id="2_q8hgu"]
 [ext_resource type="ArrayMesh" uid="uid://mi4rw3adfp8i" path="res://Assets/Meshes/Builds/CrossBow_Body.res" id="3_01kum"]
-[ext_resource type="PackedScene" uid="uid://cd0m8djmymmjt" path="res://Scenes/Player/Build/Attack_Area.tscn" id="4_567m5"]
+[ext_resource type="PackedScene" uid="uid://cd0m8djmymmjt" path="res://Scenes/Build/Attack_Area.tscn" id="4_567m5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jtmqj"]
 size = Vector3(0.6, 0.2, 0.6)
@@ -13,7 +13,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 collision_layer = 2
 collision_mask = 2
 input_ray_pickable = false
-script = ExtResource("1_0ya2u")
+script = ExtResource("1_h43xd")
 Head = NodePath("HeadMesh")
 AttackCDTimer = NodePath("AttackCD")
 AttackArea = NodePath("AttackArea")

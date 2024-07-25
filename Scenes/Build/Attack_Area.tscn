@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cd0m8djmymmjt"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Build/AttackArea.cs" id="1_w7sdg"]
+[ext_resource type="Script" path="res://Scripts/Build/AttackArea.cs" id="1_2od1e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uq7ex"]
 emission = Color(0, 1, 0, 1)
@@ -17,7 +17,7 @@ radius = 1.0
 [node name="AttackArea" type="Area3D"]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_w7sdg")
+script = ExtResource("1_2od1e")
 
 [node name="AreaMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("TorusMesh_8bs6l")
