@@ -17,7 +17,7 @@ namespace LevelObjects
             //Wait while level is created on main scene
             await ToSignal(GetTree().CreateTimer(1), "timeout");
 
-            GetNode<UI.StartMenu>("/root/Main/StartMenu").Disable();
+            GetNode<UI.StartMenu>("/root/Main/HUD/StartMenu").Disable();
 
             GetNode<Spawner>("/root/Main/Level/Objects/Spawner").StartSpawn(2);
         }
