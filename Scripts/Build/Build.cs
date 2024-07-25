@@ -58,7 +58,6 @@ public partial class Build : Area3D
                 
                 Head.LookAt(_targetsList[0].GlobalPosition);
                 Head.RotationDegrees = new Vector3(0, Head.RotationDegrees.Y + 90, 0);
-
                 break;
         }
     }
@@ -80,7 +79,7 @@ public partial class Build : Area3D
         Vector3 rayEnd = rayOrigin + camera.ProjectRayNormal(mousePosition) * 1000;
 
         var query = PhysicsRayQueryParameters3D.Create(rayOrigin, rayEnd);
-        query.CollisionMask = 1;
+        query.CollisionMask = 5;
         query.CollideWithAreas = true;
         query.CollideWithBodies = false;
 
@@ -173,7 +172,7 @@ public partial class Build : Area3D
 
     public void OnAttackCDTimerTimeout()
     {
-        if (_targetsList.Count != 0)
+        if (_targetsList.Count > 0)
             Shoot();
     }
 

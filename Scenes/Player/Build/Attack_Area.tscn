@@ -15,8 +15,8 @@ height = 0.08
 radius = 1.0
 
 [node name="AttackArea" type="Area3D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_w7sdg")
 
 [node name="AreaMesh" type="MeshInstance3D" parent="."]

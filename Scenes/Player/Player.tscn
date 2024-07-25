@@ -8,8 +8,8 @@
 size = Vector3(1.5, 1.9, 1.5)
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_mrvch")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
